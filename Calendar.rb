@@ -123,9 +123,14 @@ class Calendar
 		return dt unless !workday?(dt.strftime('%Y%m%d')) 
 		return workday_date_rand(from, to)
 	end
-	def self.peopleInHoliday(date)
+	def self.peopleInHoliday(date, team = nil)
 		@@list_persons.select {
-			|p| p.holiday? date
+			|p| if team.nil? then 
+				(p.holiday? date)
+			else 
+				(team.include? p) && (p.holiday? date)
+			end 
+			#|p| (p.holiday? date) && (	(team.include? p) unless team.nil? )
 		}
 	end 
 	def self.peopleWorkingAtHome(date)

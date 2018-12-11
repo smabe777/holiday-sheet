@@ -1,5 +1,4 @@
-require_relative './Calendar.rb'
-require_relative './person.rb'
+require_relative './HolidaySheet'
 
 def testPerson
 	p = Person.new('Bill','Boket')
@@ -61,7 +60,7 @@ def get_feries
 	Calendar.loadCalendar(official_holidays )
 end 
 
-print DateUtils.date_rand Time.local(2018, 12, 1), Time.local(2019, 12, 31)
+#print DateUtils.date_rand Time.local(2018, 12, 1), Time.local(2019, 12, 31)
 
 get_feries
 puts
@@ -113,16 +112,9 @@ def load_persons(person_folder)
 	Dir[person_folder + "/*.json"].each {
 		|json| 
 		puts json		
-		load_person(json)
+		HolidaySheet.new(person_folder).load_person(json)
 	}
 end
-def load_person(json_file)
-	content = File.read(json_file)
-	p = Person.create_from_json(content)
-	Calendar.addPerson p
-	return p
-end 
-
 
 #load_persons './persons'
 
@@ -131,7 +123,8 @@ def printPersons arr_persons
 	puts
 	arr_persons.each {
 		|x| print x.first_name + " " + x.last_name + " / "
-	}
+    }
+    puts
 end 
 def testPersonsforDates
 	load_persons './persons'
@@ -155,4 +148,92 @@ def testPersonsforDates
 end 
 
 #generatePersons
-testPersonsforDates
+#testPersonsforDates
+
+def testTeams
+
+    holidaySheet = HolidaySheet.new('.\persons')
+    zorros = Team.new("Zorros", [holidaySheet.load_person_by_name('Bill Boket'),
+    holidaySheet.load_person_by_name('Edmund Zehr'),
+    holidaySheet.load_person_by_name('Cyrus Vacca'),
+    holidaySheet.load_person_by_name('Frederic Mizzell'),
+    holidaySheet.load_person_by_name('Cesar Kestner'),
+    holidaySheet.load_person_by_name('Arnoldo Hector'),
+    holidaySheet.load_person_by_name('Jaime Bogart'),
+    holidaySheet.load_person_by_name('Steven Metz')])
+    
+    printPersons zorros.persons
+    
+    pharrels = Team.new("Pharrels", [holidaySheet.load_person_by_name('Roman Fuquay'),
+    holidaySheet.load_person_by_name('Ronald Goodenough'),
+    holidaySheet.load_person_by_name('Ashley Struthers'),
+    holidaySheet.load_person_by_name('Oswaldo Melendez'),
+    holidaySheet.load_person_by_name('Roberto Sandy'),
+    holidaySheet.load_person_by_name('Kyle Johns'),
+    holidaySheet.load_person_by_name('Bernard Utley')])
+ 
+    printPersons pharrels.persons
+    
+    espumas = Team.new("Espumas", [holidaySheet.load_person_by_name('Murray Castelli'),
+    holidaySheet.load_person_by_name('Sheldon Minner'),
+    holidaySheet.load_person_by_name('Winston Adcox'),
+    holidaySheet.load_person_by_name('Octavio Hoehne'),
+    holidaySheet.load_person_by_name('Sylvester Holaway'),
+    holidaySheet.load_person_by_name('Grady Perryman'),
+    holidaySheet.load_person_by_name('Casie Desrosier')])
+
+    printPersons espumas.persons
+
+    bloopers = Team.new("Bloopers", [holidaySheet.load_person_by_name('Mercy Klopp'),
+    holidaySheet.load_person_by_name('Berniece Fassett'),
+    holidaySheet.load_person_by_name('Joeann Elridge'),
+    holidaySheet.load_person_by_name('Chasity Schweizer'),
+    holidaySheet.load_person_by_name('Ladawn Pelton'),
+    holidaySheet.load_person_by_name('Maybell Dominick'),
+    holidaySheet.load_person_by_name('Candelaria Knisely')])
+
+    printPersons bloopers.persons
+
+    edeles = Team.new("Edeles", [holidaySheet.load_person_by_name('Wen Braggs'),
+    holidaySheet.load_person_by_name('Anette Marple'),
+    holidaySheet.load_person_by_name('Twyla Delacerda'),
+    holidaySheet.load_person_by_name('Louanne Kilgore'),
+    holidaySheet.load_person_by_name('Bebe Cioffi'),
+    holidaySheet.load_person_by_name('Leah Bost'),
+    holidaySheet.load_person_by_name('Buena Graydon')])
+
+    printPersons edeles.persons
+
+    lavenders = Team.new("Lavenders", [holidaySheet.load_person_by_name('Yun Schrage'),
+    holidaySheet.load_person_by_name('Tammi Stogner'),
+    holidaySheet.load_person_by_name('Erminia Sun'),
+    holidaySheet.load_person_by_name('Bobbi Egbert'),
+    holidaySheet.load_person_by_name('Jayna Delapp'),
+    holidaySheet.load_person_by_name('Julie Nelson')])
+
+    printPersons lavenders.persons
+
+    return {:zorros => zorros, :pharrels => pharrels, :espumas => espumas, :bloopers => bloopers, :edeles => edeles, :lavenders => lavenders}
+
+end 
+require 'set'
+def teamHolidays team
+    persons = team.persons
+    hols = Set.new()
+    persons.each {
+        |p| 
+        hols |= p.holidays
+    }
+    puts '---------- ALL TEAM HOLIDAYS ---------------------'
+    print hols
+    puts
+    puts '-------------------------------'
+    hols.each{
+        |date| print 'for date ' + date 
+        printPersons Calendar.peopleInHoliday(date, nil)
+        puts
+        puts 'will be on holiday'
+    }
+end
+teams_hash = testTeams
+teamHolidays  teams_hash[:pharrels]

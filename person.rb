@@ -1,6 +1,6 @@
 require 'json'
 class Person
-	attr_accessor :days, :first_name, :last_name
+	attr_accessor :days, :first_name, :last_name, :holidays, :work_at_homes, :standbys
 	def initialize (fname, lname, days = nil, hols = nil, wathomes =nil, stands = nil)
 		@first_name = fname
 		@last_name = lname
@@ -92,12 +92,12 @@ class Person
 	end 
 	def to_json
         {
-			"first_name" => @first_name.to_s,
-			"last_name" => @last_name.to_s,
+			"first_name" => @first_name,
+			"last_name" => @last_name,
 			"days" => days_to_json,
-			"holidays" => @holidays.sort.to_s,
-			"work_at_homes" => @work_at_homes.sort.to_s,
-			"standbys" => @standbys.to_s
+			"holidays" => @holidays.sort,
+			"work_at_homes" => @work_at_homes.sort,
+			"standbys" => @standbys
         }.to_json
 	end
 	def self.create_from_json(json)
