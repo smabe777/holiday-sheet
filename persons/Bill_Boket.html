@@ -1,0 +1,292 @@
+<html>
+  <head>
+    <title>Bill, Boket</title>
+    <script>
+      function whenclicked() {
+        window.location = "persons/Bill_Boket.json";
+      }
+    </script>
+    <style>
+      /* Float four columns side by side */
+      .column {
+        float: left;
+        width: 25%;
+        padding: 0 10px;
+      }
+
+      /* Remove extra left and right margins, due to padding in columns */
+      .row {
+        margin: 0 -5px;
+      }
+
+      /* Clear floats after the columns */
+      .row:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+
+      /* Style the counter cards */
+      .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+        padding: 16px;
+        text-align: center;
+        background-color: #f1f1f1;
+      }
+
+      /* Responsive columns - one column layout (vertical) on small screens */
+      @media screen and (max-width: 600px) {
+        .column {
+          width: 100%;
+          display: block;
+          margin-bottom: 20px;
+        }
+      }
+
+      /* Heydon Pickering’s lobotomized owl. Details: https://bit.ly/1H7MXUD */
+      * + * {
+        margin-top: 16px;
+        margin-top: 1rem;
+      }
+
+      /* Set up fonts, colors and all that jazz. */
+      body {
+        background: #f9fdfe;
+        color: #686a69;
+        font-family: "Open Sans", sans-serif;
+        font-size: 18px;
+        line-height: 1.75;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      /* Set up general layout rules for outer containers. */
+      .content,
+      .results {
+        width: 90vw;
+        max-width: 550px;
+        margin: 8vh auto;
+      }
+
+      .content__heading {
+        font-size: 125%;
+      }
+
+      .content__lede {
+        margin-top: 8px;
+        margin-top: 0.5rem;
+        font-size: 87.5%;
+      }
+      .form {
+        position: relative;
+        display: block;
+        margin: 0;
+        padding: 16px 0 32px;
+        padding: 1rem 0 2rem;
+        border-top: 1px solid #cdcfcf;
+        border-bottom: 1px solid #cdcfcf;
+        overflow: hidden;
+      }
+
+      button {
+        display: block;
+        margin: 8px 16px 0;
+        margin: 0.5rem 1rem 0;
+        padding: 0 16px 2px;
+        padding: 0 1rem 0.125rem;
+        background-color: #686a69;
+        border: 0;
+        color: #f9fdfe;
+        font-family: lato, sans-serif;
+        font-size: 100%;
+        letter-spacing: 0.05em;
+        line-height: 1.5;
+        text-transform: uppercase;
+        transition: 150ms all linear;
+      }
+      .calendar {
+        display: block;
+        margin-top: 0;
+        padding: 8px 12px;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid #cdcfcf;
+        width: 100%;
+        font-family: "Open Sans", sans-serif;
+        font-size: 16px;
+        font-size: 1rem;
+        transition: 150ms border-color linear;
+      }
+      .checkbox,
+      .radio {
+        display: inline-block;
+        width: auto;
+      }
+      .checkbox ~ .checkbox,
+      .radio ~ .radio {
+        margin-left: 16px;
+        margin-left: 1rem;
+      }
+      .input:focus,
+      .input:active {
+        border-color: #686a69;
+        outline: 0;
+      }
+      .button:hover,
+      .button:active,
+      .button:focus {
+        background: #2a2f2c;
+        cursor: pointer;
+        outline: 0;
+      }
+    </style>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <section class="content">
+      <h1 class="content__heading">Bill Boket's Days</h1>
+      <p class="content__lede">Use this form to add calendar elements</p>
+      <form class="form">
+        <input class="calendar" id="thedate" name="thedate" type="date" />
+
+        <div class="form-group">
+          <input
+            class="radio"
+            id="day_type-workday"
+            name="day_type"
+            type="radio"
+            value="is_workday"
+          />
+          <label class="label" for="day_type-workday">Workday</label>
+          <input
+            class="radio"
+            id="day_type-holiday"
+            name="day_type"
+            type="radio"
+            value="is_holiday"
+          />
+          <label class="label" for="day_type-holiday">Holiday</label>
+          <input
+            class="radio"
+            id="day_type-work-at-home"
+            name="day_type"
+            type="radio"
+            value="is_work_at_home"
+          />
+          <label class="label" for="day_type-work-at-home">Work-At-Home</label>
+          <input
+            class="radio"
+            id="day_type-standby"
+            name="day_type"
+            type="radio"
+            value="is_standby"
+          />
+          <label class="label" for="day_type-standby">Standby</label>
+        </div>
+        <button onclick="whenclicked()">Go</button>
+      </form>
+    </section>
+    <div class="row">
+      <div class="column">
+        <div class="card">
+          <h2>Holidays</h2>
+          <input class="calendar" id="holiday_Bill_Boket_20190107" type="date" value="2019-01-07"/>
+<input class="calendar" id="holiday_Bill_Boket_20190117" type="date" value="2019-01-17"/>
+<input class="calendar" id="holiday_Bill_Boket_20190201" type="date" value="2019-02-01"/>
+<input class="calendar" id="holiday_Bill_Boket_20190212" type="date" value="2019-02-12"/>
+<input class="calendar" id="holiday_Bill_Boket_20190214" type="date" value="2019-02-14"/>
+<input class="calendar" id="holiday_Bill_Boket_20190318" type="date" value="2019-03-18"/>
+<input class="calendar" id="holiday_Bill_Boket_20190329" type="date" value="2019-03-29"/>
+<input class="calendar" id="holiday_Bill_Boket_20190408" type="date" value="2019-04-08"/>
+<input class="calendar" id="holiday_Bill_Boket_20190418" type="date" value="2019-04-18"/>
+<input class="calendar" id="holiday_Bill_Boket_20190624" type="date" value="2019-06-24"/>
+<input class="calendar" id="holiday_Bill_Boket_20190708" type="date" value="2019-07-08"/>
+<input class="calendar" id="holiday_Bill_Boket_20190905" type="date" value="2019-09-05"/>
+<input class="calendar" id="holiday_Bill_Boket_20191010" type="date" value="2019-10-10"/>
+<input class="calendar" id="holiday_Bill_Boket_20191104" type="date" value="2019-11-04"/>
+<input class="calendar" id="holiday_Bill_Boket_20191203" type="date" value="2019-12-03"/>
+<input class="calendar" id="holiday_Bill_Boket_20191211" type="date" value="2019-12-11"/>
+<input class="calendar" id="holiday_Bill_Boket_20191216" type="date" value="2019-12-16"/>
+<input class="calendar" id="holiday_Bill_Boket_20191227" type="date" value="2019-12-27"/>
+<input class="calendar" id="holiday_Bill_Boket_20191230" type="date" value="2019-12-30"/>
+
+        </div>
+      </div>
+      <div class="column">
+        <div class="card">
+          <h2>@Home</h2>
+          <input class="calendar" id="holiday_Bill_Boket_20190102" type="date" value="2019-01-02"/>
+<input class="calendar" id="holiday_Bill_Boket_20190103" type="date" value="2019-01-03"/>
+<input class="calendar" id="holiday_Bill_Boket_20190108" type="date" value="2019-01-08"/>
+<input class="calendar" id="holiday_Bill_Boket_20190109" type="date" value="2019-01-09"/>
+<input class="calendar" id="holiday_Bill_Boket_20190111" type="date" value="2019-01-11"/>
+<input class="calendar" id="holiday_Bill_Boket_20190115" type="date" value="2019-01-15"/>
+<input class="calendar" id="holiday_Bill_Boket_20190118" type="date" value="2019-01-18"/>
+<input class="calendar" id="holiday_Bill_Boket_20190128" type="date" value="2019-01-28"/>
+<input class="calendar" id="holiday_Bill_Boket_20190204" type="date" value="2019-02-04"/>
+<input class="calendar" id="holiday_Bill_Boket_20190207" type="date" value="2019-02-07"/>
+<input class="calendar" id="holiday_Bill_Boket_20190220" type="date" value="2019-02-20"/>
+<input class="calendar" id="holiday_Bill_Boket_20190301" type="date" value="2019-03-01"/>
+<input class="calendar" id="holiday_Bill_Boket_20190305" type="date" value="2019-03-05"/>
+<input class="calendar" id="holiday_Bill_Boket_20190321" type="date" value="2019-03-21"/>
+<input class="calendar" id="holiday_Bill_Boket_20190405" type="date" value="2019-04-05"/>
+<input class="calendar" id="holiday_Bill_Boket_20190409" type="date" value="2019-04-09"/>
+<input class="calendar" id="holiday_Bill_Boket_20190412" type="date" value="2019-04-12"/>
+<input class="calendar" id="holiday_Bill_Boket_20190415" type="date" value="2019-04-15"/>
+<input class="calendar" id="holiday_Bill_Boket_20190424" type="date" value="2019-04-24"/>
+<input class="calendar" id="holiday_Bill_Boket_20190425" type="date" value="2019-04-25"/>
+<input class="calendar" id="holiday_Bill_Boket_20190430" type="date" value="2019-04-30"/>
+<input class="calendar" id="holiday_Bill_Boket_20190507" type="date" value="2019-05-07"/>
+<input class="calendar" id="holiday_Bill_Boket_20190514" type="date" value="2019-05-14"/>
+<input class="calendar" id="holiday_Bill_Boket_20190515" type="date" value="2019-05-15"/>
+<input class="calendar" id="holiday_Bill_Boket_20190516" type="date" value="2019-05-16"/>
+<input class="calendar" id="holiday_Bill_Boket_20190521" type="date" value="2019-05-21"/>
+<input class="calendar" id="holiday_Bill_Boket_20190527" type="date" value="2019-05-27"/>
+<input class="calendar" id="holiday_Bill_Boket_20190603" type="date" value="2019-06-03"/>
+<input class="calendar" id="holiday_Bill_Boket_20190605" type="date" value="2019-06-05"/>
+<input class="calendar" id="holiday_Bill_Boket_20190607" type="date" value="2019-06-07"/>
+<input class="calendar" id="holiday_Bill_Boket_20190612" type="date" value="2019-06-12"/>
+<input class="calendar" id="holiday_Bill_Boket_20190620" type="date" value="2019-06-20"/>
+<input class="calendar" id="holiday_Bill_Boket_20190627" type="date" value="2019-06-27"/>
+<input class="calendar" id="holiday_Bill_Boket_20190701" type="date" value="2019-07-01"/>
+<input class="calendar" id="holiday_Bill_Boket_20190704" type="date" value="2019-07-04"/>
+<input class="calendar" id="holiday_Bill_Boket_20190715" type="date" value="2019-07-15"/>
+<input class="calendar" id="holiday_Bill_Boket_20190726" type="date" value="2019-07-26"/>
+<input class="calendar" id="holiday_Bill_Boket_20190731" type="date" value="2019-07-31"/>
+<input class="calendar" id="holiday_Bill_Boket_20190805" type="date" value="2019-08-05"/>
+<input class="calendar" id="holiday_Bill_Boket_20190808" type="date" value="2019-08-08"/>
+<input class="calendar" id="holiday_Bill_Boket_20190809" type="date" value="2019-08-09"/>
+<input class="calendar" id="holiday_Bill_Boket_20190812" type="date" value="2019-08-12"/>
+<input class="calendar" id="holiday_Bill_Boket_20190813" type="date" value="2019-08-13"/>
+<input class="calendar" id="holiday_Bill_Boket_20190814" type="date" value="2019-08-14"/>
+<input class="calendar" id="holiday_Bill_Boket_20190816" type="date" value="2019-08-16"/>
+<input class="calendar" id="holiday_Bill_Boket_20190823" type="date" value="2019-08-23"/>
+<input class="calendar" id="holiday_Bill_Boket_20190904" type="date" value="2019-09-04"/>
+<input class="calendar" id="holiday_Bill_Boket_20190906" type="date" value="2019-09-06"/>
+<input class="calendar" id="holiday_Bill_Boket_20190909" type="date" value="2019-09-09"/>
+<input class="calendar" id="holiday_Bill_Boket_20190923" type="date" value="2019-09-23"/>
+<input class="calendar" id="holiday_Bill_Boket_20190924" type="date" value="2019-09-24"/>
+<input class="calendar" id="holiday_Bill_Boket_20191003" type="date" value="2019-10-03"/>
+<input class="calendar" id="holiday_Bill_Boket_20191014" type="date" value="2019-10-14"/>
+<input class="calendar" id="holiday_Bill_Boket_20191030" type="date" value="2019-10-30"/>
+<input class="calendar" id="holiday_Bill_Boket_20191106" type="date" value="2019-11-06"/>
+<input class="calendar" id="holiday_Bill_Boket_20191108" type="date" value="2019-11-08"/>
+<input class="calendar" id="holiday_Bill_Boket_20191112" type="date" value="2019-11-12"/>
+<input class="calendar" id="holiday_Bill_Boket_20191119" type="date" value="2019-11-19"/>
+<input class="calendar" id="holiday_Bill_Boket_20191122" type="date" value="2019-11-22"/>
+<input class="calendar" id="holiday_Bill_Boket_20191129" type="date" value="2019-11-29"/>
+<input class="calendar" id="holiday_Bill_Boket_20191202" type="date" value="2019-12-02"/>
+<input class="calendar" id="holiday_Bill_Boket_20191205" type="date" value="2019-12-05"/>
+<input class="calendar" id="holiday_Bill_Boket_20191206" type="date" value="2019-12-06"/>
+
+        </div>
+      </div>
+      <div class="column">
+        <div class="card">
+          <h2>Standbys</h2>
+          @@STANDBYS@@
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

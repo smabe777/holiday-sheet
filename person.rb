@@ -1,4 +1,5 @@
 require 'json'
+require 'set'
 class Person
 	attr_accessor :days, :first_name, :last_name, :holidays, :work_at_homes, :standbys
 	def initialize (fname, lname, days = nil, hols = nil, wathomes =nil, stands = nil)
@@ -8,15 +9,15 @@ class Person
 		else
 			@days = days
 		end
-		if hols.nil? then @holidays= []
+		if hols.nil? then @holidays= Set.new()
 		else
 			@holidays = hols
 		end
-		if wathomes.nil? then @work_at_homes = []
+		if wathomes.nil? then @work_at_homes = Set.new()
 		else
 			@work_at_homes = wathomes
 		end
-		if stands.nil? then @standbys = []
+		if stands.nil? then @standbys = Set.new()
 			@standbys = stands
 		end
 	end
