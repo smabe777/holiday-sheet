@@ -23,22 +23,42 @@ def create_person_interface_1 (person_folder, name)
 	end
 end 
 
+# def cumul_td(memo, date, datetype,person_date_id)
+#     puts date
+#     puts datetype.printmetoo ' '
+#     memo=memo+"<tr><td>#{date}</td>\n"
+#     if datetype.holiday?
+#              memo=memo+"<td><label class=\"container\">#{date}<input id=\"holiday_#{person_date_id}\" type=checkbox checked /><span class=\"checkmark\"></span></label></td>\n"
+#              memo=memo+"<td><label class=\"container\">#{date}<input id=\"athome_#{person_date_id}\" type=checkbox  /><span class=\"checkmark\"></span></label></td>\n"
+#         elsif !datetype.holiday?
+#             memo=memo+"<td><label class=\"container\">#{date}<input id=\"holiday_#{person_date_id}\" type=checkbox /><span class=\"checkmark\"></span></label></td>\n"
+#             memo=memo+"<td><label class=\"container\">#{date}<input id=\"athome_#{person_date_id}\" type=checkbox checked /><span class=\"checkmark\"></span></label></td>\n"
+#         else
+#              puts datetype.holiday?.class
+#             raise 'FU'
+#         end
+
+#     memo=memo+"<td>TBD</td></tr>\n"
+
+# end
+
 def cumul_td(memo, date, datetype,person_date_id)
     puts date
     puts datetype.printmetoo ' '
     memo=memo+"<tr><td>#{date}</td>\n"
-    if (datetype.holiday?() == 'true')
-             memo=memo+"<td><input id=\"holiday_#{person_date_id}\" type=checkbox checked /></td>\n"
-             memo=memo+"<td><input id=\"athome_#{person_date_id}\" type=checkbox  /></td>\n"
-        elsif (datetype.holiday?() == 'false')
-            memo=memo+"<td><input id=\"holiday_#{person_date_id}\" type=checkbox /></td>\n"
-            memo=memo+"<td><input id=\"athome_#{person_date_id}\" type=checkbox checked /></td>\n"
-        else
-             puts datetype.holiday?.class
-            raise 'FU'
+
+    if datetype.holiday?
+             memo=memo+"<td><input class=\"radio\" id=\"holiday_#{person_date_id}\" type=\"radio\" name=\"radio#{date}\" checked=true onclick=\"radio_clicked('holiday_#{person_date_id}')\"/><label class=\"label\">Holiday</label>\n"
+             memo=memo+"<input class=\"radio\"  id=\"athome_#{person_date_id}\" type=\"radio\"  name=\"radio#{date}\"  onclick=\"radio_clicked('athome_#{person_date_id}')\" /><label class=\"label\"/>Work-At-Home</label>\n"
+             memo=memo+"<input class=\"radio\"  id=\"onsite_#{person_date_id}\" type=\"radio\"  name=\"radio#{date}\"  onclick=\"radio_clicked('onsite_#{person_date_id}')\"/><label class=\"label\" />Work-On-Site</label></td>\n"
+    else 
+             memo=memo+"<td><input class=\"radio\" id=\"holiday_#{person_date_id}\" type=\"radio\" name=\"radio#{date}\" onclick=\"radio_clicked('holiday_#{person_date_id}')\"/><label class=\"label\">Holiday</label>\n"
+             memo=memo+"<input class=\"radio\" id=\"athome_#{person_date_id}\" type=\"radio\" name=\"radio#{date}\" checked=true onclick=\"radio_clicked('athome_#{person_date_id}')\"/><label class=\"label\" >Work-At-Home</label>\n"
+       memo=memo+"<input class=\"radio\"  id=\"onsite_#{person_date_id}\" type=\"radio\"  name=\"radio#{date}\" onclick=\"radio_clicked('onsite_#{person_date_id}')\"/><label class=\"label\" >Work-On-Site</label></td>\n"
         end
 
-    memo=memo+"<td>TBD</td></tr>\n"
+    memo=memo+"<td>#{datetype.standby?}</td></tr>\n"
+
 end
 def create_person_interface(person_folder, name)
     person = HolidaySheet.new(person_folder).load_person_by_name(name)

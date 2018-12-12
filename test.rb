@@ -146,6 +146,8 @@ def testPersonsforDates
 end 
 
 generatePersons
+generatePerson 'Bill', 'Boket'
+generatePerson 'Julie', 'Nelson'
 #testPersonsforDates
 
 def testTeams
@@ -236,5 +238,3 @@ end
 #teams_hash = testTeams
 #teamHolidays  teams_hash[:pharrels]
 
-generatePerson 'Bill', 'Boket'
-generatePerson 'Julie', 'Nelson'

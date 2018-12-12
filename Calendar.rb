@@ -3,7 +3,7 @@ require 'json'
 
 class DayType
 	attr_accessor :characteristics
-	def initialize (chars = nil) 
+	def initialize (chars = nil, origin = nil) 
 		if chars.nil? then
 			@characteristics={}
 			unset_workday
@@ -12,6 +12,11 @@ class DayType
 			unset_standby
 		else
 			@characteristics=chars 
+			if origin == "json"
+				@characteristics['workday'] = (chars['workday'] == 'true')
+				@characteristics['work_at_home'] = (chars['work_at_home'] == 'true')
+				@characteristics['holiday'] = (chars['holiday'] == 'true')		
+			end
 		end 
 	end
 	def set_workday
@@ -43,7 +48,7 @@ class DayType
 		@characteristics['holiday']=false
 	end  
 	def unset_standby
-		@characteristics['standby']=false
+		@characteristics['standby']=[]
 	end   
 	def workday?
 		@characteristics['workday']
@@ -52,7 +57,6 @@ class DayType
 		@characteristics['work_at_home']
 	end
 	def holiday?
-		puts "here " + @characteristics['holiday'].to_s
 		@characteristics['holiday'] 
 	end
 	def standby?
@@ -64,7 +68,6 @@ class DayType
 	end
 	def printmetoo (indent)
 		resultstring = 'isworkday: ' + workday?.to_s()
-		resultstring = 'SSSSS '  + @characteristics['holiday'].to_s
 		resultstring = resultstring + "\n"
 		resultstring = resultstring + indent + 'isholiday: ' + holiday?.to_s()
 		resultstring = resultstring + "\n"
@@ -77,12 +80,11 @@ class DayType
 	end
 	def to_json(a)
        return {
-			#"date" => @date.to_s,
 			"characteristics" => {
 				"workday" => @characteristics['workday'].to_s,
 				"holiday" => @characteristics['holiday'].to_s,
 				"work_at_home" => @characteristics['work_at_home'].to_s,
-				"standby" => @characteristics['standby'].to_s
+				"standby" => @characteristics['standby']
 			}
         }.to_json
 	end

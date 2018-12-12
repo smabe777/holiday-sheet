@@ -85,7 +85,7 @@ class Person
 							"workday" => type.workday?.to_s,
 							"holiday" => type.holiday?.to_s,
 							"work_at_home" => type.work_at_home?.to_s,
-							"standby" => type.standby?.to_s
+							"standby" => type.standby?
 						} 
 					}
 				};
@@ -104,8 +104,7 @@ class Person
 	def self.create_from_json(json)
     	jsonH = JSON::parse(json)
 		days = {}
-		print jsonH["days"]
-		jsonH["days"].each { |h| days[ h["date"] ] = DayType.new(h["characteristics"])}
+		jsonH["days"].each { |h| days[ h["date"] ] = DayType.new(h["characteristics"],"json")}
 		pp = Person.new(
 				jsonH["first_name"], 
 				jsonH["last_name"], 
