@@ -46,16 +46,17 @@ class DayType
 		@characteristics['standby']=false
 	end   
 	def workday?
-		return @characteristics['workday']
+		@characteristics['workday']
 	end
 	def work_at_home?
-		return @characteristics['work_at_home']
+		@characteristics['work_at_home']
 	end
 	def holiday?
-		return @characteristics['holiday']
+		puts "here " + @characteristics['holiday'].to_s
+		@characteristics['holiday'] 
 	end
 	def standby?
-		return @characteristics['standby']
+		@characteristics['standby']
 	end
 	def blank?
 			#A blank day is an error -- the day should be completely dropped
@@ -63,6 +64,7 @@ class DayType
 	end
 	def printmetoo (indent)
 		resultstring = 'isworkday: ' + workday?.to_s()
+		resultstring = 'SSSSS '  + @characteristics['holiday'].to_s
 		resultstring = resultstring + "\n"
 		resultstring = resultstring + indent + 'isholiday: ' + holiday?.to_s()
 		resultstring = resultstring + "\n"

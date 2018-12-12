@@ -1,0 +1,560 @@
+<html>
+  <head>
+    <title>Bebe, Cioffi</title>
+    <script>
+      function whenclicked() {
+        window.location = "persons/Bill_Boket.json";
+      }
+    </script>
+    <style>
+      /* Float four columns side by side */
+      .column {
+        float: left;
+        width: 25%;
+        padding: 0 10px;
+      }
+
+      /* Remove extra left and right margins, due to padding in columns */
+      .row {
+        margin: 0 -5px;
+      }
+
+      /* Clear floats after the columns */
+      .row:after {
+        content: "";
+        display: table;
+        clear: both;
+      }
+
+      /* Style the counter cards */
+      .card {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+        padding: 16px;
+        text-align: center;
+        background-color: #f1f1f1;
+      }
+
+      /* Responsive columns - one column layout (vertical) on small screens */
+      @media screen and (max-width: 600px) {
+        .column {
+          width: 100%;
+          display: block;
+          margin-bottom: 20px;
+        }
+      }
+
+      /* Heydon Pickering’s lobotomized owl. Details: https://bit.ly/1H7MXUD */
+      * + * {
+        margin-top: 16px;
+        margin-top: 1rem;
+      }
+
+      /* Set up fonts, colors and all that jazz. */
+      body {
+        background: #f9fdfe;
+        color: #686a69;
+        font-family: "Open Sans", sans-serif;
+        font-size: 18px;
+        line-height: 1.75;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      /* Set up general layout rules for outer containers. */
+      .content,
+      .results {
+        width: 90vw;
+        max-width: 550px;
+        margin: 8vh auto;
+      }
+
+      .content__heading {
+        font-size: 125%;
+      }
+
+      .content__lede {
+        margin-top: 8px;
+        margin-top: 0.5rem;
+        font-size: 87.5%;
+      }
+      .form {
+        position: relative;
+        display: block;
+        margin: 0;
+        padding: 16px 0 32px;
+        padding: 1rem 0 2rem;
+        border-top: 1px solid #cdcfcf;
+        border-bottom: 1px solid #cdcfcf;
+        overflow: hidden;
+      }
+
+      button {
+        display: block;
+        margin: 8px 16px 0;
+        margin: 0.5rem 1rem 0;
+        padding: 0 16px 2px;
+        padding: 0 1rem 0.125rem;
+        background-color: #686a69;
+        border: 0;
+        color: #f9fdfe;
+        font-family: lato, sans-serif;
+        font-size: 100%;
+        letter-spacing: 0.05em;
+        line-height: 1.5;
+        text-transform: uppercase;
+        transition: 150ms all linear;
+      }
+      .calendar {
+        display: block;
+        margin-top: 0;
+        padding: 8px 12px;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid #cdcfcf;
+        width: 100%;
+        font-family: "Open Sans", sans-serif;
+        font-size: 16px;
+        font-size: 1rem;
+        transition: 150ms border-color linear;
+      }
+      .checkbox,
+      .radio {
+        display: inline-block;
+        width: auto;
+      }
+      .checkbox ~ .checkbox,
+      .radio ~ .radio {
+        margin-left: 16px;
+        margin-left: 1rem;
+      }
+      .input:focus,
+      .input:active {
+        border-color: #686a69;
+        outline: 0;
+      }
+      .button:hover,
+      .button:active,
+      .button:focus {
+        background: #2a2f2c;
+        cursor: pointer;
+        outline: 0;
+      }
+      table,
+      th,
+      td {
+        border: 1px solid black;
+      }
+    </style>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <section class="content">
+      <h1 class="content__heading">Bebe Cioffi's Days</h1>
+      <p class="content__lede">Use this form to add calendar elements</p>
+      <form class="form">
+        <input class="calendar" id="thedate" name="thedate" type="date" />
+
+        <div class="form-group">
+          <input
+            class="radio"
+            id="day_type-workday"
+            name="day_type"
+            type="radio"
+            value="is_workday"
+          />
+          <label class="label" for="day_type-workday">Workday</label>
+          <input
+            class="radio"
+            id="day_type-holiday"
+            name="day_type"
+            type="radio"
+            value="is_holiday"
+          />
+          <label class="label" for="day_type-holiday">Holiday</label>
+          <input
+            class="radio"
+            id="day_type-work-at-home"
+            name="day_type"
+            type="radio"
+            value="is_work_at_home"
+          />
+          <label class="label" for="day_type-work-at-home">Work-At-Home</label>
+          <input
+            class="radio"
+            id="day_type-standby"
+            name="day_type"
+            type="radio"
+            value="is_standby"
+          />
+          <label class="label" for="day_type-standby">Standby</label>
+        </div>
+        <button onclick="whenclicked()">Go</button>
+      </form>
+    </section>
+    <table style="width:100%">
+      <tr>
+        <th>Date</th>
+        <th>Holiday</th>
+        <th>Work-At-Home</th>
+        <th>Stand-by</th>
+      </tr>
+      <tr><td>20190103</td>
+<td><input id="holiday_Bebe_Cioffi_20190103" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190103" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190108</td>
+<td><input id="holiday_Bebe_Cioffi_20190108" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190108" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190114</td>
+<td><input id="holiday_Bebe_Cioffi_20190114" type=checkbox checked /></td>
+<td><input id="athome_Bebe_Cioffi_20190114" type=checkbox  /></td>
+<td>TBD</td></tr>
+<tr><td>20190116</td>
+<td><input id="holiday_Bebe_Cioffi_20190116" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190116" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190121</td>
+<td><input id="holiday_Bebe_Cioffi_20190121" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190121" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190123</td>
+<td><input id="holiday_Bebe_Cioffi_20190123" type=checkbox checked /></td>
+<td><input id="athome_Bebe_Cioffi_20190123" type=checkbox  /></td>
+<td>TBD</td></tr>
+<tr><td>20190124</td>
+<td><input id="holiday_Bebe_Cioffi_20190124" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190124" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190218</td>
+<td><input id="holiday_Bebe_Cioffi_20190218" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190218" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190221</td>
+<td><input id="holiday_Bebe_Cioffi_20190221" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190221" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190222</td>
+<td><input id="holiday_Bebe_Cioffi_20190222" type=checkbox checked /></td>
+<td><input id="athome_Bebe_Cioffi_20190222" type=checkbox  /></td>
+<td>TBD</td></tr>
+<tr><td>20190228</td>
+<td><input id="holiday_Bebe_Cioffi_20190228" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190228" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190304</td>
+<td><input id="holiday_Bebe_Cioffi_20190304" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190304" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190308</td>
+<td><input id="holiday_Bebe_Cioffi_20190308" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190308" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190312</td>
+<td><input id="holiday_Bebe_Cioffi_20190312" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190312" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190319</td>
+<td><input id="holiday_Bebe_Cioffi_20190319" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190319" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190320</td>
+<td><input id="holiday_Bebe_Cioffi_20190320" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190320" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190321</td>
+<td><input id="holiday_Bebe_Cioffi_20190321" type=checkbox checked /></td>
+<td><input id="athome_Bebe_Cioffi_20190321" type=checkbox  /></td>
+<td>TBD</td></tr>
+<tr><td>20190325</td>
+<td><input id="holiday_Bebe_Cioffi_20190325" type=checkbox checked /></td>
+<td><input id="athome_Bebe_Cioffi_20190325" type=checkbox  /></td>
+<td>TBD</td></tr>
+<tr><td>20190329</td>
+<td><input id="holiday_Bebe_Cioffi_20190329" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190329" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190405</td>
+<td><input id="holiday_Bebe_Cioffi_20190405" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190405" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190410</td>
+<td><input id="holiday_Bebe_Cioffi_20190410" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190410" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190412</td>
+<td><input id="holiday_Bebe_Cioffi_20190412" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190412" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190418</td>
+<td><input id="holiday_Bebe_Cioffi_20190418" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190418" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190419</td>
+<td><input id="holiday_Bebe_Cioffi_20190419" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190419" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190424</td>
+<td><input id="holiday_Bebe_Cioffi_20190424" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190424" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190425</td>
+<td><input id="holiday_Bebe_Cioffi_20190425" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190425" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190506</td>
+<td><input id="holiday_Bebe_Cioffi_20190506" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190506" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190508</td>
+<td><input id="holiday_Bebe_Cioffi_20190508" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190508" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190510</td>
+<td><input id="holiday_Bebe_Cioffi_20190510" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190510" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190514</td>
+<td><input id="holiday_Bebe_Cioffi_20190514" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190514" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190520</td>
+<td><input id="holiday_Bebe_Cioffi_20190520" type=checkbox checked /></td>
+<td><input id="athome_Bebe_Cioffi_20190520" type=checkbox  /></td>
+<td>TBD</td></tr>
+<tr><td>20190523</td>
+<td><input id="holiday_Bebe_Cioffi_20190523" type=checkbox checked /></td>
+<td><input id="athome_Bebe_Cioffi_20190523" type=checkbox  /></td>
+<td>TBD</td></tr>
+<tr><td>20190528</td>
+<td><input id="holiday_Bebe_Cioffi_20190528" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190528" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190529</td>
+<td><input id="holiday_Bebe_Cioffi_20190529" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190529" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190607</td>
+<td><input id="holiday_Bebe_Cioffi_20190607" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190607" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190611</td>
+<td><input id="holiday_Bebe_Cioffi_20190611" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190611" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190613</td>
+<td><input id="holiday_Bebe_Cioffi_20190613" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190613" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190618</td>
+<td><input id="holiday_Bebe_Cioffi_20190618" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190618" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190620</td>
+<td><input id="holiday_Bebe_Cioffi_20190620" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190620" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190621</td>
+<td><input id="holiday_Bebe_Cioffi_20190621" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190621" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190625</td>
+<td><input id="holiday_Bebe_Cioffi_20190625" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190625" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190626</td>
+<td><input id="holiday_Bebe_Cioffi_20190626" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190626" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190702</td>
+<td><input id="holiday_Bebe_Cioffi_20190702" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190702" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190703</td>
+<td><input id="holiday_Bebe_Cioffi_20190703" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190703" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190705</td>
+<td><input id="holiday_Bebe_Cioffi_20190705" type=checkbox checked /></td>
+<td><input id="athome_Bebe_Cioffi_20190705" type=checkbox  /></td>
+<td>TBD</td></tr>
+<tr><td>20190708</td>
+<td><input id="holiday_Bebe_Cioffi_20190708" type=checkbox checked /></td>
+<td><input id="athome_Bebe_Cioffi_20190708" type=checkbox  /></td>
+<td>TBD</td></tr>
+<tr><td>20190715</td>
+<td><input id="holiday_Bebe_Cioffi_20190715" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190715" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190716</td>
+<td><input id="holiday_Bebe_Cioffi_20190716" type=checkbox checked /></td>
+<td><input id="athome_Bebe_Cioffi_20190716" type=checkbox  /></td>
+<td>TBD</td></tr>
+<tr><td>20190717</td>
+<td><input id="holiday_Bebe_Cioffi_20190717" type=checkbox checked /></td>
+<td><input id="athome_Bebe_Cioffi_20190717" type=checkbox  /></td>
+<td>TBD</td></tr>
+<tr><td>20190725</td>
+<td><input id="holiday_Bebe_Cioffi_20190725" type=checkbox checked /></td>
+<td><input id="athome_Bebe_Cioffi_20190725" type=checkbox  /></td>
+<td>TBD</td></tr>
+<tr><td>20190726</td>
+<td><input id="holiday_Bebe_Cioffi_20190726" type=checkbox checked /></td>
+<td><input id="athome_Bebe_Cioffi_20190726" type=checkbox  /></td>
+<td>TBD</td></tr>
+<tr><td>20190731</td>
+<td><input id="holiday_Bebe_Cioffi_20190731" type=checkbox checked /></td>
+<td><input id="athome_Bebe_Cioffi_20190731" type=checkbox  /></td>
+<td>TBD</td></tr>
+<tr><td>20190802</td>
+<td><input id="holiday_Bebe_Cioffi_20190802" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190802" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190806</td>
+<td><input id="holiday_Bebe_Cioffi_20190806" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190806" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190807</td>
+<td><input id="holiday_Bebe_Cioffi_20190807" type=checkbox checked /></td>
+<td><input id="athome_Bebe_Cioffi_20190807" type=checkbox  /></td>
+<td>TBD</td></tr>
+<tr><td>20190808</td>
+<td><input id="holiday_Bebe_Cioffi_20190808" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190808" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190809</td>
+<td><input id="holiday_Bebe_Cioffi_20190809" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190809" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190816</td>
+<td><input id="holiday_Bebe_Cioffi_20190816" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190816" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190821</td>
+<td><input id="holiday_Bebe_Cioffi_20190821" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190821" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190822</td>
+<td><input id="holiday_Bebe_Cioffi_20190822" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190822" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190823</td>
+<td><input id="holiday_Bebe_Cioffi_20190823" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190823" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190828</td>
+<td><input id="holiday_Bebe_Cioffi_20190828" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190828" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190904</td>
+<td><input id="holiday_Bebe_Cioffi_20190904" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190904" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190913</td>
+<td><input id="holiday_Bebe_Cioffi_20190913" type=checkbox checked /></td>
+<td><input id="athome_Bebe_Cioffi_20190913" type=checkbox  /></td>
+<td>TBD</td></tr>
+<tr><td>20190923</td>
+<td><input id="holiday_Bebe_Cioffi_20190923" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190923" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190924</td>
+<td><input id="holiday_Bebe_Cioffi_20190924" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20190924" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191002</td>
+<td><input id="holiday_Bebe_Cioffi_20191002" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20191002" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191009</td>
+<td><input id="holiday_Bebe_Cioffi_20191009" type=checkbox checked /></td>
+<td><input id="athome_Bebe_Cioffi_20191009" type=checkbox  /></td>
+<td>TBD</td></tr>
+<tr><td>20191010</td>
+<td><input id="holiday_Bebe_Cioffi_20191010" type=checkbox checked /></td>
+<td><input id="athome_Bebe_Cioffi_20191010" type=checkbox  /></td>
+<td>TBD</td></tr>
+<tr><td>20191014</td>
+<td><input id="holiday_Bebe_Cioffi_20191014" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20191014" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191018</td>
+<td><input id="holiday_Bebe_Cioffi_20191018" type=checkbox checked /></td>
+<td><input id="athome_Bebe_Cioffi_20191018" type=checkbox  /></td>
+<td>TBD</td></tr>
+<tr><td>20191021</td>
+<td><input id="holiday_Bebe_Cioffi_20191021" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20191021" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191024</td>
+<td><input id="holiday_Bebe_Cioffi_20191024" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20191024" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191028</td>
+<td><input id="holiday_Bebe_Cioffi_20191028" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20191028" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191029</td>
+<td><input id="holiday_Bebe_Cioffi_20191029" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20191029" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191030</td>
+<td><input id="holiday_Bebe_Cioffi_20191030" type=checkbox checked /></td>
+<td><input id="athome_Bebe_Cioffi_20191030" type=checkbox  /></td>
+<td>TBD</td></tr>
+<tr><td>20191107</td>
+<td><input id="holiday_Bebe_Cioffi_20191107" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20191107" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191108</td>
+<td><input id="holiday_Bebe_Cioffi_20191108" type=checkbox checked /></td>
+<td><input id="athome_Bebe_Cioffi_20191108" type=checkbox  /></td>
+<td>TBD</td></tr>
+<tr><td>20191112</td>
+<td><input id="holiday_Bebe_Cioffi_20191112" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20191112" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191114</td>
+<td><input id="holiday_Bebe_Cioffi_20191114" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20191114" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191115</td>
+<td><input id="holiday_Bebe_Cioffi_20191115" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20191115" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191118</td>
+<td><input id="holiday_Bebe_Cioffi_20191118" type=checkbox checked /></td>
+<td><input id="athome_Bebe_Cioffi_20191118" type=checkbox  /></td>
+<td>TBD</td></tr>
+<tr><td>20191120</td>
+<td><input id="holiday_Bebe_Cioffi_20191120" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20191120" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191122</td>
+<td><input id="holiday_Bebe_Cioffi_20191122" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20191122" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191129</td>
+<td><input id="holiday_Bebe_Cioffi_20191129" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20191129" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191209</td>
+<td><input id="holiday_Bebe_Cioffi_20191209" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20191209" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191212</td>
+<td><input id="holiday_Bebe_Cioffi_20191212" type=checkbox checked /></td>
+<td><input id="athome_Bebe_Cioffi_20191212" type=checkbox  /></td>
+<td>TBD</td></tr>
+<tr><td>20191219</td>
+<td><input id="holiday_Bebe_Cioffi_20191219" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20191219" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191230</td>
+<td><input id="holiday_Bebe_Cioffi_20191230" type=checkbox /></td>
+<td><input id="athome_Bebe_Cioffi_20191230" type=checkbox checked /></td>
+<td>TBD</td></tr>
+
+    </table>
+  </body>
+</html>

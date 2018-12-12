@@ -138,6 +138,11 @@
         cursor: pointer;
         outline: 0;
       }
+      table,
+      th,
+      td {
+        border: 1px solid black;
+      }
     </style>
     <link rel="stylesheet" href="css/style.css" />
   </head>
@@ -186,25 +191,14 @@
         <button onclick="whenclicked()">Go</button>
       </form>
     </section>
-    <div class="row">
-      <div class="column">
-        <div class="card">
-          <h2>Holidays</h2>
-          @@HOLIDAYS@@
-        </div>
-      </div>
-      <div class="column">
-        <div class="card">
-          <h2>@Home</h2>
-          @@WORK_AT_HOMES@@
-        </div>
-      </div>
-      <div class="column">
-        <div class="card">
-          <h2>Standbys</h2>
-          @@STANDBYS@@
-        </div>
-      </div>
-    </div>
+    <table style="width:100%">
+      <tr>
+        <th>Date</th>
+        <th>Holiday</th>
+        <th>Work-At-Home</th>
+        <th>Stand-by</th>
+      </tr>
+      @@TABLE@@
+    </table>
   </body>
 </html>

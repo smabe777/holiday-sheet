@@ -104,6 +104,7 @@ class Person
 	def self.create_from_json(json)
     	jsonH = JSON::parse(json)
 		days = {}
+		print jsonH["days"]
 		jsonH["days"].each { |h| days[ h["date"] ] = DayType.new(h["characteristics"])}
 		pp = Person.new(
 				jsonH["first_name"], 

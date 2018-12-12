@@ -91,9 +91,7 @@ def generatePerson (fname, lname)
 		new_dt = Calendar.workday_date_rand(Time.local(2019, 1, 1), Time.local(2019, 12, 31)).strftime("%Y%m%d")
 		arr_dates |= [ new_dt ]
 		rand_work_type p, new_dt
-
 	end
-
 		File.open("./persons/" + p.first_name + "_" + p.last_name + ".json", "w") do |f|
 	f.write(p.to_json)
 	end

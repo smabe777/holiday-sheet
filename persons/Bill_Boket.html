@@ -138,6 +138,11 @@
         cursor: pointer;
         outline: 0;
       }
+      table,
+      th,
+      td {
+        border: 1px solid black;
+      }
     </style>
     <link rel="stylesheet" href="css/style.css" />
   </head>
@@ -186,107 +191,342 @@
         <button onclick="whenclicked()">Go</button>
       </form>
     </section>
-    <div class="row">
-      <div class="column">
-        <div class="card">
-          <h2>Holidays</h2>
-          <input class="calendar" id="holiday_Bill_Boket_20190107" type="date" value="2019-01-07"/>
-<input class="calendar" id="holiday_Bill_Boket_20190117" type="date" value="2019-01-17"/>
-<input class="calendar" id="holiday_Bill_Boket_20190201" type="date" value="2019-02-01"/>
-<input class="calendar" id="holiday_Bill_Boket_20190212" type="date" value="2019-02-12"/>
-<input class="calendar" id="holiday_Bill_Boket_20190214" type="date" value="2019-02-14"/>
-<input class="calendar" id="holiday_Bill_Boket_20190318" type="date" value="2019-03-18"/>
-<input class="calendar" id="holiday_Bill_Boket_20190329" type="date" value="2019-03-29"/>
-<input class="calendar" id="holiday_Bill_Boket_20190408" type="date" value="2019-04-08"/>
-<input class="calendar" id="holiday_Bill_Boket_20190418" type="date" value="2019-04-18"/>
-<input class="calendar" id="holiday_Bill_Boket_20190624" type="date" value="2019-06-24"/>
-<input class="calendar" id="holiday_Bill_Boket_20190708" type="date" value="2019-07-08"/>
-<input class="calendar" id="holiday_Bill_Boket_20190905" type="date" value="2019-09-05"/>
-<input class="calendar" id="holiday_Bill_Boket_20191010" type="date" value="2019-10-10"/>
-<input class="calendar" id="holiday_Bill_Boket_20191104" type="date" value="2019-11-04"/>
-<input class="calendar" id="holiday_Bill_Boket_20191203" type="date" value="2019-12-03"/>
-<input class="calendar" id="holiday_Bill_Boket_20191211" type="date" value="2019-12-11"/>
-<input class="calendar" id="holiday_Bill_Boket_20191216" type="date" value="2019-12-16"/>
-<input class="calendar" id="holiday_Bill_Boket_20191227" type="date" value="2019-12-27"/>
-<input class="calendar" id="holiday_Bill_Boket_20191230" type="date" value="2019-12-30"/>
+    <table style="width:100%">
+      <tr>
+        <th>Date</th>
+        <th>Holiday</th>
+        <th>Work-At-Home</th>
+        <th>Stand-by</th>
+      </tr>
+      <tr><td>20190102</td>
+<td><input id="holiday_Bill_Boket_20190102" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190102" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190103</td>
+<td><input id="holiday_Bill_Boket_20190103" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190103" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190107</td>
+<td><input id="holiday_Bill_Boket_20190107" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190107" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190108</td>
+<td><input id="holiday_Bill_Boket_20190108" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190108" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190109</td>
+<td><input id="holiday_Bill_Boket_20190109" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190109" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190111</td>
+<td><input id="holiday_Bill_Boket_20190111" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190111" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190115</td>
+<td><input id="holiday_Bill_Boket_20190115" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190115" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190117</td>
+<td><input id="holiday_Bill_Boket_20190117" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190117" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190118</td>
+<td><input id="holiday_Bill_Boket_20190118" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190118" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190128</td>
+<td><input id="holiday_Bill_Boket_20190128" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190128" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190201</td>
+<td><input id="holiday_Bill_Boket_20190201" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190201" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190204</td>
+<td><input id="holiday_Bill_Boket_20190204" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190204" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190207</td>
+<td><input id="holiday_Bill_Boket_20190207" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190207" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190212</td>
+<td><input id="holiday_Bill_Boket_20190212" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190212" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190214</td>
+<td><input id="holiday_Bill_Boket_20190214" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190214" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190220</td>
+<td><input id="holiday_Bill_Boket_20190220" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190220" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190301</td>
+<td><input id="holiday_Bill_Boket_20190301" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190301" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190305</td>
+<td><input id="holiday_Bill_Boket_20190305" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190305" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190318</td>
+<td><input id="holiday_Bill_Boket_20190318" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190318" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190321</td>
+<td><input id="holiday_Bill_Boket_20190321" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190321" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190329</td>
+<td><input id="holiday_Bill_Boket_20190329" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190329" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190405</td>
+<td><input id="holiday_Bill_Boket_20190405" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190405" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190408</td>
+<td><input id="holiday_Bill_Boket_20190408" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190408" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190409</td>
+<td><input id="holiday_Bill_Boket_20190409" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190409" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190412</td>
+<td><input id="holiday_Bill_Boket_20190412" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190412" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190415</td>
+<td><input id="holiday_Bill_Boket_20190415" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190415" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190418</td>
+<td><input id="holiday_Bill_Boket_20190418" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190418" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190424</td>
+<td><input id="holiday_Bill_Boket_20190424" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190424" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190425</td>
+<td><input id="holiday_Bill_Boket_20190425" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190425" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190430</td>
+<td><input id="holiday_Bill_Boket_20190430" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190430" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190507</td>
+<td><input id="holiday_Bill_Boket_20190507" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190507" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190514</td>
+<td><input id="holiday_Bill_Boket_20190514" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190514" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190515</td>
+<td><input id="holiday_Bill_Boket_20190515" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190515" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190516</td>
+<td><input id="holiday_Bill_Boket_20190516" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190516" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190521</td>
+<td><input id="holiday_Bill_Boket_20190521" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190521" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190527</td>
+<td><input id="holiday_Bill_Boket_20190527" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190527" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190603</td>
+<td><input id="holiday_Bill_Boket_20190603" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190603" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190605</td>
+<td><input id="holiday_Bill_Boket_20190605" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190605" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190607</td>
+<td><input id="holiday_Bill_Boket_20190607" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190607" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190612</td>
+<td><input id="holiday_Bill_Boket_20190612" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190612" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190620</td>
+<td><input id="holiday_Bill_Boket_20190620" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190620" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190624</td>
+<td><input id="holiday_Bill_Boket_20190624" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190624" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190627</td>
+<td><input id="holiday_Bill_Boket_20190627" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190627" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190701</td>
+<td><input id="holiday_Bill_Boket_20190701" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190701" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190704</td>
+<td><input id="holiday_Bill_Boket_20190704" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190704" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190708</td>
+<td><input id="holiday_Bill_Boket_20190708" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190708" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190715</td>
+<td><input id="holiday_Bill_Boket_20190715" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190715" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190726</td>
+<td><input id="holiday_Bill_Boket_20190726" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190726" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190731</td>
+<td><input id="holiday_Bill_Boket_20190731" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190731" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190805</td>
+<td><input id="holiday_Bill_Boket_20190805" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190805" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190808</td>
+<td><input id="holiday_Bill_Boket_20190808" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190808" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190809</td>
+<td><input id="holiday_Bill_Boket_20190809" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190809" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190812</td>
+<td><input id="holiday_Bill_Boket_20190812" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190812" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190813</td>
+<td><input id="holiday_Bill_Boket_20190813" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190813" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190814</td>
+<td><input id="holiday_Bill_Boket_20190814" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190814" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190816</td>
+<td><input id="holiday_Bill_Boket_20190816" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190816" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190823</td>
+<td><input id="holiday_Bill_Boket_20190823" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190823" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190904</td>
+<td><input id="holiday_Bill_Boket_20190904" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190904" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190905</td>
+<td><input id="holiday_Bill_Boket_20190905" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190905" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190906</td>
+<td><input id="holiday_Bill_Boket_20190906" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190906" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190909</td>
+<td><input id="holiday_Bill_Boket_20190909" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190909" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190923</td>
+<td><input id="holiday_Bill_Boket_20190923" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190923" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20190924</td>
+<td><input id="holiday_Bill_Boket_20190924" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20190924" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191003</td>
+<td><input id="holiday_Bill_Boket_20191003" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20191003" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191010</td>
+<td><input id="holiday_Bill_Boket_20191010" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20191010" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191014</td>
+<td><input id="holiday_Bill_Boket_20191014" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20191014" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191030</td>
+<td><input id="holiday_Bill_Boket_20191030" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20191030" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191104</td>
+<td><input id="holiday_Bill_Boket_20191104" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20191104" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191106</td>
+<td><input id="holiday_Bill_Boket_20191106" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20191106" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191108</td>
+<td><input id="holiday_Bill_Boket_20191108" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20191108" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191112</td>
+<td><input id="holiday_Bill_Boket_20191112" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20191112" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191119</td>
+<td><input id="holiday_Bill_Boket_20191119" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20191119" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191122</td>
+<td><input id="holiday_Bill_Boket_20191122" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20191122" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191129</td>
+<td><input id="holiday_Bill_Boket_20191129" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20191129" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191202</td>
+<td><input id="holiday_Bill_Boket_20191202" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20191202" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191203</td>
+<td><input id="holiday_Bill_Boket_20191203" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20191203" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191205</td>
+<td><input id="holiday_Bill_Boket_20191205" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20191205" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191206</td>
+<td><input id="holiday_Bill_Boket_20191206" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20191206" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191211</td>
+<td><input id="holiday_Bill_Boket_20191211" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20191211" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191216</td>
+<td><input id="holiday_Bill_Boket_20191216" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20191216" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191227</td>
+<td><input id="holiday_Bill_Boket_20191227" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20191227" type=checkbox checked /></td>
+<td>TBD</td></tr>
+<tr><td>20191230</td>
+<td><input id="holiday_Bill_Boket_20191230" type=checkbox /></td>
+<td><input id="athome_Bill_Boket_20191230" type=checkbox checked /></td>
+<td>TBD</td></tr>
 
-        </div>
-      </div>
-      <div class="column">
-        <div class="card">
-          <h2>@Home</h2>
-          <input class="calendar" id="holiday_Bill_Boket_20190102" type="date" value="2019-01-02"/>
-<input class="calendar" id="holiday_Bill_Boket_20190103" type="date" value="2019-01-03"/>
-<input class="calendar" id="holiday_Bill_Boket_20190108" type="date" value="2019-01-08"/>
-<input class="calendar" id="holiday_Bill_Boket_20190109" type="date" value="2019-01-09"/>
-<input class="calendar" id="holiday_Bill_Boket_20190111" type="date" value="2019-01-11"/>
-<input class="calendar" id="holiday_Bill_Boket_20190115" type="date" value="2019-01-15"/>
-<input class="calendar" id="holiday_Bill_Boket_20190118" type="date" value="2019-01-18"/>
-<input class="calendar" id="holiday_Bill_Boket_20190128" type="date" value="2019-01-28"/>
-<input class="calendar" id="holiday_Bill_Boket_20190204" type="date" value="2019-02-04"/>
-<input class="calendar" id="holiday_Bill_Boket_20190207" type="date" value="2019-02-07"/>
-<input class="calendar" id="holiday_Bill_Boket_20190220" type="date" value="2019-02-20"/>
-<input class="calendar" id="holiday_Bill_Boket_20190301" type="date" value="2019-03-01"/>
-<input class="calendar" id="holiday_Bill_Boket_20190305" type="date" value="2019-03-05"/>
-<input class="calendar" id="holiday_Bill_Boket_20190321" type="date" value="2019-03-21"/>
-<input class="calendar" id="holiday_Bill_Boket_20190405" type="date" value="2019-04-05"/>
-<input class="calendar" id="holiday_Bill_Boket_20190409" type="date" value="2019-04-09"/>
-<input class="calendar" id="holiday_Bill_Boket_20190412" type="date" value="2019-04-12"/>
-<input class="calendar" id="holiday_Bill_Boket_20190415" type="date" value="2019-04-15"/>
-<input class="calendar" id="holiday_Bill_Boket_20190424" type="date" value="2019-04-24"/>
-<input class="calendar" id="holiday_Bill_Boket_20190425" type="date" value="2019-04-25"/>
-<input class="calendar" id="holiday_Bill_Boket_20190430" type="date" value="2019-04-30"/>
-<input class="calendar" id="holiday_Bill_Boket_20190507" type="date" value="2019-05-07"/>
-<input class="calendar" id="holiday_Bill_Boket_20190514" type="date" value="2019-05-14"/>
-<input class="calendar" id="holiday_Bill_Boket_20190515" type="date" value="2019-05-15"/>
-<input class="calendar" id="holiday_Bill_Boket_20190516" type="date" value="2019-05-16"/>
-<input class="calendar" id="holiday_Bill_Boket_20190521" type="date" value="2019-05-21"/>
-<input class="calendar" id="holiday_Bill_Boket_20190527" type="date" value="2019-05-27"/>
-<input class="calendar" id="holiday_Bill_Boket_20190603" type="date" value="2019-06-03"/>
-<input class="calendar" id="holiday_Bill_Boket_20190605" type="date" value="2019-06-05"/>
-<input class="calendar" id="holiday_Bill_Boket_20190607" type="date" value="2019-06-07"/>
-<input class="calendar" id="holiday_Bill_Boket_20190612" type="date" value="2019-06-12"/>
-<input class="calendar" id="holiday_Bill_Boket_20190620" type="date" value="2019-06-20"/>
-<input class="calendar" id="holiday_Bill_Boket_20190627" type="date" value="2019-06-27"/>
-<input class="calendar" id="holiday_Bill_Boket_20190701" type="date" value="2019-07-01"/>
-<input class="calendar" id="holiday_Bill_Boket_20190704" type="date" value="2019-07-04"/>
-<input class="calendar" id="holiday_Bill_Boket_20190715" type="date" value="2019-07-15"/>
-<input class="calendar" id="holiday_Bill_Boket_20190726" type="date" value="2019-07-26"/>
-<input class="calendar" id="holiday_Bill_Boket_20190731" type="date" value="2019-07-31"/>
-<input class="calendar" id="holiday_Bill_Boket_20190805" type="date" value="2019-08-05"/>
-<input class="calendar" id="holiday_Bill_Boket_20190808" type="date" value="2019-08-08"/>
-<input class="calendar" id="holiday_Bill_Boket_20190809" type="date" value="2019-08-09"/>
-<input class="calendar" id="holiday_Bill_Boket_20190812" type="date" value="2019-08-12"/>
-<input class="calendar" id="holiday_Bill_Boket_20190813" type="date" value="2019-08-13"/>
-<input class="calendar" id="holiday_Bill_Boket_20190814" type="date" value="2019-08-14"/>
-<input class="calendar" id="holiday_Bill_Boket_20190816" type="date" value="2019-08-16"/>
-<input class="calendar" id="holiday_Bill_Boket_20190823" type="date" value="2019-08-23"/>
-<input class="calendar" id="holiday_Bill_Boket_20190904" type="date" value="2019-09-04"/>
-<input class="calendar" id="holiday_Bill_Boket_20190906" type="date" value="2019-09-06"/>
-<input class="calendar" id="holiday_Bill_Boket_20190909" type="date" value="2019-09-09"/>
-<input class="calendar" id="holiday_Bill_Boket_20190923" type="date" value="2019-09-23"/>
-<input class="calendar" id="holiday_Bill_Boket_20190924" type="date" value="2019-09-24"/>
-<input class="calendar" id="holiday_Bill_Boket_20191003" type="date" value="2019-10-03"/>
-<input class="calendar" id="holiday_Bill_Boket_20191014" type="date" value="2019-10-14"/>
-<input class="calendar" id="holiday_Bill_Boket_20191030" type="date" value="2019-10-30"/>
-<input class="calendar" id="holiday_Bill_Boket_20191106" type="date" value="2019-11-06"/>
-<input class="calendar" id="holiday_Bill_Boket_20191108" type="date" value="2019-11-08"/>
-<input class="calendar" id="holiday_Bill_Boket_20191112" type="date" value="2019-11-12"/>
-<input class="calendar" id="holiday_Bill_Boket_20191119" type="date" value="2019-11-19"/>
-<input class="calendar" id="holiday_Bill_Boket_20191122" type="date" value="2019-11-22"/>
-<input class="calendar" id="holiday_Bill_Boket_20191129" type="date" value="2019-11-29"/>
-<input class="calendar" id="holiday_Bill_Boket_20191202" type="date" value="2019-12-02"/>
-<input class="calendar" id="holiday_Bill_Boket_20191205" type="date" value="2019-12-05"/>
-<input class="calendar" id="holiday_Bill_Boket_20191206" type="date" value="2019-12-06"/>
-
-        </div>
-      </div>
-      <div class="column">
-        <div class="card">
-          <h2>Standbys</h2>
-          @@STANDBYS@@
-        </div>
-      </div>
-    </div>
+    </table>
   </body>
 </html>
