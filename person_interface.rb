@@ -48,13 +48,13 @@ def cumul_td(memo, date, datetype,person_date_id)
     memo=memo+"<tr><td>#{date}</td>\n"
 
     if datetype.holiday?
-             memo=memo+"<td><input class=\"radio\" id=\"holiday_#{person_date_id}\" type=\"radio\" name=\"radio#{date}\" checked=true onclick=\"radio_clicked('holiday_#{person_date_id}')\"/><label class=\"label\">Holiday</label>\n"
-             memo=memo+"<input class=\"radio\"  id=\"athome_#{person_date_id}\" type=\"radio\"  name=\"radio#{date}\"  onclick=\"radio_clicked('athome_#{person_date_id}')\" /><label class=\"label\"/>Work-At-Home</label>\n"
-             memo=memo+"<input class=\"radio\"  id=\"onsite_#{person_date_id}\" type=\"radio\"  name=\"radio#{date}\"  onclick=\"radio_clicked('onsite_#{person_date_id}')\"/><label class=\"label\" />Work-On-Site</label></td>\n"
+             memo=memo+"<td><input class=\"radio\" id=\"holiday_#{person_date_id}\" type=\"radio\" name=\"radio#{date}\" checked=\"checked\" onclick=\"radio_clicked('#{person_date_id}','#{date}','holiday')\" /><label class=\"label\">Holiday</label>\n"
+             memo=memo+"<input class=\"radio\"  id=\"athome_#{person_date_id}\" type=\"radio\"  name=\"radio#{date}\"  onclick=\"radio_clicked('#{person_date_id}','#{date}','athome')\" /><label class=\"label\">Work-At-Home</label>\n"
+             memo=memo+"<input class=\"radio\"  id=\"onsite_#{person_date_id}\" type=\"radio\"  name=\"radio#{date}\"  onclick=\"radio_clicked('#{person_date_id}','#{date}','onsite')\" /><label class=\"label\">Work-On-Site</label></td>\n"
     else 
-             memo=memo+"<td><input class=\"radio\" id=\"holiday_#{person_date_id}\" type=\"radio\" name=\"radio#{date}\" onclick=\"radio_clicked('holiday_#{person_date_id}')\"/><label class=\"label\">Holiday</label>\n"
-             memo=memo+"<input class=\"radio\" id=\"athome_#{person_date_id}\" type=\"radio\" name=\"radio#{date}\" checked=true onclick=\"radio_clicked('athome_#{person_date_id}')\"/><label class=\"label\" >Work-At-Home</label>\n"
-       memo=memo+"<input class=\"radio\"  id=\"onsite_#{person_date_id}\" type=\"radio\"  name=\"radio#{date}\" onclick=\"radio_clicked('onsite_#{person_date_id}')\"/><label class=\"label\" >Work-On-Site</label></td>\n"
+             memo=memo+"<td><input class=\"radio\" id=\"holiday_#{person_date_id}\" type=\"radio\" name=\"radio#{date}\" onclick=\"radio_clicked('#{person_date_id}','#{date}','holiday')\" /><label class=\"label\">Holiday</label>\n"
+             memo=memo+"<input class=\"radio\" id=\"athome_#{person_date_id}\" type=\"radio\" name=\"radio#{date}\" checked=\"checked\" onclick=\"radio_clicked('#{person_date_id}','#{date}','athome')\" /><label class=\"label\">Work-At-Home</label>\n"
+             memo=memo+"<input class=\"radio\"  id=\"onsite_#{person_date_id}\" type=\"radio\"  name=\"radio#{date}\" onclick=\"radio_clicked('#{person_date_id}','#{date}','onsite')\" /><label class=\"label\">Work-On-Site</label></td>\n"
         end
 
     memo=memo+"<td>#{datetype.standby?}</td></tr>\n"

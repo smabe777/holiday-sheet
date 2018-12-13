@@ -6,10 +6,9 @@
       function whenclicked() {
         window.location = "persons/Bill_Boket.json";
       }
-      function radio_clicked(id){
-        radio = document.getElementById(id);
-        radio.style.bordercolor = '#686a69';
-         @@FNAME@@_@@LNAME@@_changes.push(id);
+      function radio_clicked(id, date, type){
+        radio = document.getElementById(type+'_'+id);
+        radio.style.color = '#686a69';
       }
     </script>
     <style>
