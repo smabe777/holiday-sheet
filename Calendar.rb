@@ -59,8 +59,11 @@ class DayType
 	def holiday?
 		@characteristics['holiday'] 
 	end
-	def standby?
+	def standby
 		@characteristics['standby']
+	end
+	def no_standby?
+		( @characteristics['standby'] == [])
 	end
 	def blank?
 			#A blank day is an error -- the day should be completely dropped
@@ -127,6 +130,15 @@ class Calendar
 		return dt unless !workday?(dt.strftime('%Y%m%d')) 
 		return workday_date_rand(from, to)
 	end
+	def self.personExists?(fullname, team = nil)
+		@@list_persons.find {
+			|p| if team.nil? then 
+				(p.fullName == fullname)
+			else 
+				(team.include? p) && (p.fullName == fullname)
+			end 
+		}
+	end 
 	def self.peopleInHoliday(date, team = nil)
 		@@list_persons.select {
 			|p| if team.nil? then 

@@ -21,7 +21,12 @@ class Person
 			@standbys = stands
 		end
 	end
-
+	def fullName
+		@first_name + ' ' + @last_name
+	end 
+	def full_name
+		@first_name + '_' + @last_name
+	end 
 	def add_date_if_new(date)
 		if !@days.has_key?(date)
 			@days[date] = DayType.new()
@@ -56,10 +61,13 @@ class Person
 		#the default is that all days except official_holidays and WE are workdays
 		#using set_workday only means that one had previously selected a holiday,
 		#and then changed of idea
-		if !@days.has_key?(date) then return #date should exist
+		if !@days.has_key?(date) then return #work days are assumed
 		else
-		@days[date].set_workday()
-		#remove
+			if (@days[date].no_standby?) # remove : no use to keep this in the list
+				@days.delete(date)
+			else #we need to keep the date, set it as work on site
+				@days[date].set_workday()
+			end
 		end
 	end
 	def set_standby(date, starttime, endtime)
@@ -85,7 +93,7 @@ class Person
 							"workday" => type.workday?.to_s,
 							"holiday" => type.holiday?.to_s,
 							"work_at_home" => type.work_at_home?.to_s,
-							"standby" => type.standby?
+							"standby" => type.standby
 						} 
 					}
 				};
@@ -114,6 +122,16 @@ class Person
 				jsonH["standbys"]
 				);
 		return pp
-  	end
+	  end
+	  def update(hash_date_type, type_labels) #{"20181120" => "onsite"}, ['onsite','holiday','athome','standby']
+		hash_date_type.each {
+			|date, type|
+			if type == type_labels[0] then set_workday(date)
+			elsif type == type_labels[1] then set_holiday(date)
+			elsif type == type_labels[2] then set_work_at_home(date)
+			else throw 'Person:update --> unrecognized type'
+			end
+		}
+	  end
 
 end

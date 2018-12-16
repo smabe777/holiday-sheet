@@ -145,9 +145,9 @@ def testPersonsforDates
 	end
 end 
 
-generatePersons
-generatePerson 'Bill', 'Boket'
-generatePerson 'Julie', 'Nelson'
+#generatePersons
+#generatePerson 'Bill', 'Boket'
+#generatePerson 'Julie', 'Nelson'
 #testPersonsforDates
 
 def testTeams
@@ -230,11 +230,11 @@ def teamHolidays team
     puts '-------------------------------'
     hols.each{
         |date| print 'for date ' + date 
-        printPersons Calendar.peopleInHoliday(date, nil)
+        printPersons Calendar.peopleInHoliday(date, team.persons)
         puts
         puts 'will be on holiday'
     }
 end
-#teams_hash = testTeams
-#teamHolidays  teams_hash[:pharrels]
+teams_hash = testTeams
+teamHolidays  teams_hash[:pharrels]
 
