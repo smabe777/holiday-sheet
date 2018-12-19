@@ -1,0 +1,776 @@
+<head>
+  <title>Bill, Boket</title>
+  <script>
+    let changes = {};
+    let url = "";
+    function whenclicked() {
+      url = window.location.protocol + "//" + window.location.host + '/Cyrus Vacca';
+      sendJSON(url, JSON.stringify(changes));
+    }
+    function addDate() {
+        url = window.location.protocol + "//" + window.location.host + '/Cyrus Vacca';
+        rad = document.getElementsByClassName('radio');
+        alert(rad[0]);
+       // sendJSON(url, {thedate='',});
+      }
+    function radio_clicked(id, date, type) {
+      radio = document.getElementById(type + "_" + id);
+      changes[date] = type;
+    }
+    var handleFormSubmit = function handleFormSubmit(event) {
+      // Stop the form from submitting since weâ€™re handling that with AJAX.
+      event.preventDefault();
+    };
+    var sendJSON = function sendJSON(url, json) {
+      xhttp = new XMLHttpRequest();
+
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          alert("changes posted : " + this.responseText);
+        }
+      };
+      xhttp.open("POST", url, true);
+      xhttp.setRequestHeader("Content-Type", "application/json");
+      xhttp.send(json);
+    };
+  </script>
+  <style>
+    /* Float four columns side by side */
+    .column {
+      float: left;
+      width: 25%;
+      padding: 0 10px;
+    }
+
+    /* Remove extra left and right margins, due to padding in columns */
+    .row {
+      margin: 0 -5px;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    /* Style the counter cards */
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+      padding: 16px;
+      text-align: center;
+      background-color: #f1f1f1;
+    }
+
+    /* Responsive columns - one column layout (vertical) on small screens */
+    @media screen and (max-width: 600px) {
+      .column {
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
+      }
+    }
+
+    /* Heydon Pickeringâ€™s lobotomized owl. Details: https://bit.ly/1H7MXUD */
+    * + * {
+      margin-top: 16px;
+      margin-top: 1rem;
+    }
+
+    /* Set up fonts, colors and all that jazz. */
+    body {
+      background: #f9fdfe;
+      color: #686a69;
+      font-family: "Open Sans", sans-serif;
+      font-size: 18px;
+      line-height: 1.75;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    /* Set up general layout rules for outer containers. */
+    .content,
+    .results {
+      width: 90vw;
+      max-width: 550px;
+      margin: 8vh auto;
+    }
+
+    .content__heading {
+      font-size: 125%;
+    }
+
+    .content__lede {
+      margin-top: 8px;
+      margin-top: 0.5rem;
+      font-size: 87.5%;
+    }
+    .form {
+      position: relative;
+      display: block;
+      margin: 0;
+      padding: 16px 0 32px;
+      padding: 1rem 0 2rem;
+      border-top: 1px solid #cdcfcf;
+      border-bottom: 1px solid #cdcfcf;
+      overflow: hidden;
+    }
+
+    button {
+      display: block;
+      margin: 8px 16px 0;
+      margin: 0.5rem 1rem 0;
+      padding: 0 16px 2px;
+      padding: 0 1rem 0.125rem;
+      background-color: #686a69;
+      border: 0;
+      color: #f9fdfe;
+      font-family: lato, sans-serif;
+      font-size: 100%;
+      letter-spacing: 0.05em;
+      line-height: 1.5;
+      text-transform: uppercase;
+      transition: 150ms all linear;
+    }
+    .calendar {
+      display: block;
+      margin-top: 0;
+      padding: 8px 12px;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid #cdcfcf;
+      width: 100%;
+      font-family: "Open Sans", sans-serif;
+      font-size: 16px;
+      font-size: 1rem;
+      transition: 150ms border-color linear;
+    }
+    .checkbox,
+    .radio {
+      display: inline-block;
+      width: auto;
+    }
+    .checkbox ~ .checkbox,
+    .radio ~ .radio {
+      margin-left: 16px;
+      margin-left: 1rem;
+    }
+    .input:focus,
+    .input:active {
+      border-color: #686a69;
+      outline: 0;
+    }
+    .button:hover,
+    .button:active,
+    .button:focus {
+      background: #2a2f2c;
+      cursor: pointer;
+      outline: 0;
+    }
+    table,
+    th,
+    td {
+      border: 1px solid black;
+    }
+    /* Customize the label (the container) */
+    .container {
+      display: block;
+      position: relative;
+      padding-left: 35px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      font-size: 22px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    /* Hide the browser's default checkbox */
+    .container input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+
+    /* Create a custom checkbox */
+    .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 25px;
+      width: 25px;
+      background-color: #eee;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container:hover input ~ .checkmark {
+      background-color: #ccc;
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    .container input:checked ~ .checkmark {
+      background-color: #2196f3;
+    }
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+
+    /* Show the checkmark when checked */
+    .container input:checked ~ .checkmark:after {
+      display: block;
+    }
+
+    /* Style the checkmark/indicator */
+    .container .checkmark:after {
+      left: 9px;
+      top: 5px;
+      width: 5px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 3px 3px 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+    /* Customize the label (the container) */
+    .container {
+      display: block;
+      position: relative;
+      padding-left: 35px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      font-size: 22px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    /* Hide the browser's default radio button */
+    .container input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+
+    /* Create a custom radio button */
+    .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 25px;
+      width: 25px;
+      background-color: #eee;
+      border-radius: 50%;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container:hover input ~ .checkmark {
+      background-color: #ccc;
+    }
+
+    /* When the radio button is checked, add a blue background */
+    .container input:checked ~ .checkmark {
+      background-color: #2196f3;
+    }
+
+    /* Create the indicator (the dot/circle - hidden when not checked) */
+    .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+
+    /* Show the indicator (dot/circle) when checked */
+    .container input:checked ~ .checkmark:after {
+      display: block;
+    }
+
+    /* Style the indicator (dot/circle) */
+    .container .checkmark:after {
+      top: 9px;
+      left: 9px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: white;
+    }
+     table.center {
+    margin-left:auto; 
+    margin-right:auto;
+  }
+  </style>
+</head>
+<body>
+    <section class="content">
+        <h1 class="content__heading">Cyrus Vacca's Days</h1>
+        <p class="content__lede">Use this form to add calendar elements</p>
+        <form class="form">
+            <input class="calendar" id="thedate" name="thedate" type="date" />
+
+            <div class="form-group">
+                <input class="radio" id="day_type-workday" name="day_type" type="radio" value="is_workday" />
+                <label class="label" for="day_type-workday">Workday</label>
+                <input class="radio" id="day_type-holiday" name="day_type" type="radio" value="is_holiday" />
+                <label class="label" for="day_type-holiday">Holiday</label>
+                <input class="radio" id="day_type-work-at-home" name="day_type" type="radio" value="is_work_at_home" />
+                <label class="label" for="day_type-work-at-home">Work-At-Home</label>
+                <input class="radio" id="day_type-standby" name="day_type" type="radio" value="is_standby" />
+                <label class="label" for="day_type-standby">Standby</label>
+            </div>
+        </form>
+        <button onclick="addDate()">Add</button>
+        <button onclick="whenclicked()">Update</button>
+
+    </section>
+    <div class="form-group">
+        <table style="width:80%" class="center">
+            <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Stand-by</th>
+            </tr>
+            <tr><td>20190107</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190107" type="radio" name="radio20190107" onclick="radio_clicked('Cyrus_Vacca_20190107','20190107','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190107" type="radio" name="radio20190107" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190107','20190107','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190107" type="radio"  name="radio20190107" onclick="radio_clicked('Cyrus_Vacca_20190107','20190107','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190108</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190108" type="radio" name="radio20190108" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190108','20190108','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20190108" type="radio"  name="radio20190108"  onclick="radio_clicked('Cyrus_Vacca_20190108','20190108','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190108" type="radio"  name="radio20190108"  onclick="radio_clicked('Cyrus_Vacca_20190108','20190108','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190110</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190110" type="radio" name="radio20190110" onclick="radio_clicked('Cyrus_Vacca_20190110','20190110','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190110" type="radio" name="radio20190110" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190110','20190110','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190110" type="radio"  name="radio20190110" onclick="radio_clicked('Cyrus_Vacca_20190110','20190110','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190114</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190114" type="radio" name="radio20190114" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190114','20190114','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20190114" type="radio"  name="radio20190114"  onclick="radio_clicked('Cyrus_Vacca_20190114','20190114','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190114" type="radio"  name="radio20190114"  onclick="radio_clicked('Cyrus_Vacca_20190114','20190114','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190115</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190115" type="radio" name="radio20190115" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190115','20190115','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20190115" type="radio"  name="radio20190115"  onclick="radio_clicked('Cyrus_Vacca_20190115','20190115','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190115" type="radio"  name="radio20190115"  onclick="radio_clicked('Cyrus_Vacca_20190115','20190115','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190117</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190117" type="radio" name="radio20190117" onclick="radio_clicked('Cyrus_Vacca_20190117','20190117','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190117" type="radio" name="radio20190117" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190117','20190117','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190117" type="radio"  name="radio20190117" onclick="radio_clicked('Cyrus_Vacca_20190117','20190117','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190121</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190121" type="radio" name="radio20190121" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190121','20190121','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20190121" type="radio"  name="radio20190121"  onclick="radio_clicked('Cyrus_Vacca_20190121','20190121','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190121" type="radio"  name="radio20190121"  onclick="radio_clicked('Cyrus_Vacca_20190121','20190121','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190123</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190123" type="radio" name="radio20190123" onclick="radio_clicked('Cyrus_Vacca_20190123','20190123','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190123" type="radio" name="radio20190123" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190123','20190123','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190123" type="radio"  name="radio20190123" onclick="radio_clicked('Cyrus_Vacca_20190123','20190123','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190124</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190124" type="radio" name="radio20190124" onclick="radio_clicked('Cyrus_Vacca_20190124','20190124','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190124" type="radio" name="radio20190124" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190124','20190124','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190124" type="radio"  name="radio20190124" onclick="radio_clicked('Cyrus_Vacca_20190124','20190124','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190131</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190131" type="radio" name="radio20190131" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190131','20190131','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20190131" type="radio"  name="radio20190131"  onclick="radio_clicked('Cyrus_Vacca_20190131','20190131','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190131" type="radio"  name="radio20190131"  onclick="radio_clicked('Cyrus_Vacca_20190131','20190131','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190201</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190201" type="radio" name="radio20190201" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190201','20190201','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20190201" type="radio"  name="radio20190201"  onclick="radio_clicked('Cyrus_Vacca_20190201','20190201','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190201" type="radio"  name="radio20190201"  onclick="radio_clicked('Cyrus_Vacca_20190201','20190201','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190205</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190205" type="radio" name="radio20190205" onclick="radio_clicked('Cyrus_Vacca_20190205','20190205','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190205" type="radio" name="radio20190205" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190205','20190205','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190205" type="radio"  name="radio20190205" onclick="radio_clicked('Cyrus_Vacca_20190205','20190205','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190211</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190211" type="radio" name="radio20190211" onclick="radio_clicked('Cyrus_Vacca_20190211','20190211','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190211" type="radio" name="radio20190211" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190211','20190211','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190211" type="radio"  name="radio20190211" onclick="radio_clicked('Cyrus_Vacca_20190211','20190211','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190213</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190213" type="radio" name="radio20190213" onclick="radio_clicked('Cyrus_Vacca_20190213','20190213','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190213" type="radio" name="radio20190213" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190213','20190213','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190213" type="radio"  name="radio20190213" onclick="radio_clicked('Cyrus_Vacca_20190213','20190213','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190218</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190218" type="radio" name="radio20190218" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190218','20190218','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20190218" type="radio"  name="radio20190218"  onclick="radio_clicked('Cyrus_Vacca_20190218','20190218','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190218" type="radio"  name="radio20190218"  onclick="radio_clicked('Cyrus_Vacca_20190218','20190218','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190226</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190226" type="radio" name="radio20190226" onclick="radio_clicked('Cyrus_Vacca_20190226','20190226','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190226" type="radio" name="radio20190226" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190226','20190226','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190226" type="radio"  name="radio20190226" onclick="radio_clicked('Cyrus_Vacca_20190226','20190226','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190304</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190304" type="radio" name="radio20190304" onclick="radio_clicked('Cyrus_Vacca_20190304','20190304','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190304" type="radio" name="radio20190304" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190304','20190304','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190304" type="radio"  name="radio20190304" onclick="radio_clicked('Cyrus_Vacca_20190304','20190304','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190306</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190306" type="radio" name="radio20190306" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190306','20190306','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20190306" type="radio"  name="radio20190306"  onclick="radio_clicked('Cyrus_Vacca_20190306','20190306','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190306" type="radio"  name="radio20190306"  onclick="radio_clicked('Cyrus_Vacca_20190306','20190306','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190313</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190313" type="radio" name="radio20190313" onclick="radio_clicked('Cyrus_Vacca_20190313','20190313','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190313" type="radio" name="radio20190313" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190313','20190313','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190313" type="radio"  name="radio20190313" onclick="radio_clicked('Cyrus_Vacca_20190313','20190313','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190315</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190315" type="radio" name="radio20190315" onclick="radio_clicked('Cyrus_Vacca_20190315','20190315','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190315" type="radio" name="radio20190315" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190315','20190315','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190315" type="radio"  name="radio20190315" onclick="radio_clicked('Cyrus_Vacca_20190315','20190315','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190322</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190322" type="radio" name="radio20190322" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190322','20190322','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20190322" type="radio"  name="radio20190322"  onclick="radio_clicked('Cyrus_Vacca_20190322','20190322','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190322" type="radio"  name="radio20190322"  onclick="radio_clicked('Cyrus_Vacca_20190322','20190322','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190327</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190327" type="radio" name="radio20190327" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190327','20190327','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20190327" type="radio"  name="radio20190327"  onclick="radio_clicked('Cyrus_Vacca_20190327','20190327','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190327" type="radio"  name="radio20190327"  onclick="radio_clicked('Cyrus_Vacca_20190327','20190327','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190329</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190329" type="radio" name="radio20190329" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190329','20190329','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20190329" type="radio"  name="radio20190329"  onclick="radio_clicked('Cyrus_Vacca_20190329','20190329','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190329" type="radio"  name="radio20190329"  onclick="radio_clicked('Cyrus_Vacca_20190329','20190329','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190402</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190402" type="radio" name="radio20190402" onclick="radio_clicked('Cyrus_Vacca_20190402','20190402','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190402" type="radio" name="radio20190402" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190402','20190402','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190402" type="radio"  name="radio20190402" onclick="radio_clicked('Cyrus_Vacca_20190402','20190402','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190404</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190404" type="radio" name="radio20190404" onclick="radio_clicked('Cyrus_Vacca_20190404','20190404','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190404" type="radio" name="radio20190404" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190404','20190404','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190404" type="radio"  name="radio20190404" onclick="radio_clicked('Cyrus_Vacca_20190404','20190404','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190409</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190409" type="radio" name="radio20190409" onclick="radio_clicked('Cyrus_Vacca_20190409','20190409','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190409" type="radio" name="radio20190409" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190409','20190409','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190409" type="radio"  name="radio20190409" onclick="radio_clicked('Cyrus_Vacca_20190409','20190409','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190412</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190412" type="radio" name="radio20190412" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190412','20190412','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20190412" type="radio"  name="radio20190412"  onclick="radio_clicked('Cyrus_Vacca_20190412','20190412','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190412" type="radio"  name="radio20190412"  onclick="radio_clicked('Cyrus_Vacca_20190412','20190412','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190417</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190417" type="radio" name="radio20190417" onclick="radio_clicked('Cyrus_Vacca_20190417','20190417','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190417" type="radio" name="radio20190417" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190417','20190417','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190417" type="radio"  name="radio20190417" onclick="radio_clicked('Cyrus_Vacca_20190417','20190417','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190418</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190418" type="radio" name="radio20190418" onclick="radio_clicked('Cyrus_Vacca_20190418','20190418','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190418" type="radio" name="radio20190418" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190418','20190418','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190418" type="radio"  name="radio20190418" onclick="radio_clicked('Cyrus_Vacca_20190418','20190418','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190419</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190419" type="radio" name="radio20190419" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190419','20190419','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20190419" type="radio"  name="radio20190419"  onclick="radio_clicked('Cyrus_Vacca_20190419','20190419','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190419" type="radio"  name="radio20190419"  onclick="radio_clicked('Cyrus_Vacca_20190419','20190419','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190425</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190425" type="radio" name="radio20190425" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190425','20190425','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20190425" type="radio"  name="radio20190425"  onclick="radio_clicked('Cyrus_Vacca_20190425','20190425','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190425" type="radio"  name="radio20190425"  onclick="radio_clicked('Cyrus_Vacca_20190425','20190425','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190430</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190430" type="radio" name="radio20190430" onclick="radio_clicked('Cyrus_Vacca_20190430','20190430','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190430" type="radio" name="radio20190430" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190430','20190430','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190430" type="radio"  name="radio20190430" onclick="radio_clicked('Cyrus_Vacca_20190430','20190430','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190507</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190507" type="radio" name="radio20190507" onclick="radio_clicked('Cyrus_Vacca_20190507','20190507','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190507" type="radio" name="radio20190507" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190507','20190507','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190507" type="radio"  name="radio20190507" onclick="radio_clicked('Cyrus_Vacca_20190507','20190507','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190513</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190513" type="radio" name="radio20190513" onclick="radio_clicked('Cyrus_Vacca_20190513','20190513','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190513" type="radio" name="radio20190513" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190513','20190513','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190513" type="radio"  name="radio20190513" onclick="radio_clicked('Cyrus_Vacca_20190513','20190513','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190517</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190517" type="radio" name="radio20190517" onclick="radio_clicked('Cyrus_Vacca_20190517','20190517','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190517" type="radio" name="radio20190517" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190517','20190517','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190517" type="radio"  name="radio20190517" onclick="radio_clicked('Cyrus_Vacca_20190517','20190517','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190603</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190603" type="radio" name="radio20190603" onclick="radio_clicked('Cyrus_Vacca_20190603','20190603','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190603" type="radio" name="radio20190603" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190603','20190603','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190603" type="radio"  name="radio20190603" onclick="radio_clicked('Cyrus_Vacca_20190603','20190603','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190605</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190605" type="radio" name="radio20190605" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190605','20190605','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20190605" type="radio"  name="radio20190605"  onclick="radio_clicked('Cyrus_Vacca_20190605','20190605','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190605" type="radio"  name="radio20190605"  onclick="radio_clicked('Cyrus_Vacca_20190605','20190605','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190617</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190617" type="radio" name="radio20190617" onclick="radio_clicked('Cyrus_Vacca_20190617','20190617','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190617" type="radio" name="radio20190617" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190617','20190617','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190617" type="radio"  name="radio20190617" onclick="radio_clicked('Cyrus_Vacca_20190617','20190617','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190618</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190618" type="radio" name="radio20190618" onclick="radio_clicked('Cyrus_Vacca_20190618','20190618','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190618" type="radio" name="radio20190618" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190618','20190618','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190618" type="radio"  name="radio20190618" onclick="radio_clicked('Cyrus_Vacca_20190618','20190618','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190619</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190619" type="radio" name="radio20190619" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190619','20190619','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20190619" type="radio"  name="radio20190619"  onclick="radio_clicked('Cyrus_Vacca_20190619','20190619','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190619" type="radio"  name="radio20190619"  onclick="radio_clicked('Cyrus_Vacca_20190619','20190619','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190621</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190621" type="radio" name="radio20190621" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190621','20190621','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20190621" type="radio"  name="radio20190621"  onclick="radio_clicked('Cyrus_Vacca_20190621','20190621','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190621" type="radio"  name="radio20190621"  onclick="radio_clicked('Cyrus_Vacca_20190621','20190621','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190626</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190626" type="radio" name="radio20190626" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190626','20190626','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20190626" type="radio"  name="radio20190626"  onclick="radio_clicked('Cyrus_Vacca_20190626','20190626','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190626" type="radio"  name="radio20190626"  onclick="radio_clicked('Cyrus_Vacca_20190626','20190626','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190704</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190704" type="radio" name="radio20190704" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190704','20190704','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20190704" type="radio"  name="radio20190704"  onclick="radio_clicked('Cyrus_Vacca_20190704','20190704','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190704" type="radio"  name="radio20190704"  onclick="radio_clicked('Cyrus_Vacca_20190704','20190704','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190708</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190708" type="radio" name="radio20190708" onclick="radio_clicked('Cyrus_Vacca_20190708','20190708','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190708" type="radio" name="radio20190708" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190708','20190708','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190708" type="radio"  name="radio20190708" onclick="radio_clicked('Cyrus_Vacca_20190708','20190708','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190709</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190709" type="radio" name="radio20190709" onclick="radio_clicked('Cyrus_Vacca_20190709','20190709','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190709" type="radio" name="radio20190709" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190709','20190709','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190709" type="radio"  name="radio20190709" onclick="radio_clicked('Cyrus_Vacca_20190709','20190709','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190710</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190710" type="radio" name="radio20190710" onclick="radio_clicked('Cyrus_Vacca_20190710','20190710','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190710" type="radio" name="radio20190710" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190710','20190710','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190710" type="radio"  name="radio20190710" onclick="radio_clicked('Cyrus_Vacca_20190710','20190710','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190718</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190718" type="radio" name="radio20190718" onclick="radio_clicked('Cyrus_Vacca_20190718','20190718','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190718" type="radio" name="radio20190718" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190718','20190718','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190718" type="radio"  name="radio20190718" onclick="radio_clicked('Cyrus_Vacca_20190718','20190718','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190731</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190731" type="radio" name="radio20190731" onclick="radio_clicked('Cyrus_Vacca_20190731','20190731','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190731" type="radio" name="radio20190731" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190731','20190731','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190731" type="radio"  name="radio20190731" onclick="radio_clicked('Cyrus_Vacca_20190731','20190731','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190801</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190801" type="radio" name="radio20190801" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190801','20190801','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20190801" type="radio"  name="radio20190801"  onclick="radio_clicked('Cyrus_Vacca_20190801','20190801','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190801" type="radio"  name="radio20190801"  onclick="radio_clicked('Cyrus_Vacca_20190801','20190801','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190806</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190806" type="radio" name="radio20190806" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190806','20190806','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20190806" type="radio"  name="radio20190806"  onclick="radio_clicked('Cyrus_Vacca_20190806','20190806','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190806" type="radio"  name="radio20190806"  onclick="radio_clicked('Cyrus_Vacca_20190806','20190806','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190809</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190809" type="radio" name="radio20190809" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190809','20190809','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20190809" type="radio"  name="radio20190809"  onclick="radio_clicked('Cyrus_Vacca_20190809','20190809','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190809" type="radio"  name="radio20190809"  onclick="radio_clicked('Cyrus_Vacca_20190809','20190809','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190812</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190812" type="radio" name="radio20190812" onclick="radio_clicked('Cyrus_Vacca_20190812','20190812','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190812" type="radio" name="radio20190812" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190812','20190812','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190812" type="radio"  name="radio20190812" onclick="radio_clicked('Cyrus_Vacca_20190812','20190812','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190813</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190813" type="radio" name="radio20190813" onclick="radio_clicked('Cyrus_Vacca_20190813','20190813','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190813" type="radio" name="radio20190813" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190813','20190813','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190813" type="radio"  name="radio20190813" onclick="radio_clicked('Cyrus_Vacca_20190813','20190813','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190814</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190814" type="radio" name="radio20190814" onclick="radio_clicked('Cyrus_Vacca_20190814','20190814','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190814" type="radio" name="radio20190814" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190814','20190814','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190814" type="radio"  name="radio20190814" onclick="radio_clicked('Cyrus_Vacca_20190814','20190814','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190823</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190823" type="radio" name="radio20190823" onclick="radio_clicked('Cyrus_Vacca_20190823','20190823','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190823" type="radio" name="radio20190823" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190823','20190823','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190823" type="radio"  name="radio20190823" onclick="radio_clicked('Cyrus_Vacca_20190823','20190823','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190827</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190827" type="radio" name="radio20190827" onclick="radio_clicked('Cyrus_Vacca_20190827','20190827','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190827" type="radio" name="radio20190827" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190827','20190827','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190827" type="radio"  name="radio20190827" onclick="radio_clicked('Cyrus_Vacca_20190827','20190827','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190829</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190829" type="radio" name="radio20190829" onclick="radio_clicked('Cyrus_Vacca_20190829','20190829','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190829" type="radio" name="radio20190829" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190829','20190829','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190829" type="radio"  name="radio20190829" onclick="radio_clicked('Cyrus_Vacca_20190829','20190829','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190902</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190902" type="radio" name="radio20190902" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190902','20190902','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20190902" type="radio"  name="radio20190902"  onclick="radio_clicked('Cyrus_Vacca_20190902','20190902','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190902" type="radio"  name="radio20190902"  onclick="radio_clicked('Cyrus_Vacca_20190902','20190902','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190904</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190904" type="radio" name="radio20190904" onclick="radio_clicked('Cyrus_Vacca_20190904','20190904','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190904" type="radio" name="radio20190904" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190904','20190904','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190904" type="radio"  name="radio20190904" onclick="radio_clicked('Cyrus_Vacca_20190904','20190904','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190905</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190905" type="radio" name="radio20190905" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190905','20190905','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20190905" type="radio"  name="radio20190905"  onclick="radio_clicked('Cyrus_Vacca_20190905','20190905','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190905" type="radio"  name="radio20190905"  onclick="radio_clicked('Cyrus_Vacca_20190905','20190905','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190912</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190912" type="radio" name="radio20190912" onclick="radio_clicked('Cyrus_Vacca_20190912','20190912','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190912" type="radio" name="radio20190912" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190912','20190912','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190912" type="radio"  name="radio20190912" onclick="radio_clicked('Cyrus_Vacca_20190912','20190912','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190916</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190916" type="radio" name="radio20190916" onclick="radio_clicked('Cyrus_Vacca_20190916','20190916','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20190916" type="radio" name="radio20190916" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190916','20190916','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190916" type="radio"  name="radio20190916" onclick="radio_clicked('Cyrus_Vacca_20190916','20190916','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190919</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190919" type="radio" name="radio20190919" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190919','20190919','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20190919" type="radio"  name="radio20190919"  onclick="radio_clicked('Cyrus_Vacca_20190919','20190919','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190919" type="radio"  name="radio20190919"  onclick="radio_clicked('Cyrus_Vacca_20190919','20190919','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191003</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20191003" type="radio" name="radio20191003" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20191003','20191003','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20191003" type="radio"  name="radio20191003"  onclick="radio_clicked('Cyrus_Vacca_20191003','20191003','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20191003" type="radio"  name="radio20191003"  onclick="radio_clicked('Cyrus_Vacca_20191003','20191003','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191014</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20191014" type="radio" name="radio20191014" onclick="radio_clicked('Cyrus_Vacca_20191014','20191014','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20191014" type="radio" name="radio20191014" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20191014','20191014','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20191014" type="radio"  name="radio20191014" onclick="radio_clicked('Cyrus_Vacca_20191014','20191014','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191015</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20191015" type="radio" name="radio20191015" onclick="radio_clicked('Cyrus_Vacca_20191015','20191015','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20191015" type="radio" name="radio20191015" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20191015','20191015','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20191015" type="radio"  name="radio20191015" onclick="radio_clicked('Cyrus_Vacca_20191015','20191015','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191017</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20191017" type="radio" name="radio20191017" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20191017','20191017','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20191017" type="radio"  name="radio20191017"  onclick="radio_clicked('Cyrus_Vacca_20191017','20191017','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20191017" type="radio"  name="radio20191017"  onclick="radio_clicked('Cyrus_Vacca_20191017','20191017','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191021</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20191021" type="radio" name="radio20191021" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20191021','20191021','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20191021" type="radio"  name="radio20191021"  onclick="radio_clicked('Cyrus_Vacca_20191021','20191021','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20191021" type="radio"  name="radio20191021"  onclick="radio_clicked('Cyrus_Vacca_20191021','20191021','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191022</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20191022" type="radio" name="radio20191022" onclick="radio_clicked('Cyrus_Vacca_20191022','20191022','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20191022" type="radio" name="radio20191022" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20191022','20191022','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20191022" type="radio"  name="radio20191022" onclick="radio_clicked('Cyrus_Vacca_20191022','20191022','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191025</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20191025" type="radio" name="radio20191025" onclick="radio_clicked('Cyrus_Vacca_20191025','20191025','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20191025" type="radio" name="radio20191025" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20191025','20191025','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20191025" type="radio"  name="radio20191025" onclick="radio_clicked('Cyrus_Vacca_20191025','20191025','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191031</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20191031" type="radio" name="radio20191031" onclick="radio_clicked('Cyrus_Vacca_20191031','20191031','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20191031" type="radio" name="radio20191031" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20191031','20191031','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20191031" type="radio"  name="radio20191031" onclick="radio_clicked('Cyrus_Vacca_20191031','20191031','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191104</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20191104" type="radio" name="radio20191104" onclick="radio_clicked('Cyrus_Vacca_20191104','20191104','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20191104" type="radio" name="radio20191104" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20191104','20191104','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20191104" type="radio"  name="radio20191104" onclick="radio_clicked('Cyrus_Vacca_20191104','20191104','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191106</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20191106" type="radio" name="radio20191106" onclick="radio_clicked('Cyrus_Vacca_20191106','20191106','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20191106" type="radio" name="radio20191106" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20191106','20191106','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20191106" type="radio"  name="radio20191106" onclick="radio_clicked('Cyrus_Vacca_20191106','20191106','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191108</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20191108" type="radio" name="radio20191108" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20191108','20191108','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20191108" type="radio"  name="radio20191108"  onclick="radio_clicked('Cyrus_Vacca_20191108','20191108','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20191108" type="radio"  name="radio20191108"  onclick="radio_clicked('Cyrus_Vacca_20191108','20191108','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191115</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20191115" type="radio" name="radio20191115" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20191115','20191115','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20191115" type="radio"  name="radio20191115"  onclick="radio_clicked('Cyrus_Vacca_20191115','20191115','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20191115" type="radio"  name="radio20191115"  onclick="radio_clicked('Cyrus_Vacca_20191115','20191115','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191119</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20191119" type="radio" name="radio20191119" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20191119','20191119','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20191119" type="radio"  name="radio20191119"  onclick="radio_clicked('Cyrus_Vacca_20191119','20191119','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20191119" type="radio"  name="radio20191119"  onclick="radio_clicked('Cyrus_Vacca_20191119','20191119','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191120</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20191120" type="radio" name="radio20191120" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20191120','20191120','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20191120" type="radio"  name="radio20191120"  onclick="radio_clicked('Cyrus_Vacca_20191120','20191120','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20191120" type="radio"  name="radio20191120"  onclick="radio_clicked('Cyrus_Vacca_20191120','20191120','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191122</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20191122" type="radio" name="radio20191122" onclick="radio_clicked('Cyrus_Vacca_20191122','20191122','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20191122" type="radio" name="radio20191122" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20191122','20191122','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20191122" type="radio"  name="radio20191122" onclick="radio_clicked('Cyrus_Vacca_20191122','20191122','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191126</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20191126" type="radio" name="radio20191126" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20191126','20191126','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20191126" type="radio"  name="radio20191126"  onclick="radio_clicked('Cyrus_Vacca_20191126','20191126','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20191126" type="radio"  name="radio20191126"  onclick="radio_clicked('Cyrus_Vacca_20191126','20191126','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191203</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20191203" type="radio" name="radio20191203" onclick="radio_clicked('Cyrus_Vacca_20191203','20191203','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20191203" type="radio" name="radio20191203" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20191203','20191203','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20191203" type="radio"  name="radio20191203" onclick="radio_clicked('Cyrus_Vacca_20191203','20191203','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191204</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20191204" type="radio" name="radio20191204" onclick="radio_clicked('Cyrus_Vacca_20191204','20191204','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20191204" type="radio" name="radio20191204" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20191204','20191204','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20191204" type="radio"  name="radio20191204" onclick="radio_clicked('Cyrus_Vacca_20191204','20191204','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191206</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20191206" type="radio" name="radio20191206" onclick="radio_clicked('Cyrus_Vacca_20191206','20191206','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20191206" type="radio" name="radio20191206" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20191206','20191206','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20191206" type="radio"  name="radio20191206" onclick="radio_clicked('Cyrus_Vacca_20191206','20191206','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191213</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20191213" type="radio" name="radio20191213" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20191213','20191213','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20191213" type="radio"  name="radio20191213"  onclick="radio_clicked('Cyrus_Vacca_20191213','20191213','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20191213" type="radio"  name="radio20191213"  onclick="radio_clicked('Cyrus_Vacca_20191213','20191213','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191216</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20191216" type="radio" name="radio20191216" onclick="radio_clicked('Cyrus_Vacca_20191216','20191216','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Cyrus_Vacca_20191216" type="radio" name="radio20191216" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20191216','20191216','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20191216" type="radio"  name="radio20191216" onclick="radio_clicked('Cyrus_Vacca_20191216','20191216','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191218</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20191218" type="radio" name="radio20191218" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20191218','20191218','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20191218" type="radio"  name="radio20191218"  onclick="radio_clicked('Cyrus_Vacca_20191218','20191218','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20191218" type="radio"  name="radio20191218"  onclick="radio_clicked('Cyrus_Vacca_20191218','20191218','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191220</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20191220" type="radio" name="radio20191220" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20191220','20191220','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20191220" type="radio"  name="radio20191220"  onclick="radio_clicked('Cyrus_Vacca_20191220','20191220','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20191220" type="radio"  name="radio20191220"  onclick="radio_clicked('Cyrus_Vacca_20191220','20191220','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+
+        </table>
+    </div>
+</body>
+
+</html>

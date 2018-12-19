@@ -5,8 +5,21 @@
     let url = "";
     function whenclicked() {
       url = window.location.protocol + "//" + window.location.host + '/@@FNAME@@ @@LNAME@@';
-      sendJSON(url, JSON.stringify(changes));
+      var json = JSON.stringify(changes);
+      sendJSON(url, json);
     }
+    function addDate() {
+        url = window.location.protocol + "//" + window.location.host + '/@@FNAME@@ @@LNAME@@';
+        rad = [].slice.call(document.getElementsByClassName('form-radio'));
+        selected_radio = rad.filter (r => r.checked == true ) [0];
+        thedate = document.getElementById('thedate');
+        let data = {};
+        dt_yyyymmdd = thedate.value.replace(/-/g, '');
+        data[dt_yyyymmdd] = selected_radio.value;
+        var json = JSON.stringify(data);
+        alert(json);
+        sendJSON(url, json);
+      }
     function radio_clicked(id, date, type) {
       radio = document.getElementById(type + "_" + id);
       changes[date] = type;
@@ -27,6 +40,8 @@
       xhttp.setRequestHeader("Content-Type", "application/json");
       xhttp.send(json);
     };
+    var dateControl = document.querySelector('input[type="date"]');
+    dateControl.value = new Date();
   </script>
   <style>
     /* Float four columns side by side */
@@ -311,17 +326,19 @@
             <input class="calendar" id="thedate" name="thedate" type="date" />
 
             <div class="form-group">
-                <input class="radio" id="day_type-workday" name="day_type" type="radio" value="is_workday" />
+                <input class="form-radio" id="day_type-workday" name="day_type" type="radio" value="onsite" />
                 <label class="label" for="day_type-workday">Workday</label>
-                <input class="radio" id="day_type-holiday" name="day_type" type="radio" value="is_holiday" />
+                <input class="form-radio" id="day_type-holiday" name="day_type" type="radio" value="holiday" />
                 <label class="label" for="day_type-holiday">Holiday</label>
-                <input class="radio" id="day_type-work-at-home" name="day_type" type="radio" value="is_work_at_home" />
+                <input class="form-radio" id="day_type-work-at-home" name="day_type" type="radio" value="athome" />
                 <label class="label" for="day_type-work-at-home">Work-At-Home</label>
-                <input class="radio" id="day_type-standby" name="day_type" type="radio" value="is_standby" />
+                <input class="form-radio" id="day_type-standby" name="day_type" type="radio" value="standby" />
                 <label class="label" for="day_type-standby">Standby</label>
             </div>
         </form>
-        <button onclick="whenclicked()">Go</button>
+        <button onclick="addDate()">Add</button>
+        <button onclick="whenclicked()">Update</button>
+
     </section>
     <div class="form-group">
         <table style="width:80%" class="center">

@@ -25,8 +25,7 @@ class HolidaySheetView < HolidaySheet
   def show 
         html_file = create_person_interface @person_folder, @name
         if html_file.nil? then return notFound @name end
-        content = File.read(html_file)
-        [200, {'Content-Type' => 'text/html', 'Content-Length' => (content.size).to_s},[content] ]
+        serveContent File.read(html_file)
   end
   
   def update (json)
@@ -39,7 +38,22 @@ class HolidaySheetView < HolidaySheet
         [404, {'Content-Type' => 'text/html', 'Content-Length' => content.size.to_s},[content] ]
     end 
 
+    def serveContent content
+        [200, {'Content-Type' => 'text/html', 'Content-Length' => (content.size).to_s},[content] ]
+    end 
+ 
+    def listOfPersons
+        content = ""
+        Dir[@person_folder + "/*.json"].each {
+            |json| 
+            puts json
+            personName = json[@person_folder.length+1 ..-6].gsub!('_',' ')
+            if personName.nil? then throw "Internal error : filename '#{}' could not be parsed." end
 
+            content = content + sprintf("\n<br/><a href='%s%s'>%s<a/>", request.url, personName, personName)
+        }
+        serveContent content
+    end 
 end
 
 #---------------------------------------------------------
@@ -56,24 +70,32 @@ class HolidaySheetViewRack
             folder = './persons'
             request = Rack::Request.new(env)
             getname = request.path_info
+            
+            puts "getname = '#{getname}'"
+
             #---------------------------------------------------------------------
-            #We expect the full name to be given as URI : '/Firstname%20Lastname'
-            #We try stripping the %20 character
+            # We expect the full name to be given as URI : '/Firstname%20Lastname'
+            # We try stripping the %20 character
             #---------------------------------------------------------------------
             name = getname[1,100].gsub!('%20',' ')
 
             holidaySheetView = HolidaySheetView.new(request, name, folder)
 
+            if !name.nil? 
+
             #----------------------------------------------------------------------
-            #any GET will be redirected to error if does not comply with '/Firstname%20Lastname',
-            #or if the corresponding JSON file 'Firstname_Lastname.json' is not found on the server 
-            #any POST is supposed to be JSON data giving pairs of date -> day_type
+            # any GET will be redirected to error if does not comply with '/Firstname%20Lastname',
+            # or if the corresponding JSON file 'Firstname_Lastname.json' is not found on the server 
+            # any POST is supposed to be JSON data giving pairs of date -> day_type
             #---------------------------------------------------------------------
-            if  request.request_method == 'POST'
-                json = request.body.read
-                holidaySheetView.update json
-            else
-                holidaySheetView.show
+                if  request.request_method == 'POST'
+                    json = request.body.read
+                    holidaySheetView.update json
+                else
+                    holidaySheetView.show
+                end 
+            else #if the name is not accepted, send list of persons
+                holidaySheetView.listOfPersons
             end 
     end
 end
@@ -88,7 +110,7 @@ webServerThread = Thread.new do |x|
 end
 
 webBrowserThread = Thread.new do |x|
-        system('C:\Program Files (x86)\Google\Chrome\Application\chrome', 'http://localhost:8080/Bill%20Boket')
+        system('C:\Program Files (x86)\Google\Chrome\Application\chrome', 'http://localhost:8080/')
     # while (true) do
     # print 'what do you want ? '
     # response = gets.chomp

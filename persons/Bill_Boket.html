@@ -5,8 +5,21 @@
     let url = "";
     function whenclicked() {
       url = window.location.protocol + "//" + window.location.host + '/Bill Boket';
-      sendJSON(url, JSON.stringify(changes));
+      var json = JSON.stringify(changes);
+      sendJSON(url, json);
     }
+    function addDate() {
+        url = window.location.protocol + "//" + window.location.host + '/Bill Boket';
+        rad = [].slice.call(document.getElementsByClassName('form-radio'));
+        selected_radio = rad.filter (r => r.checked == true ) [0];
+        thedate = document.getElementById('thedate');
+        let data = {};
+        dt = new Date(thedate.value);
+        dt_yyyymmdd = dt.getFullYear() + '' + dt.getMonth().toString().padStart(2, '0') + '' + dt.getDay().toString().padStart(2, '0');
+        data[dt_yyyymmdd] = selected_radio.value;
+        var json = JSON.stringify(data);
+        sendJSON(url, json);
+      }
     function radio_clicked(id, date, type) {
       radio = document.getElementById(type + "_" + id);
       changes[date] = type;
@@ -311,17 +324,19 @@
             <input class="calendar" id="thedate" name="thedate" type="date" />
 
             <div class="form-group">
-                <input class="radio" id="day_type-workday" name="day_type" type="radio" value="is_workday" />
+                <input class="form-radio" id="day_type-workday" name="day_type" type="radio" value="onsite" />
                 <label class="label" for="day_type-workday">Workday</label>
-                <input class="radio" id="day_type-holiday" name="day_type" type="radio" value="is_holiday" />
+                <input class="form-radio" id="day_type-holiday" name="day_type" type="radio" value="holiday" />
                 <label class="label" for="day_type-holiday">Holiday</label>
-                <input class="radio" id="day_type-work-at-home" name="day_type" type="radio" value="is_work_at_home" />
+                <input class="form-radio" id="day_type-work-at-home" name="day_type" type="radio" value="athome" />
                 <label class="label" for="day_type-work-at-home">Work-At-Home</label>
-                <input class="radio" id="day_type-standby" name="day_type" type="radio" value="is_standby" />
+                <input class="form-radio" id="day_type-standby" name="day_type" type="radio" value="standby" />
                 <label class="label" for="day_type-standby">Standby</label>
             </div>
         </form>
-        <button onclick="whenclicked()">Go</button>
+        <button onclick="addDate()">Add</button>
+        <button onclick="whenclicked()">Update</button>
+
     </section>
     <div class="form-group">
         <table style="width:80%" class="center">
@@ -330,7 +345,12 @@
                 <th>Type</th>
                 <th>Stand-by</th>
             </tr>
-            <tr><td>20190110</td>
+            <tr><td>20181103</td>
+<td><input class="radio" id="holiday_Bill_Boket_20181103" type="radio" name="radio20181103" checked="checked" onclick="radio_clicked('Bill_Boket_20181103','20181103','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Bill_Boket_20181103" type="radio"  name="radio20181103"  onclick="radio_clicked('Bill_Boket_20181103','20181103','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Bill_Boket_20181103" type="radio"  name="radio20181103"  onclick="radio_clicked('Bill_Boket_20181103','20181103','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190110</td>
 <td><input class="radio" id="holiday_Bill_Boket_20190110" type="radio" name="radio20190110" onclick="radio_clicked('Bill_Boket_20190110','20190110','holiday')" /><label class="label">Holiday</label>
 <input class="radio" id="athome_Bill_Boket_20190110" type="radio" name="radio20190110" checked="checked" onclick="radio_clicked('Bill_Boket_20190110','20190110','athome')" /><label class="label">Work-At-Home</label>
 <input class="radio"  id="onsite_Bill_Boket_20190110" type="radio"  name="radio20190110" onclick="radio_clicked('Bill_Boket_20190110','20190110','onsite')" /><label class="label">Work-On-Site</label></td>
@@ -341,19 +361,19 @@
 <input class="radio"  id="onsite_Bill_Boket_20190114" type="radio"  name="radio20190114"  onclick="radio_clicked('Bill_Boket_20190114','20190114','onsite')" /><label class="label">Work-On-Site</label></td>
 <td>[]</td></tr>
 <tr><td>20190118</td>
-<td><input class="radio" id="holiday_Bill_Boket_20190118" type="radio" name="radio20190118" onclick="radio_clicked('Bill_Boket_20190118','20190118','holiday')" /><label class="label">Holiday</label>
-<input class="radio" id="athome_Bill_Boket_20190118" type="radio" name="radio20190118" checked="checked" onclick="radio_clicked('Bill_Boket_20190118','20190118','athome')" /><label class="label">Work-At-Home</label>
-<input class="radio"  id="onsite_Bill_Boket_20190118" type="radio"  name="radio20190118" onclick="radio_clicked('Bill_Boket_20190118','20190118','onsite')" /><label class="label">Work-On-Site</label></td>
+<td><input class="radio" id="holiday_Bill_Boket_20190118" type="radio" name="radio20190118" checked="checked" onclick="radio_clicked('Bill_Boket_20190118','20190118','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Bill_Boket_20190118" type="radio"  name="radio20190118"  onclick="radio_clicked('Bill_Boket_20190118','20190118','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Bill_Boket_20190118" type="radio"  name="radio20190118"  onclick="radio_clicked('Bill_Boket_20190118','20190118','onsite')" /><label class="label">Work-On-Site</label></td>
 <td>[]</td></tr>
 <tr><td>20190121</td>
-<td><input class="radio" id="holiday_Bill_Boket_20190121" type="radio" name="radio20190121" onclick="radio_clicked('Bill_Boket_20190121','20190121','holiday')" /><label class="label">Holiday</label>
-<input class="radio" id="athome_Bill_Boket_20190121" type="radio" name="radio20190121" checked="checked" onclick="radio_clicked('Bill_Boket_20190121','20190121','athome')" /><label class="label">Work-At-Home</label>
-<input class="radio"  id="onsite_Bill_Boket_20190121" type="radio"  name="radio20190121" onclick="radio_clicked('Bill_Boket_20190121','20190121','onsite')" /><label class="label">Work-On-Site</label></td>
+<td><input class="radio" id="holiday_Bill_Boket_20190121" type="radio" name="radio20190121" checked="checked" onclick="radio_clicked('Bill_Boket_20190121','20190121','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Bill_Boket_20190121" type="radio"  name="radio20190121"  onclick="radio_clicked('Bill_Boket_20190121','20190121','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Bill_Boket_20190121" type="radio"  name="radio20190121"  onclick="radio_clicked('Bill_Boket_20190121','20190121','onsite')" /><label class="label">Work-On-Site</label></td>
 <td>[]</td></tr>
 <tr><td>20190123</td>
-<td><input class="radio" id="holiday_Bill_Boket_20190123" type="radio" name="radio20190123" onclick="radio_clicked('Bill_Boket_20190123','20190123','holiday')" /><label class="label">Holiday</label>
-<input class="radio" id="athome_Bill_Boket_20190123" type="radio" name="radio20190123" checked="checked" onclick="radio_clicked('Bill_Boket_20190123','20190123','athome')" /><label class="label">Work-At-Home</label>
-<input class="radio"  id="onsite_Bill_Boket_20190123" type="radio"  name="radio20190123" onclick="radio_clicked('Bill_Boket_20190123','20190123','onsite')" /><label class="label">Work-On-Site</label></td>
+<td><input class="radio" id="holiday_Bill_Boket_20190123" type="radio" name="radio20190123" checked="checked" onclick="radio_clicked('Bill_Boket_20190123','20190123','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Bill_Boket_20190123" type="radio"  name="radio20190123"  onclick="radio_clicked('Bill_Boket_20190123','20190123','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Bill_Boket_20190123" type="radio"  name="radio20190123"  onclick="radio_clicked('Bill_Boket_20190123','20190123','onsite')" /><label class="label">Work-On-Site</label></td>
 <td>[]</td></tr>
 <tr><td>20190125</td>
 <td><input class="radio" id="holiday_Bill_Boket_20190125" type="radio" name="radio20190125" onclick="radio_clicked('Bill_Boket_20190125','20190125','holiday')" /><label class="label">Holiday</label>
