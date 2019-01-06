@@ -57,21 +57,23 @@ class HolidaySheetViewRack
             request = Rack::Request.new(env)
             getname = request.path_info
             #---------------------------------------------------------------------
-            #We expect the full name to be given as URI : '/Firstname%20Lastname'
-            #We try stripping the %20 character
+            # We expect the full name to be given as URI : '/Firstname%20Lastname'
+            # We try stripping the %20 character
             #---------------------------------------------------------------------
             name = getname[1,100].gsub!('%20',' ')
 
             holidaySheetView = HolidaySheetView.new(request, name, folder)
 
             #----------------------------------------------------------------------
-            #any GET will be redirected to error if does not comply with '/Firstname%20Lastname',
-            #or if the corresponding JSON file 'Firstname_Lastname.json' is not found on the server 
-            #any POST is supposed to be JSON data giving pairs of date -> day_type
+            # any GET will be redirected to error if does not comply with '/Firstname%20Lastname',
+            # or if the corresponding JSON file 'Firstname_Lastname.json' is not found on the server 
+            # any POST is supposed to be JSON data giving pairs of date => day_type
             #---------------------------------------------------------------------
             if  request.request_method == 'POST'
                 json = request.body.read
                 holidaySheetView.update json
+            elsif name.nil? #no space, no name
+                holidaySheetView.notFound  getname[1,100]
             else
                 holidaySheetView.show
             end 
