@@ -84,11 +84,11 @@ end
 #---------------------------------------------------------
 
 webServerThread = Thread.new do |x|
-    Rack::Handler::WEBrick.run HolidaySheetViewRack.new
+    Rack::Handler::WEBrick.run HolidaySheetViewRack.new, :Port => 5000
 end
 
 webBrowserThread = Thread.new do |x|
-        system('C:\Program Files (x86)\Google\Chrome\Application\chrome', 'http://localhost:8080/Bill%20Boket')
+        system('C:\Program Files (x86)\Google\Chrome\Application\chrome', 'http://localhost:5000/Bill%20Boket')
     # while (true) do
     # print 'what do you want ? '
     # response = gets.chomp
