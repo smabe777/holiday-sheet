@@ -39,18 +39,18 @@ class HolidaySheetView < HolidaySheet
     end 
 
     def serveContent content
-        [200, {'Content-Type' => 'text/html', 'Content-Length' => (content.size).to_s},[content] ]
+        [200, {'Content-Type' => 'text/html', 'Content-Length' => (content.size + 5).to_s},[content] ]
     end 
  
     def listOfPersons
         content = ""
         Dir[@person_folder + "/*.json"].each {
             |json| 
-            puts json
+            #puts json
             personName = json[@person_folder.length+1 ..-6].gsub!('_',' ')
             if personName.nil? then throw "Internal error : filename '#{}' could not be parsed." end
 
-            content = content + sprintf("\n<br/><a href='%s%s'>%s<a/>", request.url, personName, personName)
+            content = content + sprintf("\n<br/><a href='%s/%s'>%s<a/>", request.base_url, personName, personName)
         }
         serveContent content
     end 
@@ -100,24 +100,5 @@ class HolidaySheetViewRack
     end
 end
 
-#--------------------------------------------------------
-# We start the webserver in one thread, and in the other the webbrowser, so that client and server are fired
-# at the same time for user satisfaction
-#---------------------------------------------------------
-
-webServerThread = Thread.new do |x|
-    Rack::Handler::WEBrick.run HolidaySheetViewRack.new
-end
-
-webBrowserThread = Thread.new do |x|
-        system('C:\Program Files (x86)\Google\Chrome\Application\chrome', 'http://localhost:8080/')
-    # while (true) do
-    # print 'what do you want ? '
-    # response = gets.chomp
-    # sleep(1)
-    # end 
-end
-webServerThread.join
-#app3.join
 
 

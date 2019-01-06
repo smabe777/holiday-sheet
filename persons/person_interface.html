@@ -1,48 +1,6 @@
 <head>
-  <title>Bill, Boket</title>
-  <script>
-    let changes = {};
-    let url = "";
-    function whenclicked() {
-      url = window.location.protocol + "//" + window.location.host + '/@@FNAME@@ @@LNAME@@';
-      var json = JSON.stringify(changes);
-      sendJSON(url, json);
-    }
-    function addDate() {
-        url = window.location.protocol + "//" + window.location.host + '/@@FNAME@@ @@LNAME@@';
-        rad = [].slice.call(document.getElementsByClassName('form-radio'));
-        selected_radio = rad.filter (r => r.checked == true ) [0];
-        thedate = document.getElementById('thedate');
-        let data = {};
-        dt_yyyymmdd = thedate.value.replace(/-/g, '');
-        data[dt_yyyymmdd] = selected_radio.value;
-        var json = JSON.stringify(data);
-        alert(json);
-        sendJSON(url, json);
-      }
-    function radio_clicked(id, date, type) {
-      radio = document.getElementById(type + "_" + id);
-      changes[date] = type;
-    }
-    var handleFormSubmit = function handleFormSubmit(event) {
-      // Stop the form from submitting since weâ€™re handling that with AJAX.
-      event.preventDefault();
-    };
-    var sendJSON = function sendJSON(url, json) {
-      xhttp = new XMLHttpRequest();
-
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          alert("changes posted : " + this.responseText);
-        }
-      };
-      xhttp.open("POST", url, true);
-      xhttp.setRequestHeader("Content-Type", "application/json");
-      xhttp.send(json);
-    };
-    var dateControl = document.querySelector('input[type="date"]');
-    dateControl.value = new Date();
-  </script>
+  <title>@@FNAME@@, @@LNAME@@</title>
+  <script src="static/js/person_interface.js"></script>
   <style>
     /* Float four columns side by side */
     .column {
@@ -318,38 +276,39 @@
   }
   </style>
 </head>
+
 <body>
-    <section class="content">
-        <h1 class="content__heading">@@FNAME@@ @@LNAME@@'s Days</h1>
-        <p class="content__lede">Use this form to add calendar elements</p>
-        <form class="form">
-            <input class="calendar" id="thedate" name="thedate" type="date" />
+  <section class="content">
+    <h1 class="content__heading">@@FNAME@@ @@LNAME@@'s Days</h1>
+    <p class="content__lede">Use this form to add calendar elements</p>
+    <form class="form">
+      <input class="calendar" id="thedate" name="thedate" type="date" />
 
-            <div class="form-group">
-                <input class="form-radio" id="day_type-workday" name="day_type" type="radio" value="onsite" />
-                <label class="label" for="day_type-workday">Workday</label>
-                <input class="form-radio" id="day_type-holiday" name="day_type" type="radio" value="holiday" />
-                <label class="label" for="day_type-holiday">Holiday</label>
-                <input class="form-radio" id="day_type-work-at-home" name="day_type" type="radio" value="athome" />
-                <label class="label" for="day_type-work-at-home">Work-At-Home</label>
-                <input class="form-radio" id="day_type-standby" name="day_type" type="radio" value="standby" />
-                <label class="label" for="day_type-standby">Standby</label>
-            </div>
-        </form>
-        <button onclick="addDate()">Add</button>
-        <button onclick="whenclicked()">Update</button>
+      <div class="form-group">
+        <input class="form-radio" id="day_type-workday" name="day_type" type="radio" value="onsite" />
+        <label class="label" for="day_type-workday">Workday</label>
+        <input class="form-radio" id="day_type-holiday" name="day_type" type="radio" value="holiday" />
+        <label class="label" for="day_type-holiday">Holiday</label>
+        <input class="form-radio" id="day_type-work-at-home" name="day_type" type="radio" value="athome" />
+        <label class="label" for="day_type-work-at-home">Work-At-Home</label>
+        <input class="form-radio" id="day_type-standby" name="day_type" type="radio" value="standby" />
+        <label class="label" for="day_type-standby">Standby</label>
+      </div>
+    </form>
+    <button onclick="addDate('@@FNAME@@ @@LNAME@@')">Add</button>
+    <button onclick="whenclicked('@@FNAME@@ @@LNAME@@')">Update</button>
 
-    </section>
-    <div class="form-group">
-        <table style="width:80%" class="center">
-            <tr>
-                <th>Date</th>
-                <th>Type</th>
-                <th>Stand-by</th>
-            </tr>
-            @@TABLE@@
-        </table>
-    </div>
+  </section>
+  <div class="form-group">
+    <table style="width:80%" class="center">
+      <tr>
+        <th>Date</th>
+        <th>Type</th>
+        <th>Stand-by</th>
+      </tr>
+      @@TABLE@@
+    </table>
+  </div>
 </body>
 
 </html>
