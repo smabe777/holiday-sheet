@@ -16,14 +16,14 @@ require_relative 'person_interface'
 class HolidaySheetView < HolidaySheet
   attr_reader :request, :name
 
-  def initialize(request, name, folder)
-    super(folder)
+  def initialize(request, name, data_folder, html_folder)
+    super(data_folder, html_folder)
     @name = name
     @request = request
   end
 
   def show 
-        html_file = create_person_interface @person_folder, @name
+        html_file = create_person_interface @person_folder, @html_folder, @name
         if html_file.nil? then return notFound @name end
         serveContent File.read(html_file)
   end
@@ -48,9 +48,13 @@ class HolidaySheetView < HolidaySheet
             |json| 
             puts json
             personName = json[@person_folder.length+1 ..-6].gsub!('_',' ')
-            if personName.nil? then throw "Internal error : filename '#{}' could not be parsed." end
+            if personName.nil? then 
+                #throw "Internal error : filename '#{json}' could not be parsed." end
+                content = content + sprintf("\n<br/><p style=\"color=red;\">ERROR FILE : %s<p/>", json)
+            else
 
             content = content + sprintf("\n<br/><a href='%s%s'>%s<a/>", request.url, personName, personName)
+            end
         }
         serveContent content
     end 
@@ -68,6 +72,7 @@ end
 class HolidaySheetViewRack
     def call env
             folder = './persons'
+            html_folder = './html'
             request = Rack::Request.new(env)
             getname = request.path_info
             
@@ -79,7 +84,7 @@ class HolidaySheetViewRack
             #---------------------------------------------------------------------
             name = getname[1,100].gsub!('%20',' ')
 
-            holidaySheetView = HolidaySheetView.new(request, name, folder)
+            holidaySheetView = HolidaySheetView.new(request, name, folder, html_folder)
 
             if !name.nil? 
 

@@ -3,8 +3,9 @@ require_relative './person'
 require_relative './team'
 class HolidaySheet
     attr_accessor :person_folder
-    def initialize (folder)
-        @person_folder = folder
+    def initialize (data_folder, html_folder)
+        @person_folder = data_folder
+        @html_folder = html_folder
     end
     def load_person(json_file)
         if !File.exist? json_file then return nil end

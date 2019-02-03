@@ -1,0 +1,770 @@
+<head>
+  <title>Bill, Boket</title>
+  <script>
+    let changes = {};
+    let url = "";
+    function whenclicked() {
+      url = window.location.protocol + "//" + window.location.host + '/Winston Adcox';
+      var json = JSON.stringify(changes);
+      sendJSON(url, json);
+    }
+    function addDate() {
+        url = window.location.protocol + "//" + window.location.host + '/Winston Adcox';
+        rad = [].slice.call(document.getElementsByClassName('form-radio'));
+        selected_radio = rad.filter (r => r.checked == true ) [0];
+        thedate = document.getElementById('thedate');
+        let data = {};
+        dt_yyyymmdd = thedate.value.replace(/-/g, '');
+        data[dt_yyyymmdd] = selected_radio.value;
+        var json = JSON.stringify(data);
+        alert(json);
+        sendJSON(url, json);
+      }
+    function radio_clicked(id, date, type) {
+      radio = document.getElementById(type + "_" + id);
+      changes[date] = type;
+    }
+    var handleFormSubmit = function handleFormSubmit(event) {
+      // Stop the form from submitting since weâ€™re handling that with AJAX.
+      event.preventDefault();
+    };
+    var sendJSON = function sendJSON(url, json) {
+      xhttp = new XMLHttpRequest();
+
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          alert("changes posted : " + this.responseText);
+        }
+      };
+      xhttp.open("POST", url, true);
+      xhttp.setRequestHeader("Content-Type", "application/json");
+      xhttp.send(json);
+    };
+    var dateControl = document.querySelector('input[type="date"]');
+    dateControl.value = new Date();
+  </script>
+  <style>
+    /* Float four columns side by side */
+    .column {
+      float: left;
+      width: 25%;
+      padding: 0 10px;
+    }
+
+    /* Remove extra left and right margins, due to padding in columns */
+    .row {
+      margin: 0 -5px;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    /* Style the counter cards */
+    .card {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+      padding: 16px;
+      text-align: center;
+      background-color: #f1f1f1;
+    }
+
+    /* Responsive columns - one column layout (vertical) on small screens */
+    @media screen and (max-width: 600px) {
+      .column {
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
+      }
+    }
+
+    /* Heydon Pickeringâ€™s lobotomized owl. Details: https://bit.ly/1H7MXUD */
+    * + * {
+      margin-top: 16px;
+      margin-top: 1rem;
+    }
+
+    /* Set up fonts, colors and all that jazz. */
+    body {
+      background: #f9fdfe;
+      color: #686a69;
+      font-family: "Open Sans", sans-serif;
+      font-size: 18px;
+      line-height: 1.75;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    /* Set up general layout rules for outer containers. */
+    .content,
+    .results {
+      width: 90vw;
+      max-width: 550px;
+      margin: 8vh auto;
+    }
+
+    .content__heading {
+      font-size: 125%;
+    }
+
+    .content__lede {
+      margin-top: 8px;
+      margin-top: 0.5rem;
+      font-size: 87.5%;
+    }
+    .form {
+      position: relative;
+      display: block;
+      margin: 0;
+      padding: 16px 0 32px;
+      padding: 1rem 0 2rem;
+      border-top: 1px solid #cdcfcf;
+      border-bottom: 1px solid #cdcfcf;
+      overflow: hidden;
+    }
+
+    button {
+      display: block;
+      margin: 8px 16px 0;
+      margin: 0.5rem 1rem 0;
+      padding: 0 16px 2px;
+      padding: 0 1rem 0.125rem;
+      background-color: #686a69;
+      border: 0;
+      color: #f9fdfe;
+      font-family: lato, sans-serif;
+      font-size: 100%;
+      letter-spacing: 0.05em;
+      line-height: 1.5;
+      text-transform: uppercase;
+      transition: 150ms all linear;
+    }
+    .calendar {
+      display: block;
+      margin-top: 0;
+      padding: 8px 12px;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid #cdcfcf;
+      width: 100%;
+      font-family: "Open Sans", sans-serif;
+      font-size: 16px;
+      font-size: 1rem;
+      transition: 150ms border-color linear;
+    }
+    .checkbox,
+    .radio {
+      display: inline-block;
+      width: auto;
+    }
+    .checkbox ~ .checkbox,
+    .radio ~ .radio {
+      margin-left: 16px;
+      margin-left: 1rem;
+    }
+    .input:focus,
+    .input:active {
+      border-color: #686a69;
+      outline: 0;
+    }
+    .button:hover,
+    .button:active,
+    .button:focus {
+      background: #2a2f2c;
+      cursor: pointer;
+      outline: 0;
+    }
+    table,
+    th,
+    td {
+      border: 1px solid black;
+    }
+    /* Customize the label (the container) */
+    .container {
+      display: block;
+      position: relative;
+      padding-left: 35px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      font-size: 22px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    /* Hide the browser's default checkbox */
+    .container input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+
+    /* Create a custom checkbox */
+    .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 25px;
+      width: 25px;
+      background-color: #eee;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container:hover input ~ .checkmark {
+      background-color: #ccc;
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    .container input:checked ~ .checkmark {
+      background-color: #2196f3;
+    }
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+
+    /* Show the checkmark when checked */
+    .container input:checked ~ .checkmark:after {
+      display: block;
+    }
+
+    /* Style the checkmark/indicator */
+    .container .checkmark:after {
+      left: 9px;
+      top: 5px;
+      width: 5px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 3px 3px 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+    /* Customize the label (the container) */
+    .container {
+      display: block;
+      position: relative;
+      padding-left: 35px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      font-size: 22px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    /* Hide the browser's default radio button */
+    .container input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+
+    /* Create a custom radio button */
+    .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 25px;
+      width: 25px;
+      background-color: #eee;
+      border-radius: 50%;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container:hover input ~ .checkmark {
+      background-color: #ccc;
+    }
+
+    /* When the radio button is checked, add a blue background */
+    .container input:checked ~ .checkmark {
+      background-color: #2196f3;
+    }
+
+    /* Create the indicator (the dot/circle - hidden when not checked) */
+    .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+
+    /* Show the indicator (dot/circle) when checked */
+    .container input:checked ~ .checkmark:after {
+      display: block;
+    }
+
+    /* Style the indicator (dot/circle) */
+    .container .checkmark:after {
+      top: 9px;
+      left: 9px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: white;
+    }
+     table.center {
+    margin-left:auto; 
+    margin-right:auto;
+  }
+  </style>
+</head>
+<body>
+    <section class="content">
+        <h1 class="content__heading">Winston Adcox's Days</h1>
+        <p class="content__lede">Use this form to add calendar elements</p>
+        <form class="form">
+            <input class="calendar" id="thedate" name="thedate" type="date" />
+
+            <div class="form-group">
+                <input class="form-radio" id="day_type-workday" name="day_type" type="radio" value="onsite" />
+                <label class="label" for="day_type-workday">Workday</label>
+                <input class="form-radio" id="day_type-holiday" name="day_type" type="radio" value="holiday" />
+                <label class="label" for="day_type-holiday">Holiday</label>
+                <input class="form-radio" id="day_type-work-at-home" name="day_type" type="radio" value="athome" />
+                <label class="label" for="day_type-work-at-home">Work-At-Home</label>
+                <input class="form-radio" id="day_type-standby" name="day_type" type="radio" value="standby" />
+                <label class="label" for="day_type-standby">Standby</label>
+            </div>
+        </form>
+        <button onclick="addDate()">Add</button>
+        <button onclick="whenclicked()">Update</button>
+
+    </section>
+    <div class="form-group">
+        <table style="width:80%" class="center">
+            <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Stand-by</th>
+            </tr>
+            <tr><td>20190102</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190102" type="radio" name="radio20190102" onclick="radio_clicked('Winston_Adcox_20190102','20190102','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190102" type="radio" name="radio20190102" checked="checked" onclick="radio_clicked('Winston_Adcox_20190102','20190102','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190102" type="radio"  name="radio20190102" onclick="radio_clicked('Winston_Adcox_20190102','20190102','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190103</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190103" type="radio" name="radio20190103" onclick="radio_clicked('Winston_Adcox_20190103','20190103','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190103" type="radio" name="radio20190103" checked="checked" onclick="radio_clicked('Winston_Adcox_20190103','20190103','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190103" type="radio"  name="radio20190103" onclick="radio_clicked('Winston_Adcox_20190103','20190103','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190104</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190104" type="radio" name="radio20190104" onclick="radio_clicked('Winston_Adcox_20190104','20190104','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190104" type="radio" name="radio20190104" checked="checked" onclick="radio_clicked('Winston_Adcox_20190104','20190104','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190104" type="radio"  name="radio20190104" onclick="radio_clicked('Winston_Adcox_20190104','20190104','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190108</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190108" type="radio" name="radio20190108" checked="checked" onclick="radio_clicked('Winston_Adcox_20190108','20190108','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20190108" type="radio"  name="radio20190108"  onclick="radio_clicked('Winston_Adcox_20190108','20190108','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190108" type="radio"  name="radio20190108"  onclick="radio_clicked('Winston_Adcox_20190108','20190108','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190109</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190109" type="radio" name="radio20190109" checked="checked" onclick="radio_clicked('Winston_Adcox_20190109','20190109','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20190109" type="radio"  name="radio20190109"  onclick="radio_clicked('Winston_Adcox_20190109','20190109','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190109" type="radio"  name="radio20190109"  onclick="radio_clicked('Winston_Adcox_20190109','20190109','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190114</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190114" type="radio" name="radio20190114" checked="checked" onclick="radio_clicked('Winston_Adcox_20190114','20190114','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20190114" type="radio"  name="radio20190114"  onclick="radio_clicked('Winston_Adcox_20190114','20190114','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190114" type="radio"  name="radio20190114"  onclick="radio_clicked('Winston_Adcox_20190114','20190114','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190121</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190121" type="radio" name="radio20190121" onclick="radio_clicked('Winston_Adcox_20190121','20190121','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190121" type="radio" name="radio20190121" checked="checked" onclick="radio_clicked('Winston_Adcox_20190121','20190121','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190121" type="radio"  name="radio20190121" onclick="radio_clicked('Winston_Adcox_20190121','20190121','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190122</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190122" type="radio" name="radio20190122" onclick="radio_clicked('Winston_Adcox_20190122','20190122','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190122" type="radio" name="radio20190122" checked="checked" onclick="radio_clicked('Winston_Adcox_20190122','20190122','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190122" type="radio"  name="radio20190122" onclick="radio_clicked('Winston_Adcox_20190122','20190122','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190131</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190131" type="radio" name="radio20190131" checked="checked" onclick="radio_clicked('Winston_Adcox_20190131','20190131','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20190131" type="radio"  name="radio20190131"  onclick="radio_clicked('Winston_Adcox_20190131','20190131','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190131" type="radio"  name="radio20190131"  onclick="radio_clicked('Winston_Adcox_20190131','20190131','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190205</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190205" type="radio" name="radio20190205" onclick="radio_clicked('Winston_Adcox_20190205','20190205','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190205" type="radio" name="radio20190205" checked="checked" onclick="radio_clicked('Winston_Adcox_20190205','20190205','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190205" type="radio"  name="radio20190205" onclick="radio_clicked('Winston_Adcox_20190205','20190205','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190206</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190206" type="radio" name="radio20190206" onclick="radio_clicked('Winston_Adcox_20190206','20190206','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190206" type="radio" name="radio20190206" checked="checked" onclick="radio_clicked('Winston_Adcox_20190206','20190206','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190206" type="radio"  name="radio20190206" onclick="radio_clicked('Winston_Adcox_20190206','20190206','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190214</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190214" type="radio" name="radio20190214" onclick="radio_clicked('Winston_Adcox_20190214','20190214','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190214" type="radio" name="radio20190214" checked="checked" onclick="radio_clicked('Winston_Adcox_20190214','20190214','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190214" type="radio"  name="radio20190214" onclick="radio_clicked('Winston_Adcox_20190214','20190214','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190215</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190215" type="radio" name="radio20190215" onclick="radio_clicked('Winston_Adcox_20190215','20190215','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190215" type="radio" name="radio20190215" checked="checked" onclick="radio_clicked('Winston_Adcox_20190215','20190215','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190215" type="radio"  name="radio20190215" onclick="radio_clicked('Winston_Adcox_20190215','20190215','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190220</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190220" type="radio" name="radio20190220" checked="checked" onclick="radio_clicked('Winston_Adcox_20190220','20190220','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20190220" type="radio"  name="radio20190220"  onclick="radio_clicked('Winston_Adcox_20190220','20190220','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190220" type="radio"  name="radio20190220"  onclick="radio_clicked('Winston_Adcox_20190220','20190220','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190222</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190222" type="radio" name="radio20190222" onclick="radio_clicked('Winston_Adcox_20190222','20190222','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190222" type="radio" name="radio20190222" checked="checked" onclick="radio_clicked('Winston_Adcox_20190222','20190222','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190222" type="radio"  name="radio20190222" onclick="radio_clicked('Winston_Adcox_20190222','20190222','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190227</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190227" type="radio" name="radio20190227" checked="checked" onclick="radio_clicked('Winston_Adcox_20190227','20190227','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20190227" type="radio"  name="radio20190227"  onclick="radio_clicked('Winston_Adcox_20190227','20190227','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190227" type="radio"  name="radio20190227"  onclick="radio_clicked('Winston_Adcox_20190227','20190227','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190228</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190228" type="radio" name="radio20190228" onclick="radio_clicked('Winston_Adcox_20190228','20190228','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190228" type="radio" name="radio20190228" checked="checked" onclick="radio_clicked('Winston_Adcox_20190228','20190228','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190228" type="radio"  name="radio20190228" onclick="radio_clicked('Winston_Adcox_20190228','20190228','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190301</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190301" type="radio" name="radio20190301" checked="checked" onclick="radio_clicked('Winston_Adcox_20190301','20190301','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20190301" type="radio"  name="radio20190301"  onclick="radio_clicked('Winston_Adcox_20190301','20190301','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190301" type="radio"  name="radio20190301"  onclick="radio_clicked('Winston_Adcox_20190301','20190301','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190305</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190305" type="radio" name="radio20190305" onclick="radio_clicked('Winston_Adcox_20190305','20190305','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190305" type="radio" name="radio20190305" checked="checked" onclick="radio_clicked('Winston_Adcox_20190305','20190305','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190305" type="radio"  name="radio20190305" onclick="radio_clicked('Winston_Adcox_20190305','20190305','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190306</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190306" type="radio" name="radio20190306" checked="checked" onclick="radio_clicked('Winston_Adcox_20190306','20190306','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20190306" type="radio"  name="radio20190306"  onclick="radio_clicked('Winston_Adcox_20190306','20190306','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190306" type="radio"  name="radio20190306"  onclick="radio_clicked('Winston_Adcox_20190306','20190306','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190307</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190307" type="radio" name="radio20190307" onclick="radio_clicked('Winston_Adcox_20190307','20190307','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190307" type="radio" name="radio20190307" checked="checked" onclick="radio_clicked('Winston_Adcox_20190307','20190307','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190307" type="radio"  name="radio20190307" onclick="radio_clicked('Winston_Adcox_20190307','20190307','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190308</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190308" type="radio" name="radio20190308" onclick="radio_clicked('Winston_Adcox_20190308','20190308','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190308" type="radio" name="radio20190308" checked="checked" onclick="radio_clicked('Winston_Adcox_20190308','20190308','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190308" type="radio"  name="radio20190308" onclick="radio_clicked('Winston_Adcox_20190308','20190308','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190311</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190311" type="radio" name="radio20190311" checked="checked" onclick="radio_clicked('Winston_Adcox_20190311','20190311','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20190311" type="radio"  name="radio20190311"  onclick="radio_clicked('Winston_Adcox_20190311','20190311','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190311" type="radio"  name="radio20190311"  onclick="radio_clicked('Winston_Adcox_20190311','20190311','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190314</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190314" type="radio" name="radio20190314" checked="checked" onclick="radio_clicked('Winston_Adcox_20190314','20190314','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20190314" type="radio"  name="radio20190314"  onclick="radio_clicked('Winston_Adcox_20190314','20190314','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190314" type="radio"  name="radio20190314"  onclick="radio_clicked('Winston_Adcox_20190314','20190314','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190321</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190321" type="radio" name="radio20190321" onclick="radio_clicked('Winston_Adcox_20190321','20190321','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190321" type="radio" name="radio20190321" checked="checked" onclick="radio_clicked('Winston_Adcox_20190321','20190321','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190321" type="radio"  name="radio20190321" onclick="radio_clicked('Winston_Adcox_20190321','20190321','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190326</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190326" type="radio" name="radio20190326" onclick="radio_clicked('Winston_Adcox_20190326','20190326','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190326" type="radio" name="radio20190326" checked="checked" onclick="radio_clicked('Winston_Adcox_20190326','20190326','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190326" type="radio"  name="radio20190326" onclick="radio_clicked('Winston_Adcox_20190326','20190326','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190402</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190402" type="radio" name="radio20190402" onclick="radio_clicked('Winston_Adcox_20190402','20190402','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190402" type="radio" name="radio20190402" checked="checked" onclick="radio_clicked('Winston_Adcox_20190402','20190402','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190402" type="radio"  name="radio20190402" onclick="radio_clicked('Winston_Adcox_20190402','20190402','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190404</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190404" type="radio" name="radio20190404" onclick="radio_clicked('Winston_Adcox_20190404','20190404','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190404" type="radio" name="radio20190404" checked="checked" onclick="radio_clicked('Winston_Adcox_20190404','20190404','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190404" type="radio"  name="radio20190404" onclick="radio_clicked('Winston_Adcox_20190404','20190404','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190408</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190408" type="radio" name="radio20190408" onclick="radio_clicked('Winston_Adcox_20190408','20190408','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190408" type="radio" name="radio20190408" checked="checked" onclick="radio_clicked('Winston_Adcox_20190408','20190408','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190408" type="radio"  name="radio20190408" onclick="radio_clicked('Winston_Adcox_20190408','20190408','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190412</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190412" type="radio" name="radio20190412" checked="checked" onclick="radio_clicked('Winston_Adcox_20190412','20190412','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20190412" type="radio"  name="radio20190412"  onclick="radio_clicked('Winston_Adcox_20190412','20190412','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190412" type="radio"  name="radio20190412"  onclick="radio_clicked('Winston_Adcox_20190412','20190412','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190415</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190415" type="radio" name="radio20190415" onclick="radio_clicked('Winston_Adcox_20190415','20190415','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190415" type="radio" name="radio20190415" checked="checked" onclick="radio_clicked('Winston_Adcox_20190415','20190415','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190415" type="radio"  name="radio20190415" onclick="radio_clicked('Winston_Adcox_20190415','20190415','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190416</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190416" type="radio" name="radio20190416" onclick="radio_clicked('Winston_Adcox_20190416','20190416','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190416" type="radio" name="radio20190416" checked="checked" onclick="radio_clicked('Winston_Adcox_20190416','20190416','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190416" type="radio"  name="radio20190416" onclick="radio_clicked('Winston_Adcox_20190416','20190416','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190507</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190507" type="radio" name="radio20190507" onclick="radio_clicked('Winston_Adcox_20190507','20190507','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190507" type="radio" name="radio20190507" checked="checked" onclick="radio_clicked('Winston_Adcox_20190507','20190507','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190507" type="radio"  name="radio20190507" onclick="radio_clicked('Winston_Adcox_20190507','20190507','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190517</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190517" type="radio" name="radio20190517" onclick="radio_clicked('Winston_Adcox_20190517','20190517','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190517" type="radio" name="radio20190517" checked="checked" onclick="radio_clicked('Winston_Adcox_20190517','20190517','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190517" type="radio"  name="radio20190517" onclick="radio_clicked('Winston_Adcox_20190517','20190517','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190521</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190521" type="radio" name="radio20190521" onclick="radio_clicked('Winston_Adcox_20190521','20190521','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190521" type="radio" name="radio20190521" checked="checked" onclick="radio_clicked('Winston_Adcox_20190521','20190521','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190521" type="radio"  name="radio20190521" onclick="radio_clicked('Winston_Adcox_20190521','20190521','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190522</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190522" type="radio" name="radio20190522" checked="checked" onclick="radio_clicked('Winston_Adcox_20190522','20190522','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20190522" type="radio"  name="radio20190522"  onclick="radio_clicked('Winston_Adcox_20190522','20190522','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190522" type="radio"  name="radio20190522"  onclick="radio_clicked('Winston_Adcox_20190522','20190522','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190523</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190523" type="radio" name="radio20190523" checked="checked" onclick="radio_clicked('Winston_Adcox_20190523','20190523','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20190523" type="radio"  name="radio20190523"  onclick="radio_clicked('Winston_Adcox_20190523','20190523','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190523" type="radio"  name="radio20190523"  onclick="radio_clicked('Winston_Adcox_20190523','20190523','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190607</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190607" type="radio" name="radio20190607" onclick="radio_clicked('Winston_Adcox_20190607','20190607','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190607" type="radio" name="radio20190607" checked="checked" onclick="radio_clicked('Winston_Adcox_20190607','20190607','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190607" type="radio"  name="radio20190607" onclick="radio_clicked('Winston_Adcox_20190607','20190607','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190612</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190612" type="radio" name="radio20190612" onclick="radio_clicked('Winston_Adcox_20190612','20190612','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190612" type="radio" name="radio20190612" checked="checked" onclick="radio_clicked('Winston_Adcox_20190612','20190612','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190612" type="radio"  name="radio20190612" onclick="radio_clicked('Winston_Adcox_20190612','20190612','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190614</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190614" type="radio" name="radio20190614" onclick="radio_clicked('Winston_Adcox_20190614','20190614','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190614" type="radio" name="radio20190614" checked="checked" onclick="radio_clicked('Winston_Adcox_20190614','20190614','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190614" type="radio"  name="radio20190614" onclick="radio_clicked('Winston_Adcox_20190614','20190614','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190617</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190617" type="radio" name="radio20190617" checked="checked" onclick="radio_clicked('Winston_Adcox_20190617','20190617','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20190617" type="radio"  name="radio20190617"  onclick="radio_clicked('Winston_Adcox_20190617','20190617','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190617" type="radio"  name="radio20190617"  onclick="radio_clicked('Winston_Adcox_20190617','20190617','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190620</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190620" type="radio" name="radio20190620" onclick="radio_clicked('Winston_Adcox_20190620','20190620','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190620" type="radio" name="radio20190620" checked="checked" onclick="radio_clicked('Winston_Adcox_20190620','20190620','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190620" type="radio"  name="radio20190620" onclick="radio_clicked('Winston_Adcox_20190620','20190620','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190624</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190624" type="radio" name="radio20190624" onclick="radio_clicked('Winston_Adcox_20190624','20190624','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190624" type="radio" name="radio20190624" checked="checked" onclick="radio_clicked('Winston_Adcox_20190624','20190624','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190624" type="radio"  name="radio20190624" onclick="radio_clicked('Winston_Adcox_20190624','20190624','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190628</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190628" type="radio" name="radio20190628" onclick="radio_clicked('Winston_Adcox_20190628','20190628','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190628" type="radio" name="radio20190628" checked="checked" onclick="radio_clicked('Winston_Adcox_20190628','20190628','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190628" type="radio"  name="radio20190628" onclick="radio_clicked('Winston_Adcox_20190628','20190628','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190702</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190702" type="radio" name="radio20190702" checked="checked" onclick="radio_clicked('Winston_Adcox_20190702','20190702','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20190702" type="radio"  name="radio20190702"  onclick="radio_clicked('Winston_Adcox_20190702','20190702','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190702" type="radio"  name="radio20190702"  onclick="radio_clicked('Winston_Adcox_20190702','20190702','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190705</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190705" type="radio" name="radio20190705" checked="checked" onclick="radio_clicked('Winston_Adcox_20190705','20190705','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20190705" type="radio"  name="radio20190705"  onclick="radio_clicked('Winston_Adcox_20190705','20190705','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190705" type="radio"  name="radio20190705"  onclick="radio_clicked('Winston_Adcox_20190705','20190705','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190715</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190715" type="radio" name="radio20190715" onclick="radio_clicked('Winston_Adcox_20190715','20190715','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190715" type="radio" name="radio20190715" checked="checked" onclick="radio_clicked('Winston_Adcox_20190715','20190715','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190715" type="radio"  name="radio20190715" onclick="radio_clicked('Winston_Adcox_20190715','20190715','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190717</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190717" type="radio" name="radio20190717" onclick="radio_clicked('Winston_Adcox_20190717','20190717','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190717" type="radio" name="radio20190717" checked="checked" onclick="radio_clicked('Winston_Adcox_20190717','20190717','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190717" type="radio"  name="radio20190717" onclick="radio_clicked('Winston_Adcox_20190717','20190717','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190724</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190724" type="radio" name="radio20190724" checked="checked" onclick="radio_clicked('Winston_Adcox_20190724','20190724','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20190724" type="radio"  name="radio20190724"  onclick="radio_clicked('Winston_Adcox_20190724','20190724','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190724" type="radio"  name="radio20190724"  onclick="radio_clicked('Winston_Adcox_20190724','20190724','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190729</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190729" type="radio" name="radio20190729" onclick="radio_clicked('Winston_Adcox_20190729','20190729','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190729" type="radio" name="radio20190729" checked="checked" onclick="radio_clicked('Winston_Adcox_20190729','20190729','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190729" type="radio"  name="radio20190729" onclick="radio_clicked('Winston_Adcox_20190729','20190729','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190731</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190731" type="radio" name="radio20190731" onclick="radio_clicked('Winston_Adcox_20190731','20190731','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190731" type="radio" name="radio20190731" checked="checked" onclick="radio_clicked('Winston_Adcox_20190731','20190731','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190731" type="radio"  name="radio20190731" onclick="radio_clicked('Winston_Adcox_20190731','20190731','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190806</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190806" type="radio" name="radio20190806" checked="checked" onclick="radio_clicked('Winston_Adcox_20190806','20190806','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20190806" type="radio"  name="radio20190806"  onclick="radio_clicked('Winston_Adcox_20190806','20190806','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190806" type="radio"  name="radio20190806"  onclick="radio_clicked('Winston_Adcox_20190806','20190806','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190809</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190809" type="radio" name="radio20190809" onclick="radio_clicked('Winston_Adcox_20190809','20190809','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190809" type="radio" name="radio20190809" checked="checked" onclick="radio_clicked('Winston_Adcox_20190809','20190809','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190809" type="radio"  name="radio20190809" onclick="radio_clicked('Winston_Adcox_20190809','20190809','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190814</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190814" type="radio" name="radio20190814" onclick="radio_clicked('Winston_Adcox_20190814','20190814','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190814" type="radio" name="radio20190814" checked="checked" onclick="radio_clicked('Winston_Adcox_20190814','20190814','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190814" type="radio"  name="radio20190814" onclick="radio_clicked('Winston_Adcox_20190814','20190814','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190816</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190816" type="radio" name="radio20190816" onclick="radio_clicked('Winston_Adcox_20190816','20190816','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190816" type="radio" name="radio20190816" checked="checked" onclick="radio_clicked('Winston_Adcox_20190816','20190816','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190816" type="radio"  name="radio20190816" onclick="radio_clicked('Winston_Adcox_20190816','20190816','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190823</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190823" type="radio" name="radio20190823" onclick="radio_clicked('Winston_Adcox_20190823','20190823','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190823" type="radio" name="radio20190823" checked="checked" onclick="radio_clicked('Winston_Adcox_20190823','20190823','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190823" type="radio"  name="radio20190823" onclick="radio_clicked('Winston_Adcox_20190823','20190823','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190827</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190827" type="radio" name="radio20190827" onclick="radio_clicked('Winston_Adcox_20190827','20190827','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190827" type="radio" name="radio20190827" checked="checked" onclick="radio_clicked('Winston_Adcox_20190827','20190827','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190827" type="radio"  name="radio20190827" onclick="radio_clicked('Winston_Adcox_20190827','20190827','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190910</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190910" type="radio" name="radio20190910" checked="checked" onclick="radio_clicked('Winston_Adcox_20190910','20190910','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20190910" type="radio"  name="radio20190910"  onclick="radio_clicked('Winston_Adcox_20190910','20190910','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190910" type="radio"  name="radio20190910"  onclick="radio_clicked('Winston_Adcox_20190910','20190910','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190920</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190920" type="radio" name="radio20190920" onclick="radio_clicked('Winston_Adcox_20190920','20190920','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190920" type="radio" name="radio20190920" checked="checked" onclick="radio_clicked('Winston_Adcox_20190920','20190920','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190920" type="radio"  name="radio20190920" onclick="radio_clicked('Winston_Adcox_20190920','20190920','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190923</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190923" type="radio" name="radio20190923" onclick="radio_clicked('Winston_Adcox_20190923','20190923','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190923" type="radio" name="radio20190923" checked="checked" onclick="radio_clicked('Winston_Adcox_20190923','20190923','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190923" type="radio"  name="radio20190923" onclick="radio_clicked('Winston_Adcox_20190923','20190923','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190924</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190924" type="radio" name="radio20190924" checked="checked" onclick="radio_clicked('Winston_Adcox_20190924','20190924','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20190924" type="radio"  name="radio20190924"  onclick="radio_clicked('Winston_Adcox_20190924','20190924','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190924" type="radio"  name="radio20190924"  onclick="radio_clicked('Winston_Adcox_20190924','20190924','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190925</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20190925" type="radio" name="radio20190925" onclick="radio_clicked('Winston_Adcox_20190925','20190925','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20190925" type="radio" name="radio20190925" checked="checked" onclick="radio_clicked('Winston_Adcox_20190925','20190925','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20190925" type="radio"  name="radio20190925" onclick="radio_clicked('Winston_Adcox_20190925','20190925','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191001</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20191001" type="radio" name="radio20191001" checked="checked" onclick="radio_clicked('Winston_Adcox_20191001','20191001','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20191001" type="radio"  name="radio20191001"  onclick="radio_clicked('Winston_Adcox_20191001','20191001','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20191001" type="radio"  name="radio20191001"  onclick="radio_clicked('Winston_Adcox_20191001','20191001','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191002</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20191002" type="radio" name="radio20191002" checked="checked" onclick="radio_clicked('Winston_Adcox_20191002','20191002','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20191002" type="radio"  name="radio20191002"  onclick="radio_clicked('Winston_Adcox_20191002','20191002','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20191002" type="radio"  name="radio20191002"  onclick="radio_clicked('Winston_Adcox_20191002','20191002','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191008</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20191008" type="radio" name="radio20191008" onclick="radio_clicked('Winston_Adcox_20191008','20191008','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20191008" type="radio" name="radio20191008" checked="checked" onclick="radio_clicked('Winston_Adcox_20191008','20191008','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20191008" type="radio"  name="radio20191008" onclick="radio_clicked('Winston_Adcox_20191008','20191008','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191009</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20191009" type="radio" name="radio20191009" checked="checked" onclick="radio_clicked('Winston_Adcox_20191009','20191009','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20191009" type="radio"  name="radio20191009"  onclick="radio_clicked('Winston_Adcox_20191009','20191009','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20191009" type="radio"  name="radio20191009"  onclick="radio_clicked('Winston_Adcox_20191009','20191009','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191017</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20191017" type="radio" name="radio20191017" checked="checked" onclick="radio_clicked('Winston_Adcox_20191017','20191017','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20191017" type="radio"  name="radio20191017"  onclick="radio_clicked('Winston_Adcox_20191017','20191017','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20191017" type="radio"  name="radio20191017"  onclick="radio_clicked('Winston_Adcox_20191017','20191017','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191018</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20191018" type="radio" name="radio20191018" onclick="radio_clicked('Winston_Adcox_20191018','20191018','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20191018" type="radio" name="radio20191018" checked="checked" onclick="radio_clicked('Winston_Adcox_20191018','20191018','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20191018" type="radio"  name="radio20191018" onclick="radio_clicked('Winston_Adcox_20191018','20191018','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191028</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20191028" type="radio" name="radio20191028" checked="checked" onclick="radio_clicked('Winston_Adcox_20191028','20191028','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20191028" type="radio"  name="radio20191028"  onclick="radio_clicked('Winston_Adcox_20191028','20191028','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20191028" type="radio"  name="radio20191028"  onclick="radio_clicked('Winston_Adcox_20191028','20191028','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191031</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20191031" type="radio" name="radio20191031" onclick="radio_clicked('Winston_Adcox_20191031','20191031','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20191031" type="radio" name="radio20191031" checked="checked" onclick="radio_clicked('Winston_Adcox_20191031','20191031','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20191031" type="radio"  name="radio20191031" onclick="radio_clicked('Winston_Adcox_20191031','20191031','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191118</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20191118" type="radio" name="radio20191118" onclick="radio_clicked('Winston_Adcox_20191118','20191118','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20191118" type="radio" name="radio20191118" checked="checked" onclick="radio_clicked('Winston_Adcox_20191118','20191118','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20191118" type="radio"  name="radio20191118" onclick="radio_clicked('Winston_Adcox_20191118','20191118','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191119</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20191119" type="radio" name="radio20191119" onclick="radio_clicked('Winston_Adcox_20191119','20191119','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20191119" type="radio" name="radio20191119" checked="checked" onclick="radio_clicked('Winston_Adcox_20191119','20191119','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20191119" type="radio"  name="radio20191119" onclick="radio_clicked('Winston_Adcox_20191119','20191119','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191121</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20191121" type="radio" name="radio20191121" checked="checked" onclick="radio_clicked('Winston_Adcox_20191121','20191121','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20191121" type="radio"  name="radio20191121"  onclick="radio_clicked('Winston_Adcox_20191121','20191121','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20191121" type="radio"  name="radio20191121"  onclick="radio_clicked('Winston_Adcox_20191121','20191121','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191122</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20191122" type="radio" name="radio20191122" checked="checked" onclick="radio_clicked('Winston_Adcox_20191122','20191122','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20191122" type="radio"  name="radio20191122"  onclick="radio_clicked('Winston_Adcox_20191122','20191122','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20191122" type="radio"  name="radio20191122"  onclick="radio_clicked('Winston_Adcox_20191122','20191122','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191128</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20191128" type="radio" name="radio20191128" checked="checked" onclick="radio_clicked('Winston_Adcox_20191128','20191128','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20191128" type="radio"  name="radio20191128"  onclick="radio_clicked('Winston_Adcox_20191128','20191128','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20191128" type="radio"  name="radio20191128"  onclick="radio_clicked('Winston_Adcox_20191128','20191128','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191206</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20191206" type="radio" name="radio20191206" onclick="radio_clicked('Winston_Adcox_20191206','20191206','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20191206" type="radio" name="radio20191206" checked="checked" onclick="radio_clicked('Winston_Adcox_20191206','20191206','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20191206" type="radio"  name="radio20191206" onclick="radio_clicked('Winston_Adcox_20191206','20191206','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191209</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20191209" type="radio" name="radio20191209" onclick="radio_clicked('Winston_Adcox_20191209','20191209','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20191209" type="radio" name="radio20191209" checked="checked" onclick="radio_clicked('Winston_Adcox_20191209','20191209','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20191209" type="radio"  name="radio20191209" onclick="radio_clicked('Winston_Adcox_20191209','20191209','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191211</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20191211" type="radio" name="radio20191211" checked="checked" onclick="radio_clicked('Winston_Adcox_20191211','20191211','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20191211" type="radio"  name="radio20191211"  onclick="radio_clicked('Winston_Adcox_20191211','20191211','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20191211" type="radio"  name="radio20191211"  onclick="radio_clicked('Winston_Adcox_20191211','20191211','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191218</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20191218" type="radio" name="radio20191218" onclick="radio_clicked('Winston_Adcox_20191218','20191218','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20191218" type="radio" name="radio20191218" checked="checked" onclick="radio_clicked('Winston_Adcox_20191218','20191218','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20191218" type="radio"  name="radio20191218" onclick="radio_clicked('Winston_Adcox_20191218','20191218','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191219</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20191219" type="radio" name="radio20191219" checked="checked" onclick="radio_clicked('Winston_Adcox_20191219','20191219','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20191219" type="radio"  name="radio20191219"  onclick="radio_clicked('Winston_Adcox_20191219','20191219','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20191219" type="radio"  name="radio20191219"  onclick="radio_clicked('Winston_Adcox_20191219','20191219','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191224</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20191224" type="radio" name="radio20191224" onclick="radio_clicked('Winston_Adcox_20191224','20191224','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20191224" type="radio" name="radio20191224" checked="checked" onclick="radio_clicked('Winston_Adcox_20191224','20191224','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20191224" type="radio"  name="radio20191224" onclick="radio_clicked('Winston_Adcox_20191224','20191224','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191226</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20191226" type="radio" name="radio20191226" checked="checked" onclick="radio_clicked('Winston_Adcox_20191226','20191226','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Winston_Adcox_20191226" type="radio"  name="radio20191226"  onclick="radio_clicked('Winston_Adcox_20191226','20191226','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20191226" type="radio"  name="radio20191226"  onclick="radio_clicked('Winston_Adcox_20191226','20191226','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191230</td>
+<td><input class="radio" id="holiday_Winston_Adcox_20191230" type="radio" name="radio20191230" onclick="radio_clicked('Winston_Adcox_20191230','20191230','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Winston_Adcox_20191230" type="radio" name="radio20191230" checked="checked" onclick="radio_clicked('Winston_Adcox_20191230','20191230','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Winston_Adcox_20191230" type="radio"  name="radio20191230" onclick="radio_clicked('Winston_Adcox_20191230','20191230','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+
+        </table>
+    </div>
+</body>
+
+</html>
