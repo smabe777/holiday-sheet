@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Who</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Lato:300|Open+Sans" rel="stylesheet">
+  
+  
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+
+  
+<section class="content">
+  <h1 class="content__heading">Who</h1>
+  <p class="content__lede">Use this form to add or select a person</p>
+  <form class="content__form" id="who-form">
+    <div class="contact-form__input-group">
+      <label class="contact-form__label" for="personid">Person Id</label>
+      <input class="contact-form__input contact-form__input--text" id="personid" name="personid" type="text"/>
+    </div>
+    <div class="contact-form__input-group">
+      <label class="contact-form__label" for="firstname">First Name</label>
+      <input class="contact-form__input contact-form__input--text" id="firstname" name="firstname" type="text"/>
+    </div>
+    <div class="contact-form__input-group">
+      <label class="contact-form__label" for="lastname">Last Name</label>
+      <input class="contact-form__input contact-form__input--text" id="lastname" name="lastname" type="text"/>
+      <div class="contact-form__input-group"></div>
+     </div>
+         <button class="contact-form__button" id="Create" type="submit">Create</button>
+          <button class="contact-form__button" id="Edit" type="submit">Edit</button>
+     </form>
+</section>
+<div class="results">
+  <h2 class="results__heading">Form Data</h2>
+  <pre class="results__display-wrapper"><code class="results__display"></code></pre>
+</div>
+  
+  
+
+    <script  src="js/who.js"></script>
+
+
+
+
+</body>
+
+</html>
