@@ -6,6 +6,7 @@ class HolidaySheet
     def initialize (data_folder, html_folder)
         @person_folder = data_folder
         @html_folder = html_folder
+        loadCalendar
     end
     def load_person(json_file)
         if !File.exist? json_file then return nil end
@@ -45,5 +46,20 @@ class HolidaySheet
             load_person(json)
         }
     end
+    def load_csv (csv_file)
+        ret = []
+        File.open(csv_file, "r") do |f|
+            f.each_line do |line|
+                ret << line.split(';')
+            end
+        end
+        return ret
+    end 
+    def loadCalendar
+        feries = load_csv("./analysis/feries.csv")
+        official_holidays = []
+        feries.each { |arr| official_holidays |= [arr[1]]	}
+        Calendar.loadCalendar(official_holidays )
+    end 
 
  end

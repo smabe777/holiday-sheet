@@ -32,7 +32,11 @@ class Person
 			@days[date] = DayType.new()
 		end
 	end 
+	def check_public_holidays_and_WE (date)
+		if (!Calendar.workday? date) then raise 'Date ' + date + ' is not an official workday.' end
+	end
 	def set_work_at_home(date) 
+		check_public_holidays_and_WE date
 		add_date_if_new date
 		@days[date].set_work_at_home()
 		@days[date].unset_holiday()
@@ -40,6 +44,7 @@ class Person
 		@work_at_homes << date #DateUtils.to_date(date)
 	end
 	def set_holiday (date)
+		check_public_holidays_and_WE date
 		add_date_if_new date
 		@days[date].set_holiday()
 		@days[date].unset_work_at_home()
@@ -71,6 +76,8 @@ class Person
 		end
 	end
 	def set_standby(date, starttime, endtime)
+		#TODO : if standby is on workday, then hours should be out of office hours
+		#		otherwise, standby should be on official holiday or weekends
 		add_date_if_new date
 		@days[date].set_standby(starttime, endtime)
 		@standbys << [starttime, endtime] #Day.to_date(date)

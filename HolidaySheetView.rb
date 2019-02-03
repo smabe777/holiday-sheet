@@ -20,18 +20,25 @@ class HolidaySheetView < HolidaySheet
     super(data_folder, html_folder)
     @name = name
     @request = request
+    
   end
 
   def show 
-        html_file = create_person_interface @person_folder, @html_folder, @name
+        html_file = create_person_interface @person_folder, @html_folder, @name 
         if html_file.nil? then return notFound @name end
         serveContent File.read(html_file)
   end
-  
+
   def update (json)
         datetypes = JSON.parse( json)
+        begin
         update_person(@name, datetypes, ['onsite','holiday','athome','standby']) 
-        show
+        serveContent "updated " + @name +" with '" + json +"'"
+        rescue StandardError => e
+            print e.message
+            serveContent e.message
+        end
+    
     end
     def notFound(what)
         content = "<h1>Requested content '"+ what+ "' not found</h1>"
@@ -100,7 +107,8 @@ class HolidaySheetViewRack
                     holidaySheetView.show
                 end 
             else #if the name is not accepted, send list of persons
-                holidaySheetView.listOfPersons
+                if(getname == '/') then holidaySheetView.listOfPersons 
+                else  holidaySheetView.notFound getname end
             end 
     end
 end

@@ -1,17 +1,24 @@
 <head>
-  <title>Bill, Boket</title>
+  <title>Cyrus, Vacca</title>
   <script>
     let changes = {};
     let url = "";
     function whenclicked() {
       url = window.location.protocol + "//" + window.location.host + '/Cyrus Vacca';
-      sendJSON(url, JSON.stringify(changes));
+      var json = JSON.stringify(changes);
+      sendJSON(url, json);
     }
     function addDate() {
         url = window.location.protocol + "//" + window.location.host + '/Cyrus Vacca';
-        rad = document.getElementsByClassName('radio');
-        alert(rad[0]);
-       // sendJSON(url, {thedate='',});
+        rad = [].slice.call(document.getElementsByClassName('form-radio'));
+        selected_radio = rad.filter (r => r.checked == true ) [0];
+        thedate = document.getElementById('thedate');
+        let data = {};
+        dt_yyyymmdd = thedate.value.replace(/-/g, '');
+        data[dt_yyyymmdd] = selected_radio.value;
+        var json = JSON.stringify(data);
+        alert(json);
+        sendJSON(url, json);
       }
     function radio_clicked(id, date, type) {
       radio = document.getElementById(type + "_" + id);
@@ -27,12 +34,15 @@
       xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
           alert("changes posted : " + this.responseText);
+          location.reload();
         }
       };
       xhttp.open("POST", url, true);
       xhttp.setRequestHeader("Content-Type", "application/json");
       xhttp.send(json);
     };
+    var dateControl = document.querySelector('input[type="date"]');
+    dateControl.value = new Date();
   </script>
   <style>
     /* Float four columns side by side */
@@ -317,13 +327,13 @@
             <input class="calendar" id="thedate" name="thedate" type="date" />
 
             <div class="form-group">
-                <input class="radio" id="day_type-workday" name="day_type" type="radio" value="is_workday" />
+                <input class="form-radio" id="day_type-workday" name="day_type" type="radio" value="onsite" />
                 <label class="label" for="day_type-workday">Workday</label>
-                <input class="radio" id="day_type-holiday" name="day_type" type="radio" value="is_holiday" />
+                <input class="form-radio" id="day_type-holiday" name="day_type" type="radio" value="holiday" />
                 <label class="label" for="day_type-holiday">Holiday</label>
-                <input class="radio" id="day_type-work-at-home" name="day_type" type="radio" value="is_work_at_home" />
+                <input class="form-radio" id="day_type-work-at-home" name="day_type" type="radio" value="athome" />
                 <label class="label" for="day_type-work-at-home">Work-At-Home</label>
-                <input class="radio" id="day_type-standby" name="day_type" type="radio" value="is_standby" />
+                <input class="form-radio" id="day_type-standby" name="day_type" type="radio" value="standby" />
                 <label class="label" for="day_type-standby">Standby</label>
             </div>
         </form>
@@ -338,17 +348,7 @@
                 <th>Type</th>
                 <th>Stand-by</th>
             </tr>
-            <tr><td>20190107</td>
-<td><input class="radio" id="holiday_Cyrus_Vacca_20190107" type="radio" name="radio20190107" onclick="radio_clicked('Cyrus_Vacca_20190107','20190107','holiday')" /><label class="label">Holiday</label>
-<input class="radio" id="athome_Cyrus_Vacca_20190107" type="radio" name="radio20190107" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190107','20190107','athome')" /><label class="label">Work-At-Home</label>
-<input class="radio"  id="onsite_Cyrus_Vacca_20190107" type="radio"  name="radio20190107" onclick="radio_clicked('Cyrus_Vacca_20190107','20190107','onsite')" /><label class="label">Work-On-Site</label></td>
-<td>[]</td></tr>
-<tr><td>20190108</td>
-<td><input class="radio" id="holiday_Cyrus_Vacca_20190108" type="radio" name="radio20190108" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190108','20190108','holiday')" /><label class="label">Holiday</label>
-<input class="radio"  id="athome_Cyrus_Vacca_20190108" type="radio"  name="radio20190108"  onclick="radio_clicked('Cyrus_Vacca_20190108','20190108','athome')" /><label class="label">Work-At-Home</label>
-<input class="radio"  id="onsite_Cyrus_Vacca_20190108" type="radio"  name="radio20190108"  onclick="radio_clicked('Cyrus_Vacca_20190108','20190108','onsite')" /><label class="label">Work-On-Site</label></td>
-<td>[]</td></tr>
-<tr><td>20190110</td>
+            <tr><td>20190110</td>
 <td><input class="radio" id="holiday_Cyrus_Vacca_20190110" type="radio" name="radio20190110" onclick="radio_clicked('Cyrus_Vacca_20190110','20190110','holiday')" /><label class="label">Holiday</label>
 <input class="radio" id="athome_Cyrus_Vacca_20190110" type="radio" name="radio20190110" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190110','20190110','athome')" /><label class="label">Work-At-Home</label>
 <input class="radio"  id="onsite_Cyrus_Vacca_20190110" type="radio"  name="radio20190110" onclick="radio_clicked('Cyrus_Vacca_20190110','20190110','onsite')" /><label class="label">Work-On-Site</label></td>
@@ -392,6 +392,11 @@
 <td><input class="radio" id="holiday_Cyrus_Vacca_20190201" type="radio" name="radio20190201" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190201','20190201','holiday')" /><label class="label">Holiday</label>
 <input class="radio"  id="athome_Cyrus_Vacca_20190201" type="radio"  name="radio20190201"  onclick="radio_clicked('Cyrus_Vacca_20190201','20190201','athome')" /><label class="label">Work-At-Home</label>
 <input class="radio"  id="onsite_Cyrus_Vacca_20190201" type="radio"  name="radio20190201"  onclick="radio_clicked('Cyrus_Vacca_20190201','20190201','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20190204</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20190204" type="radio" name="radio20190204" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20190204','20190204','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20190204" type="radio"  name="radio20190204"  onclick="radio_clicked('Cyrus_Vacca_20190204','20190204','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20190204" type="radio"  name="radio20190204"  onclick="radio_clicked('Cyrus_Vacca_20190204','20190204','onsite')" /><label class="label">Work-On-Site</label></td>
 <td>[]</td></tr>
 <tr><td>20190205</td>
 <td><input class="radio" id="holiday_Cyrus_Vacca_20190205" type="radio" name="radio20190205" onclick="radio_clicked('Cyrus_Vacca_20190205','20190205','holiday')" /><label class="label">Holiday</label>
@@ -767,6 +772,11 @@
 <td><input class="radio" id="holiday_Cyrus_Vacca_20191220" type="radio" name="radio20191220" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20191220','20191220','holiday')" /><label class="label">Holiday</label>
 <input class="radio"  id="athome_Cyrus_Vacca_20191220" type="radio"  name="radio20191220"  onclick="radio_clicked('Cyrus_Vacca_20191220','20191220','athome')" /><label class="label">Work-At-Home</label>
 <input class="radio"  id="onsite_Cyrus_Vacca_20191220" type="radio"  name="radio20191220"  onclick="radio_clicked('Cyrus_Vacca_20191220','20191220','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+<tr><td>20191225</td>
+<td><input class="radio" id="holiday_Cyrus_Vacca_20191225" type="radio" name="radio20191225" checked="checked" onclick="radio_clicked('Cyrus_Vacca_20191225','20191225','holiday')" /><label class="label">Holiday</label>
+<input class="radio"  id="athome_Cyrus_Vacca_20191225" type="radio"  name="radio20191225"  onclick="radio_clicked('Cyrus_Vacca_20191225','20191225','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Cyrus_Vacca_20191225" type="radio"  name="radio20191225"  onclick="radio_clicked('Cyrus_Vacca_20191225','20191225','onsite')" /><label class="label">Work-On-Site</label></td>
 <td>[]</td></tr>
 
         </table>
