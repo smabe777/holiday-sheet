@@ -1,0 +1,180 @@
+<head>
+  <title>Rodrigue, Lima</title>
+  <script>
+    let changes = {};
+    let url = "";
+    function whenclicked() {
+      url = window.location.protocol + "//" + window.location.host + '/Rodrigue Lima';
+      var json = JSON.stringify(changes);
+      sendJSON(url, json);
+    }
+    function addDate() {
+        url = window.location.protocol + "//" + window.location.host + '/Rodrigue Lima';
+        rad = [].slice.call(document.getElementsByClassName('form-radio'));
+        selected_radio = rad.filter (r => r.checked == true ) [0];
+        thedate = document.getElementById('thedate');
+        let data = {};
+        dt_yyyymmdd = thedate.value.replace(/-/g, '');
+        data[dt_yyyymmdd] = selected_radio.value;
+        var json = JSON.stringify(data);
+        alert(json);
+        sendJSON(url, json);
+      }
+    function radio_clicked(id, date, type) {
+      radio = document.getElementById(type + "_" + id);
+      changes[date] = type;
+    }
+    var handleFormSubmit = function handleFormSubmit(event) {
+      // Stop the form from submitting since weâ€™re handling that with AJAX.
+      event.preventDefault();
+    };
+    var sendJSON = function sendJSON(url, json) {
+      xhttp = new XMLHttpRequest();
+
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          alert("changes posted : " + this.responseText);
+          location.reload();
+        }
+      };
+      xhttp.open("POST", url, true);
+      xhttp.setRequestHeader("Content-Type", "application/json");
+      xhttp.send(json);
+    };
+    var dateControl = document.querySelector('input[type="date"]');
+    dateControl.value = new Date();
+  </script>
+  <style>
+    /* Set up fonts, colors and all that jazz. */
+    body {
+      background: #f9fdfe;
+      color: #686a69;
+      font-family: "Open Sans", sans-serif;
+      font-size: 18px;
+      line-height: 1.75;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    /* Set up general layout rules for outer containers. */
+    .content,
+    .results {
+      width: 90vw;
+      max-width: 550px;
+      margin: 8vh auto;
+    }
+
+    .content__heading {
+      font-size: 125%;
+    }
+
+    .content__lede {
+      margin-top: 8px;
+      margin-top: 0.5rem;
+      font-size: 87.5%;
+    }
+    .form {
+      position: relative;
+      display: block;
+      margin: 0;
+      padding: 16px 0 32px;
+      padding: 1rem 0 2rem;
+      border-top: 1px solid #cdcfcf;
+      border-bottom: 1px solid #cdcfcf;
+      overflow: hidden;
+    }
+
+    button {
+      display: block;
+      margin: 8px 16px 0;
+      margin: 0.5rem 1rem 0;
+      padding: 0 16px 2px;
+      padding: 0 1rem 0.125rem;
+      background-color: #686a69;
+      border: 0;
+      color: #f9fdfe;
+      font-family: lato, sans-serif;
+      font-size: 100%;
+      letter-spacing: 0.05em;
+      line-height: 1.5;
+      text-transform: uppercase;
+      transition: 150ms all linear;
+    }
+    .calendar {
+      display: block;
+      margin-top: 0;
+      padding: 8px 12px;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid #cdcfcf;
+      width: 100%;
+      font-family: "Open Sans", sans-serif;
+      font-size: 16px;
+      font-size: 1rem;
+      transition: 150ms border-color linear;
+    }
+ 
+    th{
+      font-family: "Open Sans", sans-serif;
+      text-align: center;
+      padding-top: 12px;
+      padding-bottom: 12px;
+      background-color:#686a69;
+      color: white;
+      font-weight: bold;
+        font-size: 1em;
+    }
+    td {
+      /*border: 3px solid rgb(119, 27, 65);*/
+      border-bottom: 1px solid rgb(32, 2, 28);
+      text-align: center;
+      font-weight: normal;
+	  font-size: 20px;
+    }
+
+
+     table.center {
+    margin-left:auto; 
+    margin-right:auto;
+  }
+  </style>
+</head>
+<body>
+    <section class="content">
+        <h1 class="content__heading">Rodrigue Lima's Days</h1>
+        <p class="content__lede">Use this form to add calendar elements</p>
+        <form class="form">
+            <input class="calendar" id="thedate" name="thedate" type="date" />
+
+            <div class="form-group">
+                <input class="form-radio" id="day_type-workday" name="day_type" type="radio" value="onsite" />
+                <label class="label" for="day_type-workday">Workday</label>
+                <input class="form-radio" id="day_type-holiday" name="day_type" type="radio" value="holiday" />
+                <label class="label" for="day_type-holiday">Holiday</label>
+                <input class="form-radio" id="day_type-work-at-home" name="day_type" type="radio" value="athome" />
+                <label class="label" for="day_type-work-at-home">Work-At-Home</label>
+                <input class="form-radio" id="day_type-standby" name="day_type" type="radio" value="standby" />
+                <label class="label" for="day_type-standby">Standby</label>
+            </div>
+        </form>
+        <button onclick="addDate()">Add</button>
+        <button onclick="whenclicked()">Update</button>
+
+    </section>
+    <div class="form-group">
+        <table style="width:80%" class="center">
+            <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Stand-by</th>
+            </tr>
+            <tr><td>20190211</td>
+<td><input class="radio" id="holiday_Rodrigue_Lima_20190211" type="radio" name="radio20190211" onclick="radio_clicked('Rodrigue_Lima_20190211','20190211','holiday')" /><label class="label">Holiday</label>
+<input class="radio" id="athome_Rodrigue_Lima_20190211" type="radio" name="radio20190211" checked="checked" onclick="radio_clicked('Rodrigue_Lima_20190211','20190211','athome')" /><label class="label">Work-At-Home</label>
+<input class="radio"  id="onsite_Rodrigue_Lima_20190211" type="radio"  name="radio20190211" onclick="radio_clicked('Rodrigue_Lima_20190211','20190211','onsite')" /><label class="label">Work-On-Site</label></td>
+<td>[]</td></tr>
+
+        </table>
+    </div>
+</body>
+
+</html>

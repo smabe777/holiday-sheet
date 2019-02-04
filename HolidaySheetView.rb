@@ -28,6 +28,12 @@ class HolidaySheetView < HolidaySheet
         if html_file.nil? then return notFound @name end
         serveContent File.read(html_file)
   end
+  def page (file)
+    if File.extname(file) == '.css' then mime = 'text/css' 
+    elsif File.extname(file) == '.js' then mime = 'text/javascript' 
+    else mime = 'text/html' end
+    serveContent File.read(file), mime
+  end
 
   def update (json)
         datetypes = JSON.parse( json)
@@ -40,13 +46,18 @@ class HolidaySheetView < HolidaySheet
         end
     
     end
+    def create (json)
+        person = JSON.parse (json)
+        createPerson(person["firstname"], person["lastname"])
+        serveContent "to create '"+person["firstname"]+" "+ person["lastname"]+ "' with '" + json +"'"
+    end 
     def notFound(what)
         content = "<h1>Requested content '"+ what+ "' not found</h1>"
         [404, {'Content-Type' => 'text/html', 'Content-Length' => content.size.to_s},[content] ]
     end 
 
-    def serveContent content
-        [200, {'Content-Type' => 'text/html', 'Content-Length' => (content.size).to_s},[content] ]
+    def serveContent content, type = 'text/html'
+        [200, {'Content-Type' => type, 'Content-Length' => (content.size).to_s},[content] ]
     end 
  
     def listOfPersons
@@ -93,7 +104,6 @@ class HolidaySheetViewRack
 
             holidaySheetView = HolidaySheetView.new(request, name, folder, html_folder)
 
-            if !name.nil? 
 
             #----------------------------------------------------------------------
             # any GET will be redirected to error if does not comply with '/Firstname%20Lastname',
@@ -102,13 +112,21 @@ class HolidaySheetViewRack
             #---------------------------------------------------------------------
                 if  request.request_method == 'POST'
                     json = request.body.read
-                    holidaySheetView.update json
+                    if (getname =='/NewUser') then
+                        holidaySheetView.create json
+                    else
+                        holidaySheetView.update json
+                    end
                 else
-                    holidaySheetView.show
-                end 
-            else #if the name is not accepted, send list of persons
-                if(getname == '/') then holidaySheetView.listOfPersons 
-                else  holidaySheetView.notFound getname end
+                    
+                if !name.nil? 
+                        holidaySheetView.show
+
+                else #if the name is not accepted, send list of persons
+                    if(getname == '/') then holidaySheetView.listOfPersons 
+                    elsif (getname !='/favicon.ico') then holidaySheetView.page html_folder + getname
+                    else  holidaySheetView.notFound getname end
+                end
             end 
     end
 end

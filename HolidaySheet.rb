@@ -61,5 +61,11 @@ class HolidaySheet
         feries.each { |arr| official_holidays |= [arr[1]]	}
         Calendar.loadCalendar(official_holidays )
     end 
+    def createPerson (fname, lname)
+        p = Person.new(fname, lname)
+        File.open( @person_folder +'/'+ p.first_name + "_" + p.last_name + ".json", "w") do |f|
+            f.write(p.to_json)
+        end
+    end
 
  end
