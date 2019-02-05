@@ -1,4 +1,4 @@
-require_relative './HolidaySheet'
+require_relative '../HolidaySheet'
 
 def testPerson
 	p = Person.new('Bill','Boket')
@@ -54,7 +54,7 @@ def load_csv (csv_file)
 end 
 
 def get_feries
-	feries = load_csv("./feries.csv")
+	feries = load_csv("./analysis/feries.csv")
 	official_holidays = []
 	feries.each { |arr| official_holidays |= [arr[1]]	}
 	Calendar.loadCalendar(official_holidays )
@@ -92,13 +92,13 @@ def generatePerson (fname, lname)
 		arr_dates |= [ new_dt ]
 		rand_work_type p, new_dt
 	end
-		File.open("./persons/" + p.first_name + "_" + p.last_name + ".json", "w") do |f|
+		File.open("../persons/" + p.first_name + "_" + p.last_name + ".json", "w") do |f|
 	f.write(p.to_json)
 	end
 end
 
 def generatePersons
-	File.open("./People.txt", "r") do |f|
+	File.open("../People.txt", "r") do |f|
 		f.each_line do |line|
 			arr = line.split(' ')
 			generatePerson arr[0], arr[1]
@@ -125,7 +125,7 @@ def printPersons arr_persons
     puts
 end 
 def testPersonsforDates
-	load_persons './persons'
+	load_persons '../persons'
 	(1..100).step(1) do |x|
 		new_dt = Calendar.workday_date_rand(Time.local(2019, 1, 1), Time.local(2019, 12, 31)).strftime("%Y%m%d")
 		print "date : " + new_dt
@@ -152,7 +152,7 @@ end
 
 def testTeams
 
-    holidaySheet = HolidaySheet.new('.\persons')
+    holidaySheet = HolidaySheet.new('./persons','./html','./teams')
     zorros = Team.new("Zorros", [holidaySheet.load_person_by_name('Bill Boket'),
     holidaySheet.load_person_by_name('Edmund Zehr'),
     holidaySheet.load_person_by_name('Cyrus Vacca'),
@@ -162,7 +162,8 @@ def testTeams
     holidaySheet.load_person_by_name('Jaime Bogart'),
     holidaySheet.load_person_by_name('Steven Metz')])
     
-    printPersons zorros.persons
+	printPersons zorros.persons
+	holidaySheet.save_team zorros
     
     pharrels = Team.new("Pharrels", [holidaySheet.load_person_by_name('Roman Fuquay'),
     holidaySheet.load_person_by_name('Ronald Goodenough'),
@@ -172,7 +173,8 @@ def testTeams
     holidaySheet.load_person_by_name('Kyle Johns'),
     holidaySheet.load_person_by_name('Bernard Utley')])
  
-    printPersons pharrels.persons
+	printPersons pharrels.persons
+	holidaySheet.save_team pharrels
     
     espumas = Team.new("Espumas", [holidaySheet.load_person_by_name('Murray Castelli'),
     holidaySheet.load_person_by_name('Sheldon Minner'),
@@ -182,7 +184,8 @@ def testTeams
     holidaySheet.load_person_by_name('Grady Perryman'),
     holidaySheet.load_person_by_name('Casie Desrosier')])
 
-    printPersons espumas.persons
+	printPersons espumas.persons
+	holidaySheet.save_team espumas	
 
     bloopers = Team.new("Bloopers", [holidaySheet.load_person_by_name('Mercy Klopp'),
     holidaySheet.load_person_by_name('Berniece Fassett'),
@@ -193,6 +196,7 @@ def testTeams
     holidaySheet.load_person_by_name('Candelaria Knisely')])
 
     printPersons bloopers.persons
+	holidaySheet.save_team bloopers
 
     edeles = Team.new("Edeles", [holidaySheet.load_person_by_name('Wen Braggs'),
     holidaySheet.load_person_by_name('Anette Marple'),
@@ -202,7 +206,8 @@ def testTeams
     holidaySheet.load_person_by_name('Leah Bost'),
     holidaySheet.load_person_by_name('Buena Graydon')])
 
-    printPersons edeles.persons
+	printPersons edeles.persons
+	holidaySheet.save_team edeles
 
     lavenders = Team.new("Lavenders", [holidaySheet.load_person_by_name('Yun Schrage'),
     holidaySheet.load_person_by_name('Tammi Stogner'),
@@ -211,7 +216,8 @@ def testTeams
     holidaySheet.load_person_by_name('Jayna Delapp'),
     holidaySheet.load_person_by_name('Julie Nelson')])
 
-    printPersons lavenders.persons
+	printPersons lavenders.persons
+	holidaySheet.save_team lavenders
 
     return {:zorros => zorros, :pharrels => pharrels, :espumas => espumas, :bloopers => bloopers, :edeles => edeles, :lavenders => lavenders}
 
@@ -237,4 +243,16 @@ def teamHolidays team
 end
 teams_hash = testTeams
 teamHolidays  teams_hash[:pharrels]
+
+def loadTeamFromJSON team
+	
+    holidaySheet = HolidaySheet.new('./persons','./html','./teams')
+	team = holidaySheet.load_team './teams/'+team+'.json'
+	printPersons team.persons
+end
+
+
+loadTeamFromJSON 'Lavenders'
+loadTeamFromJSON 'Pharrels'
+loadTeamFromJSON 'Espumas'
 

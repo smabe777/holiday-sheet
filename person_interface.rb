@@ -1,4 +1,4 @@
-require_relative './HolidaySheet'
+#require_relative './HolidaySheet'
 
 
 def cumul_td(memo, date, datetype,person_date_id)
@@ -24,8 +24,8 @@ def cumul_td(memo, date, datetype,person_date_id)
     memo=memo+"<td>#{datetype.standby}</td></tr>\n"
 
 end
-def create_person_interface(person_folder, html_folder,  name)
-    person = HolidaySheet.new(person_folder, html_folder).load_person_by_name(name)
+def create_person_interface(person_folder, html_folder,  person)
+   # person = HolidaySheet.new(person_folder, html_folder).load_person_by_name(name)
     if person.nil? then return nil end
     memo =""
     base_id = person.full_name + "_" 
@@ -35,8 +35,7 @@ def create_person_interface(person_folder, html_folder,  name)
         memo = cumul_td memo, date, type , person_date_id
     }
     holidays = memo
-    #print holidays
-     html_file = person_folder + "/html/" + person.first_name + "_" + person.last_name + ".html"
+
     html_template = html_folder +'/person_interface.html'
 
     html = File.read(html_template)
@@ -45,11 +44,32 @@ def create_person_interface(person_folder, html_folder,  name)
                     .gsub(/@@LNAME@@/, person.last_name)
                     .gsub(/@@TABLE@@/, holidays)
     
-    File.open(html_file, "w") do |f|
-        f.write(new_html)
-
-    html_file
-    
-    end
+    new_html
 end
-#create_person_interface './persons', 'Bebe Cioffi'
+def create_team_interface(team_folder, person_folder, html_folder)
+    selectTeams = Dir[team_folder + "/*.json"].reduce {
+        |html, file| 
+        teamName = json[team_folder.length+1 ..-6]
+        if !teamName.nil? then 
+            html += sprintf("\n<br/><option>%s</option>", teamName)
+        end
+    }
+    print selectTeams
+
+    html = File.read(html_template)
+    content = ""
+    Dir[person_folder + "/*.json"].each {
+        |json| 
+        personName = json[person_folder.length+1 ..-6].gsub!('_',' ')
+        if !personName.nil? then 
+        content = content + sprintf("\n<br/><input type=\"checkbox\" class=\"checkbox\">%s</input>", personName)
+        end
+    }
+    html_template = html_folder +'/team.html'
+
+    html = File.read(html_template)
+    new_html = html.gsub(/@@PERSONS_CHECKBOXES@@/, content)
+                    .gsub(/@@TEAMS_OPTIONS@@/, selectTeams)
+    
+    new_html
+end

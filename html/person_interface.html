@@ -1,142 +1,6 @@
 <head>
   <title>@@FNAME@@, @@LNAME@@</title>
-  <script>
-    let changes = {};
-    let url = "";
-    function whenclicked() {
-      url = window.location.protocol + "//" + window.location.host + '/@@FNAME@@ @@LNAME@@';
-      var json = JSON.stringify(changes);
-      sendJSON(url, json);
-    }
-    function addDate() {
-        url = window.location.protocol + "//" + window.location.host + '/@@FNAME@@ @@LNAME@@';
-        rad = [].slice.call(document.getElementsByClassName('form-radio'));
-        selected_radio = rad.filter (r => r.checked == true ) [0];
-        thedate = document.getElementById('thedate');
-        let data = {};
-        dt_yyyymmdd = thedate.value.replace(/-/g, '');
-        data[dt_yyyymmdd] = selected_radio.value;
-        var json = JSON.stringify(data);
-        alert(json);
-        sendJSON(url, json);
-      }
-    function radio_clicked(id, date, type) {
-      radio = document.getElementById(type + "_" + id);
-      changes[date] = type;
-    }
-    var handleFormSubmit = function handleFormSubmit(event) {
-      // Stop the form from submitting since weâ€™re handling that with AJAX.
-      event.preventDefault();
-    };
-    var sendJSON = function sendJSON(url, json) {
-      xhttp = new XMLHttpRequest();
-
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-          alert("changes posted : " + this.responseText);
-          location.reload();
-        }
-      };
-      xhttp.open("POST", url, true);
-      xhttp.setRequestHeader("Content-Type", "application/json");
-      xhttp.send(json);
-    };
-    var dateControl = document.querySelector('input[type="date"]');
-    dateControl.value = new Date();
-  </script>
-  <style>
-    /* Set up fonts, colors and all that jazz. */
-    body {
-      background: #f9fdfe;
-      color: #686a69;
-      font-family: "Open Sans", sans-serif;
-      font-size: 18px;
-      line-height: 1.75;
-      text-rendering: optimizeLegibility;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-    /* Set up general layout rules for outer containers. */
-    .content,
-    .results {
-      width: 90vw;
-      max-width: 550px;
-      margin: 8vh auto;
-    }
-
-    .content__heading {
-      font-size: 125%;
-    }
-
-    .content__lede {
-      margin-top: 8px;
-      margin-top: 0.5rem;
-      font-size: 87.5%;
-    }
-    .form {
-      position: relative;
-      display: block;
-      margin: 0;
-      padding: 16px 0 32px;
-      padding: 1rem 0 2rem;
-      border-top: 1px solid #cdcfcf;
-      border-bottom: 1px solid #cdcfcf;
-      overflow: hidden;
-    }
-
-    button {
-      display: block;
-      margin: 8px 16px 0;
-      margin: 0.5rem 1rem 0;
-      padding: 0 16px 2px;
-      padding: 0 1rem 0.125rem;
-      background-color: #686a69;
-      border: 0;
-      color: #f9fdfe;
-      font-family: lato, sans-serif;
-      font-size: 100%;
-      letter-spacing: 0.05em;
-      line-height: 1.5;
-      text-transform: uppercase;
-      transition: 150ms all linear;
-    }
-    .calendar {
-      display: block;
-      margin-top: 0;
-      padding: 8px 12px;
-      padding: 0.5rem 0.75rem;
-      border: 1px solid #cdcfcf;
-      width: 100%;
-      font-family: "Open Sans", sans-serif;
-      font-size: 16px;
-      font-size: 1rem;
-      transition: 150ms border-color linear;
-    }
- 
-    th{
-      font-family: "Open Sans", sans-serif;
-      text-align: center;
-      padding-top: 12px;
-      padding-bottom: 12px;
-      background-color:#686a69;
-      color: white;
-      font-weight: bold;
-        font-size: 1em;
-    }
-    td {
-      /*border: 3px solid rgb(119, 27, 65);*/
-      border-bottom: 1px solid rgb(32, 2, 28);
-      text-align: center;
-      font-weight: normal;
-	  font-size: 20px;
-    }
-
-
-     table.center {
-    margin-left:auto; 
-    margin-right:auto;
-  }
-  </style>
+  <link rel="stylesheet" href="css/person_interface.css">
 </head>
 <body>
     <section class="content">
@@ -170,6 +34,25 @@
             @@TABLE@@
         </table>
     </div>
+    <script src="js/api.js"></script>
+    <script src="js/person_interface.js"></script>
+  <script>function whenclicked() {
+    url = window.location.protocol + "//" + window.location.host + '/@@FNAME@@ @@LNAME@@';
+    var json = JSON.stringify(changes);
+    sendJSON(url, json);
+  }
+  function addDate() {
+      url = window.location.protocol + "//" + window.location.host + '/@@FNAME@@ @@LNAME@@';
+      rad = [].slice.call(document.getElementsByClassName('form-radio'));
+      selected_radio = rad.filter (r => r.checked == true ) [0];
+      thedate = document.getElementById('thedate');
+      let data = {};
+      dt_yyyymmdd = thedate.value.replace(/-/g, '');
+      data[dt_yyyymmdd] = selected_radio.value;
+      var json = JSON.stringify(data);
+      alert(json);
+      sendJSON(url, json);
+    }</script>
 </body>
 
 </html>

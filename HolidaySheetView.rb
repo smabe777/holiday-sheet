@@ -1,6 +1,15 @@
 require 'rack'
+require_relative 'HolidaySheet'
 require_relative 'person_interface'
 
+class HolidaySheetViewFactory
+    attr_accessor :holidaySheetViews
+    def initialize
+        holidaySheetViews = {}
+    end 
+    def self.Create
+    end
+end
 #---------------------------------------------------------
 #   HolidaySheetView
 #
@@ -14,19 +23,21 @@ require_relative 'person_interface'
 #----------------------------------------------------------
 
 class HolidaySheetView < HolidaySheet
-  attr_reader :request, :name
-
-  def initialize(request, name, data_folder, html_folder)
-    super(data_folder, html_folder)
+    attr_accessor :name
+  def initialize(name, data_folder, html_folder, team_folder)
+    super(data_folder, html_folder, team_folder)
     @name = name
-    @request = request
     
   end
 
-  def show 
-        html_file = create_person_interface @person_folder, @html_folder, @name 
-        if html_file.nil? then return notFound @name end
-        serveContent File.read(html_file)
+  def showPerson
+        html = create_person_interface @person_folder, @html_folder, load_person_by_name(@name) 
+        if html.nil? then return notFound @name end
+        serveContent(html)
+  end
+  def showTeam
+        html = create_team_interface @person_folder, @html_folder
+        serveContent(html)
   end
   def page (file)
     if File.extname(file) == '.css' then mime = 'text/css' 
@@ -60,7 +71,7 @@ class HolidaySheetView < HolidaySheet
         [200, {'Content-Type' => type, 'Content-Length' => (content.size).to_s},[content] ]
     end 
  
-    def listOfPersons
+    def listOfPersons url
         content = ""
         Dir[@person_folder + "/*.json"].each {
             |json| 
@@ -71,7 +82,7 @@ class HolidaySheetView < HolidaySheet
                 content = content + sprintf("\n<br/><p style=\"color=red;\">ERROR FILE : %s<p/>", json)
             else
 
-            content = content + sprintf("\n<br/><a href='%s%s'>%s<a/>", request.url, personName, personName)
+            content = content + sprintf("\n<br/><a href='%s%s'>%s<a/>", url, personName, personName)
             end
         }
         serveContent content
@@ -91,6 +102,7 @@ class HolidaySheetViewRack
     def call env
             folder = './persons'
             html_folder = './html'
+            team_folder = './teams'
             request = Rack::Request.new(env)
             getname = request.path_info
             
@@ -102,7 +114,7 @@ class HolidaySheetViewRack
             #---------------------------------------------------------------------
             name = getname[1,100].gsub!('%20',' ')
 
-            holidaySheetView = HolidaySheetView.new(request, name, folder, html_folder)
+            holidaySheetView = HolidaySheetView.new(name, folder, html_folder, team_folder)
 
 
             #----------------------------------------------------------------------
@@ -120,10 +132,11 @@ class HolidaySheetViewRack
                 else
                     
                 if !name.nil? 
-                        holidaySheetView.show
+                        holidaySheetView.showPerson 
 
                 else #if the name is not accepted, send list of persons
-                    if(getname == '/') then holidaySheetView.listOfPersons 
+                    if(getname == '/') then holidaySheetView.listOfPersons request.url
+                    elsif(getname == '/team.html') then holidaySheetView.showTeam
                     elsif (getname !='/favicon.ico') then holidaySheetView.page html_folder + getname
                     else  holidaySheetView.notFound getname end
                 end

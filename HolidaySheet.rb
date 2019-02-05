@@ -3,9 +3,10 @@ require_relative './person'
 require_relative './team'
 class HolidaySheet
     attr_accessor :person_folder
-    def initialize (data_folder, html_folder)
+    def initialize (data_folder, html_folder, team_folder)
         @person_folder = data_folder
         @html_folder = html_folder
+        @team_folder = team_folder
         loadCalendar
     end
     def load_person(json_file)
@@ -45,6 +46,26 @@ class HolidaySheet
             puts json		
             load_person(json)
         }
+    end
+    def load_teams
+        Dir[@team_folder + "/*.json"].each {
+            |json| 
+            puts json		
+            load_team(json)
+        }
+    end
+    def load_team(json_file)
+        if !File.exist? json_file then return nil end
+        content = File.read(json_file)
+        team = Team.create_from_json(content)
+        team.person_names.each {|name| team.persons << load_person_by_name(name) }
+        team
+    end
+    def save_team(team)
+        json_file = @team_folder + "/" + team.name + ".json"
+        File.open(json_file, 'w') do |f|
+            f.write(team.to_json)
+        end
     end
     def load_csv (csv_file)
         ret = []
