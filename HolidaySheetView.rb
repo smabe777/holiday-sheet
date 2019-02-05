@@ -36,7 +36,7 @@ class HolidaySheetView < HolidaySheet
         serveContent(html)
   end
   def showTeam
-        html = create_team_interface @person_folder, @html_folder
+        html = create_team_interface @team_folder, @person_folder, @html_folder
         serveContent(html)
   end
   def page (file)

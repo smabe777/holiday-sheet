@@ -47,28 +47,31 @@ def create_person_interface(person_folder, html_folder,  person)
     new_html
 end
 def create_team_interface(team_folder, person_folder, html_folder)
-    selectTeams = Dir[team_folder + "/*.json"].reduce {
-        |html, file| 
-        teamName = json[team_folder.length+1 ..-6]
+    selectTeams = Dir[team_folder + "/*.json"].reduce('') {
+        |html, json_file| 
+        teamName = json_file[team_folder.length+1 ..-6]
         if !teamName.nil? then 
             html += sprintf("\n<br/><option>%s</option>", teamName)
+        else
+            html += ""
         end
     }
     print selectTeams
-
-    html = File.read(html_template)
-    content = ""
-    Dir[person_folder + "/*.json"].each {
-        |json| 
-        personName = json[person_folder.length+1 ..-6].gsub!('_',' ')
+    selectPersons = Dir[person_folder + "/*.json"].reduce('') {
+        |html, json_file| 
+        personName = json_file[person_folder.length+1 ..-6].gsub!('_',' ')
         if !personName.nil? then 
-        content = content + sprintf("\n<br/><input type=\"checkbox\" class=\"checkbox\">%s</input>", personName)
+            html += sprintf("\n<br/><input type=\"checkbox\" class=\"checkbox\">%s</input>", personName)
+        else
+            html += ""
         end
     }
+    print selectPersons
+    
     html_template = html_folder +'/team.html'
 
     html = File.read(html_template)
-    new_html = html.gsub(/@@PERSONS_CHECKBOXES@@/, content)
+    new_html = html.gsub(/@@PERSONS_CHECKBOXES@@/, selectPersons)
                     .gsub(/@@TEAMS_OPTIONS@@/, selectTeams)
     
     new_html
